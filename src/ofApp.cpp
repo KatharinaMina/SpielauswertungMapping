@@ -154,23 +154,23 @@ void ofApp::draw(){
 	//ofDrawRectangle(0, 0, 800, 800);
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
-	for (int i = 0; i < system.size(); i++) {
-		system.at(i)->draw();
-	}
 	
 	if (type1 == true) {
-		fileImage4 = changeImageColor(fileImage4, 255, 255, 30);
+		fileImage4 = changeImageColor(fileImage4,121, 205, 205);
 		fileImage4.draw(200, 200);
 	}
 	else if (type2 == true) {
-		fileImage5 = changeImageColor(fileImage5, 255, 255, 30);
+		fileImage5 = changeImageColor(fileImage5, 121, 205, 205);
 		fileImage5.draw(200, 200);
 	}
 	else if (type3 == true) {
-		fileImage6 = changeImageColor(fileImage6, 255, 255, 30);
+		fileImage6 = changeImageColor(fileImage6, 121, 205, 205);
 		fileImage6.draw(200, 200);
 	}
 
+	for (int i = 0; i < system.size(); i++) {
+		system.at(i)->draw();
+	}
 
 
 
@@ -276,7 +276,7 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 
 			ofVec2f vec;
 			
-			vec.set(x + ((sceneSize.x / 2) - picWidth  ), y + ((sceneSize.y - 300) - picHeight ));
+			vec.set(x + (200), y + (200));
 		
 
 			pxPos.push_back(vec);

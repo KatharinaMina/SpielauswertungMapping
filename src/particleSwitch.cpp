@@ -43,20 +43,30 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 	if (tornadoIsFinished == true) {
 		age += deltaT;
 		vel *= 0.1;
-		//vel.set(ofRandom(-20.0, 20.0), 0);
-		ofVec2f force = attractor - pos;				//Anziehungskraft
+		ofVec2f force = attractor - pos;				//Anziehungskraft				
+		
 
-		if (force.length() < 200) {						//force.length = Abstand (Partikel - Attraktor)
-			force = 30 * force.getNormalized();			//Anziehungskraft des Attraktors auf die Partikel
+		if (50 < force.length() < 150) {
+			force = 300 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
+													//Anziehungskraft des Attraktors auf die Partikel
+				
+			vel += force;							//Bewegung zum Attraktor
+			vel = mass * vel.getNormalized();		//bleiben sonst nicht an Attraktor kleben auch Bewegungsgeschwindigkeit hin zum Attraktor
+		}
+		else if (force.length() < 50) {
+			force = 10 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
+													//Anziehungskraft des Attraktors auf die Partikel
+
+			vel += force;							//Bewegung zum Attraktor
+			vel = mass * vel.getNormalized();		//bleiben sonst nicht an Attraktor kleben auch Bewegungsgeschwindigkeit hin zum Attraktor
 		}
 		else {
-			force = 10 * force.getNormalized(); 
-
-		};
-
-		vel += force;									//Bewegung zum Attraktor
-		vel = mass  * vel.getNormalized();				//bleiben sonst nicht an Attraktor kleben auch Bewegungsgeschwindigkeit hin zum Attraktor
-		pos += (vel * deltaT);							//Position = m/s * s [Partikel bleiben statisch]
+			force = 10 * force.getNormalized();
+			vel += force;
+			vel = mass * vel.getNormalized();
+		}
+		pos += (vel / 2 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
+	}
 
 		if (cloudAttractorIsSet == true) {				//Bewegung bei Wolke
 			int y = ofRandom(30, sceneSizeY/8);
@@ -69,7 +79,8 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 			velocity2 = (mass / 40)* velocity2.getNormalized(); //Bewegungsgeschwindigkeit hin zum Attraktor
 			pos += (velocity2) * 2;						//Position = m/s Partikel bleiben nicht statisch am Attraktor kleben		
 		}
-	}
+
+	
 
 }
 
