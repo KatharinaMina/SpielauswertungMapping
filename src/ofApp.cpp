@@ -3,7 +3,7 @@
 #include "ofTrueTypeFont.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
 
 	ofDisableArbTex();
 	ofBackground(0);
@@ -67,7 +67,7 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update() {
 
 	std::cout << picPix << endl;
 	double deltaT = ofGetLastFrameTime();
@@ -92,7 +92,7 @@ void ofApp::update(){
 	//		system.back()->setup(ofVec2f(x,y), 20);
 	//	}
 	//}
-	//else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symbole
+	//else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 	//	int newPix = system.size() - (picPix / 7);
 	//	for (int i = 0; i <= newPix; i++) {
 	//		delete system.at(i);													// löschen des Partikel Obj.
@@ -145,27 +145,29 @@ void ofApp::exit() {
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
-	
+void ofApp::draw() {
+
 	fbo.begin();
 	ofClear(0, 0, 0);
 	//draw stuff here
-	
+
 	//ofDrawRectangle(0, 0, 800, 800);
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
-	
+	int picWidth = fileImage4.getHeight();
+	int picHeight = fileImage4.getHeight();
+
 	if (type1 == true) {
-		fileImage4 = changeImageColor(fileImage4,121, 205, 205);
-		fileImage4.draw(200, 200);
+		fileImage4 = changeImageColor(fileImage4, 121, 205, 205);
+		fileImage4.draw((sceneSize.x / 4 - picWidth / 2), (sceneSize.y / 2 - picHeight / 2));
 	}
 	else if (type2 == true) {
 		fileImage5 = changeImageColor(fileImage5, 121, 205, 205);
-		fileImage5.draw(200, 200);
+		fileImage5.draw((sceneSize.x / 4 - picWidth / 2), (sceneSize.y / 2 - picHeight / 2));
 	}
 	else if (type3 == true) {
 		fileImage6 = changeImageColor(fileImage6, 121, 205, 205);
-		fileImage6.draw(200, 200);
+		fileImage6.draw((sceneSize.x / 4 - picWidth / 2), (sceneSize.y / 2 - picHeight / 2));
 	}
 
 	for (int i = 0; i < system.size(); i++) {
@@ -180,17 +182,17 @@ void ofApp::draw(){
 	//do not draw past this point
 	//draw warp
 	warpController.getWarp(0)->begin();
-	fbo.draw(0,0);
+	fbo.draw(0, 0);
 	warpController.getWarp(0)->end();
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::keyReleased(int key) {
 	if (key == 'f')
 	{
 		ofToggleFullscreen();
@@ -200,6 +202,7 @@ void ofApp::keyReleased(int key){
 		editingWarp = !editingWarp;
 		warpController.getWarp(0)->setEditing(editingWarp);
 	}
+
 	switch (key) {
 	case ' ':												//Löschen von Partikel
 		for (int p = 0; p < system.size();) {
@@ -234,7 +237,7 @@ void ofApp::keyReleased(int key){
 		break;
 	case '2':												//Bild 2: Forum-Logo
 		attractors = pixelInVector(fileImage1);
-	
+
 		type1 = false;
 		type2 = true;
 		type3 = false;
@@ -245,7 +248,7 @@ void ofApp::keyReleased(int key){
 		break;
 	case '5':												//Bild 3: Danke
 		attractors = pixelInVector(fileImage1);
-	
+
 		type1 = false;
 		type2 = false;
 		type3 = true;
@@ -275,9 +278,10 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 			int x = i / 4 % width;
 
 			ofVec2f vec;
-			
-			vec.set(x + (200), y + (200));
-		
+
+			//vec.set(x + (200), y + (200));
+			vec.set(x + ((sceneSize.x / 2) - picWidth / 2), y + ((sceneSize.y - 30) - picHeight));
+
 
 			pxPos.push_back(vec);
 
@@ -289,9 +293,9 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 
 
 ofImage ofApp::changeImageColor(ofImage image, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
-	
+
 	int threshold = 1;
-	
+
 	int picWidth = image.getWidth();
 	int picHeight = image.getHeight();
 
@@ -307,7 +311,7 @@ ofImage ofApp::changeImageColor(ofImage image, int r, int g, int b) {			//Einles
 				image.getPixelsRef()[index + 1] = g;
 				image.getPixelsRef()[index + 2] = b;
 
-				
+
 			}
 		}
 	}
@@ -354,46 +358,46 @@ void ofApp::updateTornado() {
 	}
 }
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
+void ofApp::mouseReleased(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
+void ofApp::mouseEntered(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
+void ofApp::mouseExited(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
+void ofApp::gotMessage(ofMessage msg) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo) {
 
 }

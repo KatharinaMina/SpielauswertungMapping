@@ -47,7 +47,7 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 		
 
 		if (50 < force.length() < 150) {
-			force = 300 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
+			force = 10 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
 													//Anziehungskraft des Attraktors auf die Partikel
 				
 			vel += force;							//Bewegung zum Attraktor
