@@ -20,7 +20,7 @@ void ofApp::setup(){
 	this->tex.loadData(img.getPixels());
 
 	//scene properties
-	sceneSize.set(800, 800);
+	sceneSize.set(1280, 800);
 	area.set(0, 0, sceneSize.x, sceneSize.y);
 	fbo.allocate(sceneSize.x, sceneSize.y, GL_RGBA);
 
@@ -47,7 +47,7 @@ void ofApp::setup(){
 	//testing stuff
 	ofSetCircleResolution(60);
 	ofSetBackgroundColor(0, 0, 0);
-//	ofSetFrameRate(60);
+	//ofSetFrameRate(60);
 	maxParticle = 50;
 	birthCnt = 0;
 	parAmount = 4;
@@ -55,9 +55,14 @@ void ofApp::setup(){
 	time = 0;
 	status = -1;
 
-	fileImage1.loadImage("Ohm.png");
+	fileImage1.loadImage("Hexagon.png");
 	fileImage2.loadImage("FINAL_Logo.png");
 	fileImage3.loadImage("Danke_4070_2.png");
+	fileImage4.loadImage("UmweltTechnik.png");
+	fileImage5.loadImage("UmweltWissenschaft.png");
+	fileImage6.loadImage("AlltagWissenschaftUmwelt.png");
+	fileImage7.loadImage("AlltagTechnikUmwelt.png");
+	fileImage8.loadImage("UmweltWissenschaft.png");
 
 }
 
@@ -76,24 +81,24 @@ void ofApp::update(){
 		}
 		birthCnt = 0;
 	}
-	else if ((tornadoIsFinished == true) && (system.size() < picPix / 7)) {			//Ertsellen von Partiklen für Symbole
-		int newPix = (picPix / 7) - system.size();
-		for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
-			system.push_back(new particle02);
+	//else if ((tornadoIsFinished == true) && (system.size() < picPix / 7)) {			//Ertsellen von Partiklen für Symbole
+	//	int newPix = (picPix / 7) - system.size();
+	//	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
+	//		system.push_back(new particle02);
 
-			int y = ofRandom(0, sceneSize.y);
-			int x = ofRandom(0, sceneSize.x);
+	//		int y = ofRandom(0, sceneSize.y);
+	//		int x = ofRandom(0, sceneSize.x);
 
-			system.back()->setup(ofVec2f(x,y), 20);
-		}
-	}
-	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symbole
-		int newPix = system.size() - (picPix / 7);
-		for (int i = 1; i <= newPix; i++) {
- 			delete system.at(i);													//Löschen des Partikel Obj.
-			system.erase(system.begin() + i);										//Löschen des Pointer auf Partikel
-		}
-	}
+	//		system.back()->setup(ofVec2f(x,y), 20);
+	//	}
+	//}
+	//else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symbole
+	//	int newPix = system.size() - (picPix / 7);
+	//	for (int i = 0; i <= newPix; i++) {
+	//		delete system.at(i);													// löschen des Partikel Obj.
+	//		system.erase(system.begin() + i);										//löschen der des Pointer auf Partikel
+	//	}
+	//}
 
 	//----------------------------------------------------------//Updaten der Partikel (Bewegung)
 
@@ -147,15 +152,28 @@ void ofApp::draw(){
 	//draw stuff here
 	
 	//ofDrawRectangle(0, 0, 800, 800);
-//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
+	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
+
 	for (int i = 0; i < system.size(); i++) {
 		system.at(i)->draw();
-		//if (tornadoIsFinished == true) {								// damit nicht jeder Bildpkt einen Partikel bekommt
-		//	if (drawAllPixel == false) {
-		//		i = i + 2;
-		//	}
-		//}
 	}
+	
+	if (type1 == true) {
+		fileImage4 = changeImageColor(fileImage4, 255, 255, 30);
+		fileImage4.draw(200, 200);
+	}
+	else if (type2 == true) {
+		fileImage5 = changeImageColor(fileImage5, 255, 255, 30);
+		fileImage5.draw(200, 200);
+	}
+	else if (type3 == true) {
+		fileImage6 = changeImageColor(fileImage6, 255, 255, 30);
+		fileImage6.draw(200, 200);
+	}
+
+
+
+
 	fbo.end();
 
 
@@ -205,20 +223,32 @@ void ofApp::keyReleased(int key){
 		//--------------------------------------------------// ab hier laden der unterschiedlichen Bilder
 	case '1':												//Bild 1: Ohm
 		attractors = pixelInVector(fileImage1);
+
+		type1 = true;
+		type2 = false;
+		type3 = false;
 		symbolAttractorIsSet = true;
 		cloudAttractorIsSet = false;
 		tornadoIsFinished = true;
 		drawAllPixel = false;
 		break;
 	case '2':												//Bild 2: Forum-Logo
-		attractors = pixelInVector(fileImage2);
+		attractors = pixelInVector(fileImage1);
+	
+		type1 = false;
+		type2 = true;
+		type3 = false;
 		symbolAttractorIsSet = true;
 		cloudAttractorIsSet = false;
 		tornadoIsFinished = true;
 		drawAllPixel = false;
 		break;
 	case '5':												//Bild 3: Danke
-		attractors = pixelInVector(fileImage3);
+		attractors = pixelInVector(fileImage1);
+	
+		type1 = false;
+		type2 = false;
+		type3 = true;
 		symbolAttractorIsSet = true;
 		cloudAttractorIsSet = false;
 		tornadoIsFinished = true;
@@ -246,7 +276,8 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 
 			ofVec2f vec;
 			
-				vec.set(x + ((sceneSize.x / 2) - picWidth / 2), y + ((sceneSize.y - 30) - picHeight));
+			vec.set(x + ((sceneSize.x / 2) - picWidth  ), y + ((sceneSize.y - 300) - picHeight ));
+		
 
 			pxPos.push_back(vec);
 
@@ -255,6 +286,38 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 	}
 	return pxPos;
 }
+
+
+ofImage ofApp::changeImageColor(ofImage image, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
+	
+	int threshold = 1;
+	
+	int picWidth = image.getWidth();
+	int picHeight = image.getHeight();
+
+
+	for (int x = 0; x < picWidth; x++) {
+		for (int y = 0; y < picHeight; y++)
+		{
+			int index = (x + y * picWidth) * 4;
+
+			if (image.getPixelsRef()[index + 3] >= threshold) {
+
+				image.getPixelsRef()[index] = r;
+				image.getPixelsRef()[index + 1] = g;
+				image.getPixelsRef()[index + 2] = b;
+
+				
+			}
+		}
+	}
+	ofSetColor(255, 255, 255);
+
+	image.update();
+
+	return image;
+}
+
 
 //--------------------------------------------------------------
 void ofApp::startTornado() {

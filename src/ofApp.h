@@ -35,6 +35,7 @@ class ofApp : public ofBaseApp{
 		void updateTornado();
 
 		vector <ofVec2f> pixelInVector(ofImage a);
+		ofImage changeImageColor(ofImage a, int r, int g, int b);
 	
 	private:
 		//warp
@@ -54,6 +55,14 @@ class ofApp : public ofBaseApp{
 		ofImage fileImage1;
 		ofImage fileImage2;
 		ofImage fileImage3;
+		ofImage fileImage4;
+		ofImage fileImage5;
+		ofImage fileImage6;
+		ofImage fileImage7;
+		ofImage fileImage8;
+
+		ofColor color;
+		
 
 		int maxParticle;
 		int picPix;
@@ -62,6 +71,9 @@ class ofApp : public ofBaseApp{
 		bool tornadoIsFinished;
 		bool tornadoStarted;
 		bool drawAllPixel;
+		bool type1;
+		bool type2;
+		bool type3;
 		
 
 		//------------------------------------------
