@@ -16,23 +16,24 @@ c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_relea
   c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(65): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
   c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(106): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(107): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(126): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(173): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(208): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(272): warning C4018: '<=': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(308): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
-  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(310): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(95): warning C4018: '>': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(108): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(109): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(128): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(174): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(210): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(274): warning C4018: '<=': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(309): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
   c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(311): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
   c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(312): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
   c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(330): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(343): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(353): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(313): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(331): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(344): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(354): warning C4018: '<': signed/unsigned mismatch
   dmnWarp.vcxproj -> C:\Users\Katon\Desktop\Projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myApps\SpielauswertungMapping\bin\dmnWarp_debug.exe
   
   	                   2	C:\Users\Katon\Desktop\Projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\fmodex\lib\vs\Win32\

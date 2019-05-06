@@ -92,13 +92,15 @@ void ofApp::update() {
 	//		system.back()->setup(ofVec2f(x,y), 20);
 	//	}
 	//}
-	//else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
-	//	int newPix = system.size() - (picPix / 7);
-	//	for (int i = 0; i <= newPix; i++) {
-	//		delete system.at(i);													// löschen des Partikel Obj.
-	//		system.erase(system.begin() + i);										//löschen der des Pointer auf Partikel
-	//	}
-	//}
+	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
+		
+		int newPix = (system.size() - (picPix / 7));
+
+		for (int i = 0; i < newPix; i++) {
+			delete system.at(0);													// löschen des Partikel Obj.
+			system.erase(system.begin());										//löschen der des Pointer auf Partikel
+		}
+	}
 
 	//----------------------------------------------------------//Updaten der Partikel (Bewegung)
 
@@ -154,20 +156,19 @@ void ofApp::draw() {
 	//ofDrawRectangle(0, 0, 800, 800);
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
-	int picWidth = fileImage4.getHeight();
-	int picHeight = fileImage4.getHeight();
+
 
 	if (type1 == true) {
 		fileImage4 = changeImageColor(fileImage4, 121, 205, 205);
-		fileImage4.draw((sceneSize.x / 4 - picWidth / 2), (sceneSize.y / 2 - picHeight / 2));
+		fileImage4.draw((sceneSize.x / 4 - fileImage4.getHeight() / 2), (sceneSize.y / 2 - fileImage4.getHeight() / 2));
 	}
 	else if (type2 == true) {
 		fileImage5 = changeImageColor(fileImage5, 121, 205, 205);
-		fileImage5.draw((sceneSize.x / 4 - picWidth / 2), (sceneSize.y / 2 - picHeight / 2));
+		fileImage5.draw((sceneSize.x / 4 - fileImage5.getHeight() / 2), (sceneSize.y / 2 - fileImage5.getHeight() / 2));
 	}
 	else if (type3 == true) {
 		fileImage6 = changeImageColor(fileImage6, 121, 205, 205);
-		fileImage6.draw((sceneSize.x / 4 - picWidth / 2), (sceneSize.y / 2 - picHeight / 2));
+		fileImage6.draw((sceneSize.x / 4 - fileImage6.getHeight() / 2), (sceneSize.y / 2 - fileImage6.getHeight() / 2));
 	}
 
 	for (int i = 0; i < system.size(); i++) {
@@ -193,6 +194,7 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
+
 	if (key == 'f')
 	{
 		ofToggleFullscreen();
@@ -206,10 +208,10 @@ void ofApp::keyReleased(int key) {
 	switch (key) {
 	case ' ':												//Löschen von Partikel
 		for (int p = 0; p < system.size();) {
-			if (system.at(p)->getAgeNorm() >= 1) {			//schauen ob maxAge erreicht
+					//schauen ob maxAge erreicht
 				delete system.at(p);						//Löschen des Partikel Obj.
 				system.erase(system.begin() + p);			//Löschen des Pointer auf Partikel
-			}
+			
 			p++;
 		}
 		maxParticle = 0;									//damit keine neuen Partikel durch die update-Methode ersellt werden
@@ -280,8 +282,7 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 			ofVec2f vec;
 
 			//vec.set(x + (200), y + (200));
-			vec.set(x + ((sceneSize.x / 2) - picWidth / 2), y + ((sceneSize.y - 30) - picHeight));
-
+			vec.set(x + ((sceneSize.x / 4) - picWidth / 2.5), y + ((sceneSize.y / 2) - picHeight / 2));
 
 			pxPos.push_back(vec);
 

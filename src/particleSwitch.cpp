@@ -47,25 +47,25 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 		
 
 		if (50 < force.length() < 150) {
-			force = 10 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
+			force = 8 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
 													//Anziehungskraft des Attraktors auf die Partikel
 				
 			vel += force;							//Bewegung zum Attraktor
 			vel = mass * vel.getNormalized();		//bleiben sonst nicht an Attraktor kleben auch Bewegungsgeschwindigkeit hin zum Attraktor
 		}
-		else if (force.length() < 50) {
-			force = 10 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
+		else if (force.length() < 500) {
+			force = 5 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
 													//Anziehungskraft des Attraktors auf die Partikel
 
 			vel += force;							//Bewegung zum Attraktor
 			vel = mass * vel.getNormalized();		//bleiben sonst nicht an Attraktor kleben auch Bewegungsgeschwindigkeit hin zum Attraktor
 		}
 		else {
-			force = 10 * force.getNormalized();
+			force = 1 * force.getNormalized();
 			vel += force;
 			vel = mass * vel.getNormalized();
 		}
-		pos += (vel / 2 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
+		pos += (vel / 1.5 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
 	}
 
 		if (cloudAttractorIsSet == true) {				//Bewegung bei Wolke
