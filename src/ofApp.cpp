@@ -93,7 +93,7 @@ void ofApp::update() {
 	//	}
 	//}
 	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
-		
+
 		int newPix = (system.size() - (picPix / 7));
 
 		for (int i = 0; i < newPix; i++) {
@@ -156,19 +156,21 @@ void ofApp::draw() {
 	//ofDrawRectangle(0, 0, 800, 800);
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
+	int r = 121;
+	int g = 205;
+	int b = 205;
 
-
-	if (type1 == true) {
-		fileImage4 = changeImageColor(fileImage4, 121, 205, 205);
-		fileImage4.draw((sceneSize.x / 4 - fileImage4.getHeight() / 2), (sceneSize.y / 2 - fileImage4.getHeight() / 2));
+	if (type1) {
+		fileImage4 = changeImageColor(fileImage4, r, g, b);
+		drawImageIntoScreen(fileImage4);
 	}
-	else if (type2 == true) {
-		fileImage5 = changeImageColor(fileImage5, 121, 205, 205);
-		fileImage5.draw((sceneSize.x / 4 - fileImage5.getHeight() / 2), (sceneSize.y / 2 - fileImage5.getHeight() / 2));
+	else if (type2) {
+		fileImage5 = changeImageColor(fileImage5, r, g, b);
+		drawImageIntoScreen(fileImage5);
 	}
-	else if (type3 == true) {
-		fileImage6 = changeImageColor(fileImage6, 121, 205, 205);
-		fileImage6.draw((sceneSize.x / 4 - fileImage6.getHeight() / 2), (sceneSize.y / 2 - fileImage6.getHeight() / 2));
+	else if (type3) {
+		fileImage6 = changeImageColor(fileImage6, r, g, b);
+		drawImageIntoScreen(fileImage6);
 	}
 
 	for (int i = 0; i < system.size(); i++) {
@@ -187,80 +189,6 @@ void ofApp::draw() {
 	warpController.getWarp(0)->end();
 }
 
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key) {
-
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key) {
-
-	if (key == 'f')
-	{
-		ofToggleFullscreen();
-	}
-
-	if (key == 'e') {
-		editingWarp = !editingWarp;
-		warpController.getWarp(0)->setEditing(editingWarp);
-	}
-
-	switch (key) {
-	case ' ':												//Löschen von Partikel
-		for (int p = 0; p < system.size();) {
-					//schauen ob maxAge erreicht
-				delete system.at(p);						//Löschen des Partikel Obj.
-				system.erase(system.begin() + p);			//Löschen des Pointer auf Partikel
-			
-			p++;
-		}
-		maxParticle = 0;									//damit keine neuen Partikel durch die update-Methode ersellt werden
-		break;
-	case '3':												//Tornado
-		startTornado();
-		tornadoIsFinished = false;
-		break;
-	case '4':
-		cloudAttractorIsSet = true;
-		tornadoIsFinished = true;
-		drawAllPixel = false;
-		break;
-		//--------------------------------------------------// ab hier laden der unterschiedlichen Bilder
-	case '1':												//Bild 1: Ohm
-		attractors = pixelInVector(fileImage1);
-
-		type1 = true;
-		type2 = false;
-		type3 = false;
-		symbolAttractorIsSet = true;
-		cloudAttractorIsSet = false;
-		tornadoIsFinished = true;
-		drawAllPixel = false;
-		break;
-	case '2':												//Bild 2: Forum-Logo
-		attractors = pixelInVector(fileImage1);
-
-		type1 = false;
-		type2 = true;
-		type3 = false;
-		symbolAttractorIsSet = true;
-		cloudAttractorIsSet = false;
-		tornadoIsFinished = true;
-		drawAllPixel = false;
-		break;
-	case '5':												//Bild 3: Danke
-		attractors = pixelInVector(fileImage1);
-
-		type1 = false;
-		type2 = false;
-		type3 = true;
-		symbolAttractorIsSet = true;
-		cloudAttractorIsSet = false;
-		tornadoIsFinished = true;
-		drawAllPixel = true;
-		break;
-	}
-}
 
 //--------------------------------------------------------------
 
@@ -281,7 +209,6 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 
 			ofVec2f vec;
 
-			//vec.set(x + (200), y + (200));
 			vec.set(x + ((sceneSize.x / 4) - picWidth / 2.5), y + ((sceneSize.y / 2) - picHeight / 2));
 
 			pxPos.push_back(vec);
@@ -292,13 +219,17 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 	return pxPos;
 }
 
+void ofApp::drawImageIntoScreen(ofImage imageToDraw) {
 
-ofImage ofApp::changeImageColor(ofImage image, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
+	imageToDraw.draw((sceneSize.x / 4 - imageToDraw.getHeight() / 2), (sceneSize.y / 2 - imageToDraw.getHeight() / 2));
+}
+
+ofImage ofApp::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
 
 	int threshold = 1;
 
-	int picWidth = image.getWidth();
-	int picHeight = image.getHeight();
+	int picWidth = imageToDraw.getWidth();
+	int picHeight = imageToDraw.getHeight();
 
 
 	for (int x = 0; x < picWidth; x++) {
@@ -306,21 +237,20 @@ ofImage ofApp::changeImageColor(ofImage image, int r, int g, int b) {			//Einles
 		{
 			int index = (x + y * picWidth) * 4;
 
-			if (image.getPixelsRef()[index + 3] >= threshold) {
+			if (imageToDraw.getPixelsRef()[index + 3] >= threshold) {
 
-				image.getPixelsRef()[index] = r;
-				image.getPixelsRef()[index + 1] = g;
-				image.getPixelsRef()[index + 2] = b;
-
-
+				imageToDraw.getPixelsRef()[index] = r;
+				imageToDraw.getPixelsRef()[index + 1] = g;
+				imageToDraw.getPixelsRef()[index + 2] = b;
 			}
 		}
 	}
+
 	ofSetColor(255, 255, 255);
 
-	image.update();
+	imageToDraw.update();
 
-	return image;
+	return imageToDraw;
 }
 
 
@@ -357,6 +287,82 @@ void ofApp::updateTornado() {
 		}
 		break;
 	}
+}
+
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key) {
+
+	if (key == 'f')
+	{
+		ofToggleFullscreen();
+	}
+
+	if (key == 'e') {
+		editingWarp = !editingWarp;
+		warpController.getWarp(0)->setEditing(editingWarp);
+	}
+
+	switch (key) {
+	case ' ':												//Löschen von Partikel
+		for (int p = 0; p < system.size();) {
+			//schauen ob maxAge erreicht
+			delete system.at(p);						//Löschen des Partikel Obj.
+			system.erase(system.begin() + p);			//Löschen des Pointer auf Partikel
+
+			p++;
+		}
+		maxParticle = 0;									//damit keine neuen Partikel durch die update-Methode ersellt werden
+		break;
+	case '3':												//Tornado
+		startTornado();
+		tornadoIsFinished = false;
+		break;
+	case '4':
+		cloudAttractorIsSet = true;
+		tornadoIsFinished = true;
+		drawAllPixel = false;
+		break;
+		//--------------------------------------------------// ab hier laden der unterschiedlichen Bilder
+	case '1':												//Bild 1: UmweltTechnik
+		attractors = pixelInVector(fileImage1);
+
+		type1 = true;
+		type2 = false;
+		type3 = false;
+		symbolAttractorIsSet = true;
+		cloudAttractorIsSet = false;
+		tornadoIsFinished = true;
+		drawAllPixel = false;
+		break;
+	case '2':												//Bild 2: UmweltWissenschaft
+		attractors = pixelInVector(fileImage1);
+
+		type1 = false;
+		type2 = true;
+		type3 = false;
+		symbolAttractorIsSet = true;
+		cloudAttractorIsSet = false;
+		tornadoIsFinished = true;
+		drawAllPixel = false;
+		break;
+	case '5':												//Bild 3: AlltagTechnikUmwelt
+		attractors = pixelInVector(fileImage1);
+
+		type1 = false;
+		type2 = false;
+		type3 = true;
+		symbolAttractorIsSet = true;
+		cloudAttractorIsSet = false;
+		tornadoIsFinished = true;
+		drawAllPixel = true;
+		break;
+	}
+}
+
+
+//--------------------------------------------------------------
+void ofApp::keyPressed(int key) {
+
 }
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y) {

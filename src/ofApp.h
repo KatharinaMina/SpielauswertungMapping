@@ -34,24 +34,26 @@ class ofApp : public ofBaseApp{
 		void startTornado();
 		void updateTornado();
 
+		void drawImageIntoScreen(ofImage imageToDraw);
+
 		vector <ofVec2f> pixelInVector(ofImage a);
-		ofImage changeImageColor(ofImage a, int r, int g, int b);
+		ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
+
 	
 	private:
 		//warp
 		ofxWarpController warpController;
-		ofImage img;
 		ofTexture tex;
 		ofRectangle area;
 		ofVec2f sceneSize;
-		bool editingWarp;
+		ofVec2f force;
 
 		ofFbo fbo;
 
 		vector<ofVec2f>attractors;
 		vector<particle02*> system;
-		ofVec2f force;
-
+		
+		ofImage img;
 		ofImage fileImage1;
 		ofImage fileImage2;
 		ofImage fileImage3;
@@ -74,6 +76,7 @@ class ofApp : public ofBaseApp{
 		bool type1;
 		bool type2;
 		bool type3;
+		bool editingWarp;
 		
 
 		//------------------------------------------
