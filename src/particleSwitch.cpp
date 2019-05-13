@@ -12,8 +12,7 @@ particle02::~particle02() {
 
 //--------------------------------------------------------------
 
-void particle02::setup(ofVec2f pos, float maxAge) {
-    
+void particle02::setup(ofVec2f pos, float maxAge) {    
 	this->pos = pos;									//pointer auf Position ofVec2f position
 	vel.set(ofRandom(-20.0, 20.0), ofRandom(90, 100));	//Die Bewegungsrichtung
 
@@ -22,7 +21,6 @@ void particle02::setup(ofVec2f pos, float maxAge) {
 	size = ofRandom(2, 3);							//Unterschiedliche Partikelgröße
 	mass = ofRandom(100, 200);							//verändert die Partikelgeschwindigkeit
 	color.set(5, 241, 219);
-    
 }
 
 //--------------------------------------------------------------
@@ -43,8 +41,7 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 	if (tornadoIsFinished == true) {
 		age += deltaT;
 		vel *= 0.1;
-		ofVec2f force = attractor - pos;				//Anziehungskraft				
-		
+		ofVec2f force = attractor - pos;				//Anziehungskraft						
 
 		if (50 < force.length() < 150) {
 			force = 8 * force.getNormalized();		//force.length = Abstand (Partikel - Attraktor)
@@ -70,8 +67,8 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 
 		if (cloudAttractorIsSet == true) {				//Bewegung bei Wolke
 			int y = ofRandom(30, sceneSizeY/8);
-			int x = ofRandom(0, sceneSizeX);
-
+			int x = ofRandom(0, sceneSizeX/2);
+			
 			attractor.set(x, y);						//Attraktor wird neu gesetzt 
 			ofVec2f force2 = attractor - pos;
 
@@ -79,9 +76,6 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 			velocity2 = (mass / 40)* velocity2.getNormalized(); //Bewegungsgeschwindigkeit hin zum Attraktor
 			pos += (velocity2) * 2;						//Position = m/s Partikel bleiben nicht statisch am Attraktor kleben		
 		}
-
-	
-
 }
 
 //--------------------------------------------------------------

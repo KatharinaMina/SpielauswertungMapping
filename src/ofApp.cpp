@@ -2,6 +2,7 @@
 #include "ofxOpenCv.h"
 #include "ofTrueTypeFont.h"
 
+
 //--------------------------------------------------------------
 void ofApp::setup() {
 
@@ -55,15 +56,6 @@ void ofApp::setup() {
 	time = 0;
 	status = -1;
 
-	fileImage1.loadImage("Hexagon.png");
-	fileImage2.loadImage("FINAL_Logo.png");
-	fileImage3.loadImage("Danke_4070_2.png");
-	fileImage4.loadImage("UmweltTechnik.png");
-	fileImage5.loadImage("UmweltWissenschaft.png");
-	fileImage6.loadImage("AlltagWissenschaftUmwelt.png");
-	fileImage7.loadImage("AlltagTechnikUmwelt.png");
-	fileImage8.loadImage("UmweltWissenschaft.png");
-
 }
 
 //--------------------------------------------------------------
@@ -81,17 +73,17 @@ void ofApp::update() {
 		}
 		birthCnt = 0;
 	}
-	//else if ((tornadoIsFinished == true) && (system.size() < picPix / 7)) {			//Ertsellen von Partiklen für Symbole
-	//	int newPix = (picPix / 7) - system.size();
-	//	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
-	//		system.push_back(new particle02);
+	else if ((tornadoIsFinished == true) && (system.size() < picPix / 7)) {			//Ertsellen von Partiklen für Symbole
+		int newPix = (picPix / 7) - system.size();
+		for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
+			system.push_back(new particle02);
 
-	//		int y = ofRandom(0, sceneSize.y);
-	//		int x = ofRandom(0, sceneSize.x);
+			int y = ofRandom(0, sceneSize.y);
+			int x = ofRandom(0, sceneSize.x);
 
-	//		system.back()->setup(ofVec2f(x,y), 20);
-	//	}
-	//}
+			system.back()->setup(ofVec2f(x,y), 20);
+		}
+	}
 	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
 		int newPix = (system.size() - (picPix / 7));
@@ -156,31 +148,13 @@ void ofApp::draw() {
 	//ofDrawRectangle(0, 0, 800, 800);
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
-	int r = 121;
-	int g = 205;
-	int b = 205;
-
-	if (type1) {
-		fileImage4 = changeImageColor(fileImage4, r, g, b);
-		drawImageIntoScreen(fileImage4);
-	}
-	else if (type2) {
-		fileImage5 = changeImageColor(fileImage5, r, g, b);
-		drawImageIntoScreen(fileImage5);
-	}
-	else if (type3) {
-		fileImage6 = changeImageColor(fileImage6, r, g, b);
-		drawImageIntoScreen(fileImage6);
-	}
-
 	for (int i = 0; i < system.size(); i++) {
 		system.at(i)->draw();
 	}
 
-
+	images->drawImageIntoScreen(sceneSize.x, sceneSize.y);
 
 	fbo.end();
-
 
 	//do not draw past this point
 	//draw warp
@@ -217,40 +191,6 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 		}
 	}
 	return pxPos;
-}
-
-void ofApp::drawImageIntoScreen(ofImage imageToDraw) {
-
-	imageToDraw.draw((sceneSize.x / 4 - imageToDraw.getHeight() / 2), (sceneSize.y / 2 - imageToDraw.getHeight() / 2));
-}
-
-ofImage ofApp::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
-
-	int threshold = 1;
-
-	int picWidth = imageToDraw.getWidth();
-	int picHeight = imageToDraw.getHeight();
-
-
-	for (int x = 0; x < picWidth; x++) {
-		for (int y = 0; y < picHeight; y++)
-		{
-			int index = (x + y * picWidth) * 4;
-
-			if (imageToDraw.getPixelsRef()[index + 3] >= threshold) {
-
-				imageToDraw.getPixelsRef()[index] = r;
-				imageToDraw.getPixelsRef()[index + 1] = g;
-				imageToDraw.getPixelsRef()[index + 2] = b;
-			}
-		}
-	}
-
-	ofSetColor(255, 255, 255);
-
-	imageToDraw.update();
-
-	return imageToDraw;
 }
 
 
@@ -321,40 +261,6 @@ void ofApp::keyReleased(int key) {
 		cloudAttractorIsSet = true;
 		tornadoIsFinished = true;
 		drawAllPixel = false;
-		break;
-		//--------------------------------------------------// ab hier laden der unterschiedlichen Bilder
-	case '1':												//Bild 1: UmweltTechnik
-		attractors = pixelInVector(fileImage1);
-
-		type1 = true;
-		type2 = false;
-		type3 = false;
-		symbolAttractorIsSet = true;
-		cloudAttractorIsSet = false;
-		tornadoIsFinished = true;
-		drawAllPixel = false;
-		break;
-	case '2':												//Bild 2: UmweltWissenschaft
-		attractors = pixelInVector(fileImage1);
-
-		type1 = false;
-		type2 = true;
-		type3 = false;
-		symbolAttractorIsSet = true;
-		cloudAttractorIsSet = false;
-		tornadoIsFinished = true;
-		drawAllPixel = false;
-		break;
-	case '5':												//Bild 3: AlltagTechnikUmwelt
-		attractors = pixelInVector(fileImage1);
-
-		type1 = false;
-		type2 = false;
-		type3 = true;
-		symbolAttractorIsSet = true;
-		cloudAttractorIsSet = false;
-		tornadoIsFinished = true;
-		drawAllPixel = true;
 		break;
 	}
 }
