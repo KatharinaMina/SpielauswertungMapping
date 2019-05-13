@@ -91,7 +91,7 @@
     <ClCompile Include="..\..\..\addons\ofxWarp\src\ofxWarp\WarpPerspectiveBilinear.cpp">
       <Filter>addons\ofxWarp\src\ofxWarp</Filter>
     </ClCompile>
-    <ClCompile Include="image.cpp">
+    <ClCompile Include="..\..\..\..\..\..\image.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1391,7 +1391,7 @@
     <ClInclude Include="..\..\..\addons\ofxWarp\src\ofxWarp.h">
       <Filter>addons\ofxWarp\src</Filter>
     </ClInclude>
-    <ClInclude Include="image.h">
+    <ClInclude Include="..\..\..\..\..\..\image.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

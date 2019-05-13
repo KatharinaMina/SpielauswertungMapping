@@ -180,7 +180,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="image.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\image.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\particleSwitch.cpp" />
@@ -211,7 +211,7 @@
     <ClCompile Include="..\..\..\addons\ofxWarp\src\ofxWarp\WarpPerspectiveBilinear.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="image.h" />
+    <ClInclude Include="..\..\..\..\..\..\image.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\particleSwitch.h" />
     <ClInclude Include="..\..\..\addons\ofxCv\src\ofxCv.h" />
