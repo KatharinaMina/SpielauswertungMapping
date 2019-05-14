@@ -2,7 +2,7 @@
 #include "ofxOpenCv.h"
 #include "ofTrueTypeFont.h"
 
-
+images imgs;
 //--------------------------------------------------------------
 void ofApp::setup() {
 
@@ -55,6 +55,10 @@ void ofApp::setup() {
 	tornadoStartTime = -1000;
 	time = 0;
 	status = -1;
+	imgs.setup();
+
+
+	fileImage1.loadImage("Hexagon.png");
 
 }
 
@@ -129,6 +133,7 @@ void ofApp::update() {
 			}
 		}
 		updateTornado();
+		imgs.updateImage();
 	}
 }
 
@@ -152,8 +157,9 @@ void ofApp::draw() {
 		system.at(i)->draw();
 	}
 
-	images->drawImageIntoScreen(sceneSize.x, sceneSize.y);
-
+	//drawImage = fileImage1;
+	imgs.drawImageIntoScreen(sceneSize.x, sceneSize.y);
+	
 	fbo.end();
 
 	//do not draw past this point
@@ -231,7 +237,7 @@ void ofApp::updateTornado() {
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-
+	
 	if (key == 'f')
 	{
 		ofToggleFullscreen();
@@ -260,9 +266,16 @@ void ofApp::keyReleased(int key) {
 	case '4':
 		cloudAttractorIsSet = true;
 		tornadoIsFinished = true;
-		drawAllPixel = false;
+		break;
+	case '1':												//Bild 1: Ohm
+		attractors = pixelInVector(fileImage1);
+		symbolAttractorIsSet = true;
+		cloudAttractorIsSet = false;
+		tornadoIsFinished = true;
+
 		break;
 	}
+	imgs.keyReleased(key);
 }
 
 

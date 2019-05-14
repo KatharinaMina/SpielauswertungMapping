@@ -4,7 +4,7 @@
 #include "ofxWarp.h"
 
 #include "particleSwitch.h"
-#include "image.h"
+#include "images.h"
 
 #include "ofxOpenCv.h"
 #include "ofTrueTypeFont.h"
@@ -37,7 +37,6 @@ class ofApp : public ofBaseApp{
 
 
 		vector <ofVec2f> pixelInVector(ofImage a);
-		ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 	
 	private:
@@ -63,6 +62,7 @@ class ofApp : public ofBaseApp{
 		ofImage fileImage7;
 		ofImage fileImage8;
 		ofImage imageToDraw;
+		ofImage drawImage;
 
 		ofColor color;
 		
