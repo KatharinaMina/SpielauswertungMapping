@@ -64,18 +64,7 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 		}
 		pos += (vel / 1.5 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
 	}
-
-		if (cloudAttractorIsSet == true) {				//Bewegung bei Wolke
-			int y = ofRandom(30, sceneSizeY/8);
-			int x = ofRandom(0, sceneSizeX/2);
-			
-			attractor.set(x, y);						//Attraktor wird neu gesetzt 
-			ofVec2f force2 = attractor - pos;
-
-			velocity2 += force2 / 500;  
-			velocity2 = (mass / 40)* velocity2.getNormalized(); //Bewegungsgeschwindigkeit hin zum Attraktor
-			pos += (velocity2) * 2;						//Position = m/s Partikel bleiben nicht statisch am Attraktor kleben		
-		}
+		
 }
 
 //--------------------------------------------------------------

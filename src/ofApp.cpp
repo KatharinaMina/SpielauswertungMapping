@@ -31,7 +31,7 @@ void ofApp::setup() {
 	fbo.end();
 
 	//load warp settings from file if present
-	this->warpController.loadSettings("settings.json");
+//	this->warpController.loadSettings("settings.json");
 
 	//if there is no file, generate warp
 	if (this->warpController.getWarps().empty())
@@ -59,6 +59,7 @@ void ofApp::setup() {
 
 
 	fileImage1.loadImage("Hexagon.png");
+	fileImage9.loadImage("Wolke.png");
 
 }
 
@@ -85,12 +86,21 @@ void ofApp::update() {
 			int y = ofRandom(0, sceneSize.y);
 			int x = ofRandom(0, sceneSize.x);
 
-			system.back()->setup(ofVec2f(x,y), 20);
+			system.back()->setup(ofVec2f(x, y), 20);
 		}
 	}
 	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
 		int newPix = (system.size() - (picPix / 7));
+
+		for (int i = 0; i < newPix; i++) {
+			delete system.at(0);													// löschen des Partikel Obj.
+			system.erase(system.begin());										//löschen der des Pointer auf Partikel
+		}
+	}
+	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == true) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
+
+		int newPix = (system.size() - (picPix / 4));
 
 		for (int i = 0; i < newPix; i++) {
 			delete system.at(0);													// löschen des Partikel Obj.
@@ -103,11 +113,15 @@ void ofApp::update() {
 	if (tornadoIsFinished == true) {												//Bewegung bei Symbolen
 		for (int p = 0; p < system.size();) {
 			if (p * 7 < attractors.size()) {
-				if (symbolAttractorIsSet == false) {
+				if (cloudAttractorIsSet == true) {
+					system.at(p)->updateParticle(deltaT, attractors[p * 7],
+						cloudAttractorIsSet, tornadoIsFinished, sceneSize.x, sceneSize.y);
+				}
+				else if (symbolAttractorIsSet == false) {
 					system.at(p)->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())),
 						cloudAttractorIsSet, tornadoIsFinished, sceneSize.x, sceneSize.y);					//Partikel werden an beliebige Stelle gezogen				
 				}
-				else
+				else if (symbolAttractorIsSet == true)
 				{
 					system.at(p)->updateParticle(deltaT, attractors[p * 7],
 						cloudAttractorIsSet, tornadoIsFinished, sceneSize.x, sceneSize.y);					//Partikel werden an Symbol gezogen
@@ -133,8 +147,9 @@ void ofApp::update() {
 			}
 		}
 		updateTornado();
-		imgs.updateImage();
+
 	}
+
 }
 
 //--------------------------------------------------------------
@@ -153,13 +168,14 @@ void ofApp::draw() {
 	//ofDrawRectangle(0, 0, 800, 800);
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
+	//drawImage = fileImage1;
+	
+	imgs.updateImage(sceneSize.x, sceneSize.y);
+
 	for (int i = 0; i < system.size(); i++) {
 		system.at(i)->draw();
 	}
 
-	//drawImage = fileImage1;
-	imgs.drawImageIntoScreen(sceneSize.x, sceneSize.y);
-	
 	fbo.end();
 
 	//do not draw past this point
@@ -189,8 +205,7 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 
 			ofVec2f vec;
 
-			vec.set(x + ((sceneSize.x / 4) - picWidth / 2.5), y + ((sceneSize.y / 2) - picHeight / 2));
-
+			vec.set(x + ((sceneSize.x / 2) - picWidth / 2.5), y + ((sceneSize.y / 2) - picHeight / 2));
 			pxPos.push_back(vec);
 
 			picPix++;
@@ -198,7 +213,6 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 	}
 	return pxPos;
 }
-
 
 //--------------------------------------------------------------
 void ofApp::startTornado() {
@@ -237,7 +251,7 @@ void ofApp::updateTornado() {
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-	
+
 	if (key == 'f')
 	{
 		ofToggleFullscreen();
@@ -259,15 +273,19 @@ void ofApp::keyReleased(int key) {
 		}
 		maxParticle = 0;									//damit keine neuen Partikel durch die update-Methode ersellt werden
 		break;
-	case '3':												//Tornado
+	case '5':												//Tornado
 		startTornado();
 		tornadoIsFinished = false;
 		break;
 	case '4':
+		attractors = pixelInVector(fileImage9);
 		cloudAttractorIsSet = true;
 		tornadoIsFinished = true;
 		break;
-	case '1':												//Bild 1: Ohm
+	case '1':
+	case '2':
+	case '3':
+
 		attractors = pixelInVector(fileImage1);
 		symbolAttractorIsSet = true;
 		cloudAttractorIsSet = false;

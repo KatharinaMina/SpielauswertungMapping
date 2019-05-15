@@ -61,7 +61,9 @@ class ofApp : public ofBaseApp{
 		ofImage fileImage6;
 		ofImage fileImage7;
 		ofImage fileImage8;
+		ofImage fileImage9;
 		ofImage imageToDraw;
+		
 		ofImage drawImage;
 
 		ofColor color;
@@ -69,6 +71,7 @@ class ofApp : public ofBaseApp{
 
 		int maxParticle;
 		int picPix;
+		int k;
 		bool symbolAttractorIsSet;
 		bool cloudAttractorIsSet;
 		bool tornadoIsFinished;

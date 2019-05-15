@@ -6,6 +6,7 @@ int r = 121;		//Farbe für Symbol
 int g = 205;
 int b = 205;
 
+
 images::images() {
 
 }
@@ -26,20 +27,45 @@ void images::setup() {
 	fileImage1.loadImage("Hexagon.png");
 	fileImage2.loadImage("FINAL_Logo.png");
 	fileImage3.loadImage("Danke_4070_2.png");
-	fileImage4.loadImage("UmweltTechnik.png");
-	fileImage5.loadImage("UmweltWissenschaft.png");
-	fileImage6.loadImage("AlltagWissenschaftUmwelt.png");
-	fileImage7.loadImage("AlltagTechnikUmwelt.png");
-	fileImage8.loadImage("UmweltWissenschaft.png");
+	fileImage4.loadImage("PktUmweltTechnik.png");
+	fileImage5.loadImage("PktUmweltWissenschaft.png");
+	fileImage6.loadImage("PktAlltagWissenschaftUmwelt.png");
+	fileImage7.loadImage("PktAlltagTechnikUmwelt.png");
+	fileImage8.loadImage("PktUmweltWissenschaft.png");
+	fileImage9.loadImage("Wolke.png");
 
 }
 
 //--------------------------------------------------------------
 
-void images::updateImage() {
-	//if (symbolAttractorIsSet) {
+void images::updateImage(float sceneSizeX, float sceneSizeY) {
+	ima = changeImageColor(fileImage1, r, g, b);
 
-	//}
+
+	if (cloudAttractorIsSet) {
+		if (y <= sceneSizeY / 2 - imageToDraw.getHeight() / 2) {
+
+			//attractorToDraw.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+
+			ima.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+
+			ofSetColor(0, 0, 0);
+			ofDrawRectangle(sceneSizeX / 2 - 100, sceneSizeY / 3, 200, 200);
+			ofSetColor(255, 255, 255);
+			y += 3;
+		}
+		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+		ima.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+	}
+	else if (symbolAttractorIsSet) {
+		y = 0;
+		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2));
+	}
+	else if (tornadoIsFinished == false) {
+		y = 0;
+	}
+
 }
 
 //--------------------------------------------------------------
@@ -51,9 +77,6 @@ void images::draw() {
 //--------------------------------------------------------------
 
 void images::drawImageIntoScreen(float sceneSizeX, float sceneSizeY) {
-	if (imageToDraw.getWidth() != 0) {
-		imageToDraw.draw((sceneSizeX / 4 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2));
-	}
 
 }
 
@@ -110,7 +133,7 @@ void images::keyReleased(int key) {
 		tornadoIsFinished = true;
 
 		break;
-	case '5':												//Bild 3: AlltagTechnikUmwelt
+	case '3':												//Bild 3: AlltagTechnikUmwelt
 
 		imageToDraw = changeImageColor(fileImage6, r, g, b);
 
@@ -119,7 +142,13 @@ void images::keyReleased(int key) {
 		tornadoIsFinished = true;
 
 		break;
+	case '4':
+		//attractorToDraw = changeImageColor(fileImage9, r, g, b);
+		cloudAttractorIsSet = true;
+		tornadoIsFinished = true;
+		break;
 	}
+
 }
 
 //--------------------------------------------------------------

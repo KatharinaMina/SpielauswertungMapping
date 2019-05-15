@@ -29,6 +29,7 @@ public:
 	float size;
 	float mass;
 	float shallBeKilled();
+	int y;
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
@@ -36,7 +37,7 @@ public:
 
 	void setup();
 	void drawImageIntoScreen(float sceneSizeX, float sceneSizeY);
-	void updateImage();
+	void updateImage(float sceneSizeX, float sceneSizeY);
 	void draw();
 	void keyReleased(int key);
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
@@ -49,7 +50,10 @@ public:
 	ofImage fileImage6;
 	ofImage fileImage7;
 	ofImage fileImage8;
+	ofImage fileImage9;
 	ofImage imageToDraw;
+	ofImage attractorToDraw;
+	ofImage ima;
 
 private:
 
