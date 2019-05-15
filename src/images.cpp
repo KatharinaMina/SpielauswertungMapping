@@ -43,24 +43,24 @@ void images::updateImage(float sceneSizeX, float sceneSizeY) {
 
 
 	if (cloudAttractorIsSet) {
-		if (y <= sceneSizeY / 2 - imageToDraw.getHeight() / 2) {
+		if (y <= sceneSizeY / 2 - imageToDraw.getHeight() / 2  - 3) {
 
 			//attractorToDraw.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
-			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+			//imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
 
-			ima.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+			//ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
 
-			ofSetColor(0, 0, 0);
+			/*ofSetColor(0, 0, 0);
 			ofDrawRectangle(sceneSizeX / 2 - 100, sceneSizeY / 3, 200, 200);
-			ofSetColor(255, 255, 255);
+			ofSetColor(255, 255, 255);*/
 			y += 3;
 		}
-		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
-		ima.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+		ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
 	}
 	else if (symbolAttractorIsSet) {
 		y = 0;
-		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getHeight() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2));
+		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2));
 	}
 	else if (tornadoIsFinished == false) {
 		y = 0;

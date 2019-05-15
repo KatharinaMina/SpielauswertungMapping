@@ -29,6 +29,7 @@ public:
 	float size;
 	float mass;
 	float shallBeKilled();
+	int k;
 	bool pL;
   
     void setup(ofVec2f pos, float maxAge);

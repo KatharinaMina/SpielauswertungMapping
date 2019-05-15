@@ -98,15 +98,15 @@ void ofApp::update() {
 			system.erase(system.begin());										//löschen der des Pointer auf Partikel
 		}
 	}
-	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == true) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
+	//else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == true) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
-		int newPix = (system.size() - (picPix / 4));
+	//	int newPix = (system.size() - (picPix / 4));
 
-		for (int i = 0; i < newPix; i++) {
-			delete system.at(0);													// löschen des Partikel Obj.
-			system.erase(system.begin());										//löschen der des Pointer auf Partikel
-		}
-	}
+	//	for (int i = 0; i < newPix; i++) {
+	//		delete system.at(0);													// löschen des Partikel Obj.
+	//		system.erase(system.begin());										//löschen der des Pointer auf Partikel
+	//	}
+	//}
 
 	//----------------------------------------------------------//Updaten der Partikel (Bewegung)
 
@@ -205,7 +205,7 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 
 			ofVec2f vec;
 
-			vec.set(x + ((sceneSize.x / 2) - picWidth / 2.5), y + ((sceneSize.y / 2) - picHeight / 2));
+			vec.set(x + ((sceneSize.x / 2) - picWidth / 2), y + ((sceneSize.y / 2) - picHeight / 2));
 			pxPos.push_back(vec);
 
 			picPix++;

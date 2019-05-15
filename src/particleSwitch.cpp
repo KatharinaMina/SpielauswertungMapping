@@ -21,6 +21,7 @@ void particle02::setup(ofVec2f pos, float maxAge) {
 	size = ofRandom(2, 3);							//Unterschiedliche Partikelgröße
 	mass = ofRandom(100, 200);							//verändert die Partikelgeschwindigkeit
 	color.set(5, 241, 219);
+	k = 0;
 }
 
 //--------------------------------------------------------------
@@ -36,9 +37,30 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 		}
 	}
 
-//---------------------------------------------------------------
-														//Bewegung bei Symbolen
-	if (tornadoIsFinished == true) {
+
+	//---------------------------------------------------------------
+															//Bewegung bei Symbolen 
+	if (cloudAttractorIsSet == true) {
+		//Bewegung bei Wolke
+		int y = ((sceneSizeY / 2) + 130);
+		int x = ofRandom(sceneSizeX / 2 - 65, sceneSizeX / 2 + 65);
+
+		ofVec2f force2 = attractor - pos;
+		if (y - k - 130 > 250) {
+			k += 4;
+		}
+		else if (y - k - 130 > 10) {
+			k += 3;
+
+		}
+		attractor.set(x, y - k);		
+		//Attraktor wird neu gesetzt 
+	}
+
+	if (tornadoIsFinished == true ){
+		if (!cloudAttractorIsSet) {
+			k = 0;
+		}
 		age += deltaT;
 		vel *= 0.1;
 		ofVec2f force = attractor - pos;				//Anziehungskraft						
@@ -64,8 +86,8 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 		}
 		pos += (vel / 1.5 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
 	}
-		
-}
+
+		}
 
 //--------------------------------------------------------------
 
