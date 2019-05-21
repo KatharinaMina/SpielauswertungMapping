@@ -53,15 +53,8 @@ class ofApp : public ofBaseApp{
 		vector<particle02*> system;
 		
 		ofImage img;
-		ofImage fileImage1;
-		ofImage fileImage2;
-		ofImage fileImage3;
-		ofImage fileImage4;
-		ofImage fileImage5;
-		ofImage fileImage6;
-		ofImage fileImage7;
-		ofImage fileImage8;
-		ofImage fileImage9;
+		ofImage fileImageHex;
+		ofImage fileImageCloud;
 		ofImage imageToDraw;
 		
 		ofImage drawImage;

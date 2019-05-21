@@ -58,8 +58,10 @@ void ofApp::setup() {
 	imgs.setup();
 
 
-	fileImage1.loadImage("Hexagon.png");
-	fileImage9.loadImage("Wolke.png");
+	fileImageHex.loadImage("Hexagon.png");
+	fileImageCloud.loadImage("Wolke.png");
+
+
 
 }
 
@@ -115,21 +117,21 @@ void ofApp::update() {
 			if (p * 7 < attractors.size()) {
 				if (cloudAttractorIsSet == true) {
 					system.at(p)->updateParticle(deltaT, attractors[p * 7],
-						cloudAttractorIsSet, tornadoIsFinished, sceneSize.x, sceneSize.y);
+						cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(),sceneSize.x, sceneSize.y);
 				}
 				else if (symbolAttractorIsSet == false) {
 					system.at(p)->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())),
-						cloudAttractorIsSet, tornadoIsFinished, sceneSize.x, sceneSize.y);					//Partikel werden an beliebige Stelle gezogen				
+						cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);					//Partikel werden an beliebige Stelle gezogen				
 				}
 				else if (symbolAttractorIsSet == true)
 				{
 					system.at(p)->updateParticle(deltaT, attractors[p * 7],
-						cloudAttractorIsSet, tornadoIsFinished, sceneSize.x, sceneSize.y);					//Partikel werden an Symbol gezogen
+						cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);					//Partikel werden an Symbol gezogen
 				}
 			}
 			else {
 				system.at(p)->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())),
-					cloudAttractorIsSet, tornadoIsFinished, sceneSize.x, sceneSize.y);						//Partikel werden an beliebige Stelle gezogen
+					cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);						//Partikel werden an beliebige Stelle gezogen
 			}
 			p++;
 		}
@@ -138,7 +140,7 @@ void ofApp::update() {
 		for (int p = 0; p < system.size(); p++) {
 			particle02* partikel = system.at(p);
 
-			partikel->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())), cloudAttractorIsSet, tornadoIsFinished, sceneSize.x, sceneSize.y);
+			partikel->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())), cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);
 
 			if (system.at(p)->shallBeKilled()) {									//Beim austreten rechts werden die Partikel gelöscht
 				delete system.at(p);												//und links wieder erstellt
@@ -168,7 +170,7 @@ void ofApp::draw() {
 	//ofDrawRectangle(0, 0, 800, 800);
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
-	//drawImage = fileImage1;
+	//drawImage = fileImageHex;
 	
 	imgs.updateImage(sceneSize.x, sceneSize.y);
 
@@ -278,7 +280,7 @@ void ofApp::keyReleased(int key) {
 		tornadoIsFinished = false;
 		break;
 	case '4':
-		attractors = pixelInVector(fileImage9);
+		attractors = pixelInVector(fileImageCloud);
 		cloudAttractorIsSet = true;
 		tornadoIsFinished = true;
 		break;
@@ -286,7 +288,7 @@ void ofApp::keyReleased(int key) {
 	case '2':
 	case '3':
 
-		attractors = pixelInVector(fileImage1);
+		attractors = pixelInVector(fileImageHex);
 		symbolAttractorIsSet = true;
 		cloudAttractorIsSet = false;
 		tornadoIsFinished = true;

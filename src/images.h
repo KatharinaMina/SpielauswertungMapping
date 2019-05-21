@@ -30,6 +30,9 @@ public:
 	float mass;
 	float shallBeKilled();
 	int y;
+	int x;
+	int ticksToMovePictureToRight;
+	int counterToMovePicctureToRight;
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
@@ -42,15 +45,13 @@ public:
 	void keyReleased(int key);
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
-	ofImage fileImage1;
-	ofImage fileImage2;
-	ofImage fileImage3;
-	ofImage fileImage4;
-	ofImage fileImage5;
-	ofImage fileImage6;
-	ofImage fileImage7;
-	ofImage fileImage8;
-	ofImage fileImage9;
+	ofImage fileImageHex;
+	ofImage fileImageUT;
+	ofImage fileImageTU;
+	ofImage fileImageUW;
+	ofImage fileImageAWU;
+	ofImage fileImageATU;
+	ofImage fileImageCloud;
 	ofImage imageToDraw;
 	ofImage attractorToDraw;
 	ofImage ima;

@@ -30,13 +30,16 @@ public:
 	float mass;
 	float shallBeKilled();
 	int k;
+	int l;
+	int ticksToMoveParticlesToRight;
+	int counterToMoveParticlesToRight;
 	bool pL;
   
     void setup(ofVec2f pos, float maxAge);
     void startTornado();
     void startStage1();
     void updateStage1();
-    void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool tornadoIsFinished,float sceneSizeX, float sceneSizeY);
+    void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool tornadoIsFinished, int imageHeight, float sceneSizeX, float sceneSizeY);
     void draw();
     void keyReleased(int key);
     void keyPressed(int key);
