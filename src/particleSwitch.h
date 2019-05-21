@@ -28,12 +28,15 @@ public:
     float getAgeNorm();
 	float size;
 	float mass;
-	float shallBeKilled();
+	float deleteAfterLeavingSceneY();
+	bool deleteAfterLeavingSceneX();
+	
 	int k;
 	int l;
 	int ticksToMoveParticlesToRight;
 	int counterToMoveParticlesToRight;
 	bool pL;
+	bool particleLeftScene;
   
     void setup(ofVec2f pos, float maxAge);
     void startTornado();

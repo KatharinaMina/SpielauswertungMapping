@@ -28,7 +28,7 @@ public:
 	float getAgeNorm();
 	float size;
 	float mass;
-	float shallBeKilled();
+	float deleteAfterLeavingSceneY();
 	int y;
 	int x;
 	int ticksToMovePictureToRight;

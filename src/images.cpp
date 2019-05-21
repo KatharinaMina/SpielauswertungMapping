@@ -38,7 +38,7 @@ void images::setup() {
 	y = 0;
 	ticksToMovePictureToRight = 70;
 	counterToMovePicctureToRight = 0;
-	
+
 }
 
 //--------------------------------------------------------------
@@ -58,7 +58,7 @@ void images::drawImageIntoScreen(float sceneSizeX, float sceneSizeY) {
 void images::updateImage(float sceneSizeX, float sceneSizeY) {
 	ima = changeImageColor(fileImageHex, r, g, b);
 
-	int maxYpositionForPicture = sceneSizeY / 2 - imageToDraw.getHeight() / 2 - 3;
+	int maxYpositionForPicture = sceneSizeY - imageToDraw.getHeight() - 3;
 
 
 	if (cloudAttractorIsSet) {
@@ -69,27 +69,29 @@ void images::updateImage(float sceneSizeX, float sceneSizeY) {
 			counterToMovePicctureToRight++;
 		}
 		else {
-			if (pastMiddle)
+			if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
 				x += 3;
-			else
+			}
+			else {					// mittelpkt - x  jetzt wird x wieder zu null
 				x -= 3;
+			}
 		}
 
-		if (pastMiddle && x >= sceneSizeX/2 + imageToDraw.getWidth()) {
+		if (pastMiddle && x >= sceneSizeX / 2 + imageToDraw.getWidth()) {
 			pastMiddle = false;
 		}
-		
+
 		if (!pastMiddle && x <= 0) {
 			pastMiddle = true;
 		}
 
 		if (pastMiddle) {
-			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
-			ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
+			ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
 		}
 		else {
-			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
-			ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY / 2 - imageToDraw.getHeight() / 2) - y);
+			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
+			ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
 		}
 
 
@@ -99,7 +101,7 @@ void images::updateImage(float sceneSizeX, float sceneSizeY) {
 		y = 0;
 		x = 0;
 		counterToMovePicctureToRight = 0;
-		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY / 2 - imageToDraw.getHeight() / 2));
+		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));
 	}
 	else if (tornadoIsFinished == false) {
 		y = 0;
@@ -189,7 +191,7 @@ float images::getAgeNorm() {
 
 //--------------------------------------------------------------
 
-float images::shallBeKilled() {
+float images::deleteAfterLeavingSceneY() {
 	return pos.y < 0 || pos.y > ofGetHeight();
 
 }

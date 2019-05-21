@@ -52,10 +52,10 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 
 		ofVec2f force2 = attractor - pos;
 		if (y - k - imageHeight > 250) {
-			k += 4;
+			k += 2;
 		}
 		else if (y - k - imageHeight > 10) {
-			k += 3;
+			k += 2;
 
 		}
 		else if(counterToMoveParticlesToRight < ticksToMoveParticlesToRight){
@@ -65,6 +65,12 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 			l += 3;
 		}
 
+		if (attractor.x + l >= sceneSizeX){
+			particleLeftScene = true;
+		}
+		else {
+			particleLeftScene = false;
+		}
 
 		attractor.set(x + l, y - k);
 
@@ -74,14 +80,14 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 		ofVec2f force = attractor - pos;			//Anziehungskraft						
 
 		if (50 < force.length() < 150) {
-			force = 6 * force.getNormalized();		//Anziehungskraft des Attraktors auf die Partikel
+			force = 3 * force.getNormalized();		//Anziehungskraft des Attraktors auf die Partikel
 
 
 			vel += force;							//Bewegung zum Attraktor
 			vel = mass * vel.getNormalized();
 		}
 		else if (force.length() < 500) {
-			force = 8 * force.getNormalized();
+			force = 7 * force.getNormalized();
 
 
 			vel += force;
@@ -92,7 +98,7 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 			vel += force;
 			vel = mass * vel.getNormalized();
 		}
-		pos += (vel / 1.5 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
+		pos += (vel / 1.2 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
 
 
 	}
@@ -166,7 +172,14 @@ float particle02::getAgeNorm() {
 
 //--------------------------------------------------------------
 
-float particle02::shallBeKilled() {
+float particle02::deleteAfterLeavingSceneY() {
 	return pos.y < 0 || pos.y > ofGetHeight();
 
 }
+
+bool particle02::deleteAfterLeavingSceneX() {
+	return particleLeftScene;
+}
+
+
+

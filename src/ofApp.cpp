@@ -80,7 +80,7 @@ void ofApp::update() {
 		}
 		birthCnt = 0;
 	}
-	else if ((tornadoIsFinished == true) && (system.size() < picPix / 7)) {			//Ertsellen von Partiklen für Symbole
+	else if ((cloudAttractorIsSet == false) && (tornadoIsFinished == true) && (system.size() < picPix / 7)) {			//Ertsellen von Partiklen für Symbole
 		int newPix = (picPix / 7) - system.size();
 		for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 			system.push_back(new particle02);
@@ -100,15 +100,14 @@ void ofApp::update() {
 			system.erase(system.begin());										//löschen der des Pointer auf Partikel
 		}
 	}
-	//else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == true) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
+	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == true) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
-	//	int newPix = (system.size() - (picPix / 4));
-
-	//	for (int i = 0; i < newPix; i++) {
-	//		delete system.at(0);													// löschen des Partikel Obj.
-	//		system.erase(system.begin());										//löschen der des Pointer auf Partikel
-	//	}
-	//}
+		int newPix = (system.size() - (picPix / 4));
+		for (int i = 0; i < newPix; i++) {
+			delete system.at(0);													// löschen des Partikel Obj.
+			system.erase(system.begin());										//löschen der des Pointer auf Partikel
+		}
+	}
 
 	//----------------------------------------------------------//Updaten der Partikel (Bewegung)
 
@@ -117,7 +116,13 @@ void ofApp::update() {
 			if (p * 7 < attractors.size()) {
 				if (cloudAttractorIsSet == true) {
 					system.at(p)->updateParticle(deltaT, attractors[p * 7],
-						cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(),sceneSize.x, sceneSize.y);
+						cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);
+
+					bool particleToDelete = system.at(p)->deleteAfterLeavingSceneX();
+					if (particleToDelete) {
+						delete system.at(0);													// löschen des Partikel Obj.
+						system.erase(system.begin());
+					}
 				}
 				else if (symbolAttractorIsSet == false) {
 					system.at(p)->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())),
@@ -142,7 +147,7 @@ void ofApp::update() {
 
 			partikel->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())), cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);
 
-			if (system.at(p)->shallBeKilled()) {									//Beim austreten rechts werden die Partikel gelöscht
+			if (system.at(p)->deleteAfterLeavingSceneY()) {									//Beim austreten rechts werden die Partikel gelöscht
 				delete system.at(p);												//und links wieder erstellt
 				system.erase(system.begin() + p);
 				p--;
@@ -171,7 +176,7 @@ void ofApp::draw() {
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
 	//drawImage = fileImageHex;
-	
+
 	imgs.updateImage(sceneSize.x, sceneSize.y);
 
 	for (int i = 0; i < system.size(); i++) {
@@ -207,7 +212,7 @@ vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixe
 
 			ofVec2f vec;
 
-			vec.set(x + ((sceneSize.x / 2) - picWidth / 2), y + ((sceneSize.y / 2) - picHeight / 2));
+			vec.set(x + ((sceneSize.x / 2) - picWidth / 2), y + ((sceneSize.y) - picHeight - 5));
 			pxPos.push_back(vec);
 
 			picPix++;
