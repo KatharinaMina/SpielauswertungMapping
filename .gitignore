@@ -1,7 +1,103 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/.vs/dmnWarp/v15
-/.vs/SpielauswertungMapping/v15
-/.vs
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c20000\c20000\c20000;\cssrgb\c100000\c100000\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}}{\leveltext\leveltemplateid1\'01\'00;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\f0\fs24 \cf2 \cb3 ###########################\
+# ignore generated binaries\
+# but not the data folder\
+###########################\
+\
+/bin/*\
+!/bin/data/\
+\
+#########\
+# general\
+#########\
+\
+[Bb]uild/\
+[Oo]bj/\
+*.o\
+[Dd]ebug*/\
+[Rr]elease*/\
+*.mode*\
+*.app/\
+*.pyc\
+.svn/\
+*.log\
+\
+########################\
+# IDE files which should\
+# be ignored\
+########################\
+\
+# XCode\
+*.pbxuser\
+*.plist\
+*.DS_Store\
+*.Makefile\
+Project.xcconfig\
+*.make\
+/makefile\
+*.xcodeproj\
+*.perspective\
+*.perspectivev3\
+*.mode1v3\
+*.mode2v3\
+# XCode 4\
+xcuserdata\
+*.xcworkspace\
+\
+# Code::Blocks\
+*.depend\
+*.layout\
+\
+# Visual Studio\
+*.sdf\
+*.opensdf\
+*.suo\
+*.pdb\
+*.ilk\
+*.aps\
+*.make\
+*.sln\
+*.vcxproj\
+*.filters\
+*.rc\
+ipch/\
+\
+# Eclipse\
+.metadata\
+local.properties\
+.externalToolBuilders\
+\
+##################\
+# operating system\
+##################\
+\
+# Linux\
+*~\
+# KDE\
+.directory\
+.AppleDouble\
+\
+# OSX\
+.DS_Store\
+*.swp\
+*~.nib\
+# Thumbnails\
+._*\
+\
+# Windows\
+# Image file caches\
+Thumbs.db\
+# Folder config file\
+Desktop.ini\
+\
+# Android\
+.csettings}

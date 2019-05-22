@@ -76,7 +76,7 @@ void ofApp::update() {
 	if ((birthCnt >= 0) && (status == -1) && (tornadoIsFinished == false)) {		//Ertsellen von Partiklen für Tornado
 		for (int i = 0; i < parAmount; i++) {
 			system.push_back(new particle02);
-			system.back()->setup(ofVec2f(ofRandom(0, sceneSize.x), 0), 20);
+			system.back()->setup(ofVec2f(ofRandom(0, sceneSize.x), sceneSize.y), 20);
 		}
 		birthCnt = 0;
 	}

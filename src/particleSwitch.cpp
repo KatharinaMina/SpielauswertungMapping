@@ -16,7 +16,7 @@ particle02::~particle02() {
 
 void particle02::setup(ofVec2f pos, float maxAge) {
 	this->pos = pos;									//pointer auf Position ofVec2f position
-	vel.set(ofRandom(-20.0, 20.0), ofRandom(90, 100));	//Die Bewegungsrichtung
+	vel.set(ofRandom(-20.0, 20.0), ofRandom(-90, -100));	//Die Bewegungsrichtung
 
 	age = 0.0;											//Alter ist am Anfang 0
 	maxLife = ofRandom(maxAge - 5, maxAge);				//Wie lange der Partikel maximal leben soll
