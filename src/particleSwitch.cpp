@@ -14,8 +14,9 @@ particle02::~particle02() {
 
 //--------------------------------------------------------------
 
-void particle02::setup(ofVec2f pos, float maxAge) {
+void particle02::setup(ofVec2f pos, ofVec2f pos2, float maxAge) {
 	this->pos = pos;									//pointer auf Position ofVec2f position
+    this->pos2 = pos2;
 	vel.set(ofRandom(-20.0, 20.0), ofRandom(-90, -100));	//Die Bewegungsrichtung
 
 	age = 0.0;											//Alter ist am Anfang 0
@@ -23,7 +24,8 @@ void particle02::setup(ofVec2f pos, float maxAge) {
 	size = ofRandom(2, 3);								//Unterschiedliche Partikelgröße
 	mass = ofRandom(100, 200);							//verändert die Partikelgeschwindigkeit
 	color.set(5, 241, 219);
-	k = 0;
+    color2.set(255,255,255);
+    k = 0;
 	l = 0;
 	ticksToMoveParticlesToRight = 70;
 	counterToMoveParticlesToRight = 0;
@@ -33,13 +35,19 @@ void particle02::setup(ofVec2f pos, float maxAge) {
 
 void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool tornadoIsFinished, int imageHeight, float sceneSizeX, float sceneSizeY) {
 	//Fallender Partikel
+    
+    
 	if (tornadoIsFinished == false) {
 		pos += vel * deltaT;
+        pos2 += vel * deltaT;
 		age += deltaT;
 
 		if (pos.x >= sceneSizeX) {
 			pos.x = 0;
 		}
+        if (pos2.x >= sceneSizeX) {
+            pos2.x = 0;
+        }
 	}
 
 	//---------------------------------------------------------------
@@ -99,6 +107,7 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 			vel = mass * vel.getNormalized();
 		}
 		pos += (vel / 1.2 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
+       pos2 += (vel / 1.2 * deltaT);
 
 
 	}
@@ -133,6 +142,7 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 			vel = mass * vel.getNormalized();
 		}
 		pos += (vel / 1.5 * deltaT);				//Position = m/s * s [Partikel bleiben statisch]
+        pos2 += (vel / 1.5 * deltaT);
 	}
 
 }
@@ -140,14 +150,25 @@ void particle02::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttr
 //--------------------------------------------------------------
 
 void particle02::draw() {
-	ofSetColor(this->color);
-	ofDrawCircle(pos, size);
+    if (pos.x > 0 || pos.x < 300){
+        ofSetColor(this->color);
+    } else{
+        ofSetColor(255, 255, 255);
+    }
+    ofDrawCircle(pos, size);
+	
+    
+}
+void particle02::draw2(){
+    ofSetColor(this->color2);
+    ofDrawCircle(pos2, size);
 }
 
 //--------------------------------------------------------------
 
 void particle02::startTornado() {
 	int distance = pos.y - ofGetHeight() / 3.5 * 3;
+    
 	vel.y = -distance / 2;
 }
 
@@ -173,7 +194,7 @@ float particle02::getAgeNorm() {
 //--------------------------------------------------------------
 
 float particle02::deleteAfterLeavingSceneY() {
-	return pos.y < 0 || pos.y > ofGetHeight();
+	return pos.y < 0 || pos.y > ofGetHeight() || pos2.y < 0 || pos.y > ofGetHeight();
 
 }
 

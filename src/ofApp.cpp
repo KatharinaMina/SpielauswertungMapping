@@ -22,7 +22,7 @@ void ofApp::setup() {
 
 	//scene properties
 	sceneSize.set(1280, 800);
-	area.set(0, 0, sceneSize.x, sceneSize.y);
+	//area.set(0, 0, sceneSize.x, sceneSize.y);
 	fbo.allocate(sceneSize.x, sceneSize.y, GL_RGBA);
 
 	//clear fbo to make sure there's no scrap
@@ -76,7 +76,7 @@ void ofApp::update() {
 	if ((birthCnt >= 0) && (status == -1) && (tornadoIsFinished == false)) {		//Ertsellen von Partiklen für Tornado
 		for (int i = 0; i < parAmount; i++) {
 			system.push_back(new particle02);
-			system.back()->setup(ofVec2f(ofRandom(0, sceneSize.x), sceneSize.y), 20);
+			system.back()->setup(ofVec2f(ofRandom(0, sceneSize.x/2), sceneSize.y),ofVec2f(ofRandom(sceneSize.x/2, sceneSize.x), sceneSize.y), 20);
 		}
 		birthCnt = 0;
 	}
@@ -86,9 +86,11 @@ void ofApp::update() {
 			system.push_back(new particle02);
 
 			int y = ofRandom(0, sceneSize.y);
-			int x = ofRandom(0, sceneSize.x);
+			int x = ofRandom(0, sceneSize.x/2);
+            int y2 = ofRandom(0, sceneSize.y);
+            int x2 = ofRandom(sceneSize.x/2, sceneSize.x);
 
-			system.back()->setup(ofVec2f(x, y), 20);
+			system.back()->setup(ofVec2f(x, y),ofVec2f(x2, y2), 20);
 		}
 	}
 	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
@@ -181,6 +183,7 @@ void ofApp::draw() {
 
 	for (int i = 0; i < system.size(); i++) {
 		system.at(i)->draw();
+        system.at(i)->draw2();
 	}
 
 	fbo.end();
@@ -189,6 +192,7 @@ void ofApp::draw() {
 	//draw warp
 	warpController.getWarp(0)->begin();
 	fbo.draw(0, 0);
+    
 	warpController.getWarp(0)->end();
 }
 
