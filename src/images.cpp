@@ -2,10 +2,6 @@
 
 
 
-int r = 121;		//Farbe für Symbol
-int g = 205;
-int b = 205;
-
 bool pastMiddle = true;
 
 

@@ -13,9 +13,6 @@
     <ClCompile Include="src\ofApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\particleSwitch.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxCv\libs\CLD\src\ETF.cpp">
       <Filter>addons\ofxCv\libs\CLD\src</Filter>
     </ClCompile>
@@ -91,7 +88,16 @@
     <ClCompile Include="..\..\..\addons\ofxWarp\src\ofxWarp\WarpPerspectiveBilinear.cpp">
       <Filter>addons\ofxWarp\src\ofxWarp</Filter>
     </ClCompile>
-    <ClCompile Include="src\images.cpp">
+    <ClCompile Include="src\drawableImage.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\particle.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imageParticleSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rainParticleSystem.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -300,9 +306,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\ofApp.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\particleSwitch.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxCv\src\ofxCv.h">
@@ -1391,7 +1394,16 @@
     <ClInclude Include="..\..\..\addons\ofxWarp\src\ofxWarp.h">
       <Filter>addons\ofxWarp\src</Filter>
     </ClInclude>
-    <ClInclude Include="src\images.h">
+    <ClInclude Include="src\drawableImage.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particle.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imageParticleSystem.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rainParticleSystem.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

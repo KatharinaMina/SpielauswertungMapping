@@ -3,8 +3,11 @@
 #include "ofMain.h"
 #include "ofxWarp.h"
 
-#include "particleSwitch.h"
-#include "images.h"
+#include "particle.h"
+#include "drawableImage.h"
+#include "imageParticleSystem.h"
+#include "rainParticleSystem.h"
+
 
 #include "ofxOpenCv.h"
 #include "ofTrueTypeFont.h"
@@ -32,12 +35,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		void startTornado();
-		void updateTornado();
-
-
-		vector <ofVec2f> pixelInVector(ofImage a);
-
 	
 	private:
 		//warp
@@ -50,8 +47,12 @@ class ofApp : public ofBaseApp{
 		ofFbo fbo;
 
 		vector<ofVec2f>attractors;
-		vector<particle02*> system;
-		
+		vector<particle*> system;
+
+		vector<imageParticleSystem*> imageParticleSystems;
+		rainParticleSystem* rainParticleSyst;
+
+
 		ofImage img;
 		ofImage fileImageHex;
 		ofImage fileImageCloud;
@@ -62,22 +63,13 @@ class ofApp : public ofBaseApp{
 		ofColor color;
 		
 
+		int currentImage;
 		int maxParticle;
 		int picPix;
 		int k;
-		bool symbolAttractorIsSet;
-		bool cloudAttractorIsSet;
-		bool tornadoIsFinished;
-		bool tornadoStarted;
+		bool rainIsActive;
 		bool editingWarp;
 		
 
-		//------------------------------------------
-		float birthCnt;
-		float maxLife;
-		float parAmount;
-		float height;
-		double time;
-		double tornadoStartTime;
-		int status;
+
 };

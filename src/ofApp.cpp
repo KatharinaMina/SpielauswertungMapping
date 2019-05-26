@@ -2,21 +2,21 @@
 #include "ofxOpenCv.h"
 #include "ofTrueTypeFont.h"
 
-images imgs;
 //--------------------------------------------------------------
 void ofApp::setup() {
 
+	currentImage = -1;
 	ofDisableArbTex();
 	ofBackground(0);
 
 	//test image
-	img.setUseTexture(false);
+	/*img.setUseTexture(false);
 	if (!img.load("testcard.png"))
 	{
 		ofLogError("ofApp::setup") << "Could not load image!";
 		return;
 	}
-
+*/
 	this->tex.enableMipmap();
 	this->tex.loadData(img.getPixels());
 
@@ -49,116 +49,28 @@ void ofApp::setup() {
 	ofSetCircleResolution(60);
 	ofSetBackgroundColor(0, 0, 0);
 	//ofSetFrameRate(60);
-	maxParticle = 50;
-	birthCnt = 0;
-	parAmount = 4;
-	tornadoStartTime = -1000;
-	time = 0;
-	status = -1;
-	imgs.setup();
+
 
 
 	fileImageHex.loadImage("Hexagon.png");
 	fileImageCloud.loadImage("Wolke.png");
 
+	rainIsActive = true;
 
+	this->rainParticleSyst = new rainParticleSystem(sceneSize.x, sceneSize.y);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-
-	std::cout << picPix << endl;
-	double deltaT = ofGetLastFrameTime();
-	time += deltaT;
-
-	//----------------------------------------------------------//Ertsellen bzw. Löschen von Partikeln
-	if ((birthCnt >= 0) && (status == -1) && (tornadoIsFinished == false)) {		//Ertsellen von Partiklen für Tornado
-		for (int i = 0; i < parAmount; i++) {
-			system.push_back(new particle02);
-			system.back()->setup(ofVec2f(ofRandom(0, sceneSize.x/2), sceneSize.y),ofVec2f(ofRandom(sceneSize.x/2, sceneSize.x), sceneSize.y), 20);
-		}
-		birthCnt = 0;
+	if (rainIsActive) {
+		rainParticleSyst->updateParticleSystem();
 	}
-	else if ((cloudAttractorIsSet == false) && (tornadoIsFinished == true) && (system.size() < picPix / 7)) {			//Ertsellen von Partiklen für Symbole
-		int newPix = (picPix / 7) - system.size();
-		for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
-			system.push_back(new particle02);
-
-			int y = ofRandom(0, sceneSize.y);
-			int x = ofRandom(0, sceneSize.x/2);
-            int y2 = ofRandom(0, sceneSize.y);
-            int x2 = ofRandom(sceneSize.x/2, sceneSize.x);
-
-			system.back()->setup(ofVec2f(x, y),ofVec2f(x2, y2), 20);
+	else {
+		for (int i = 0; i < imageParticleSystems.size(); i++) {
+			imageParticleSystems.at(i)->updateParticleSystem();
 		}
 	}
-	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == false) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
-
-		int newPix = (system.size() - (picPix / 7));
-
-		for (int i = 0; i < newPix; i++) {
-			delete system.at(0);													// löschen des Partikel Obj.
-			system.erase(system.begin());										//löschen der des Pointer auf Partikel
-		}
-	}
-	else if ((tornadoIsFinished == true) && (cloudAttractorIsSet == true) && (system.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
-
-		int newPix = (system.size() - (picPix / 4));
-		for (int i = 0; i < newPix; i++) {
-			delete system.at(0);													// löschen des Partikel Obj.
-			system.erase(system.begin());										//löschen der des Pointer auf Partikel
-		}
-	}
-
-	//----------------------------------------------------------//Updaten der Partikel (Bewegung)
-
-	if (tornadoIsFinished == true) {												//Bewegung bei Symbolen
-		for (int p = 0; p < system.size();) {
-			if (p * 7 < attractors.size()) {
-				if (cloudAttractorIsSet == true) {
-					system.at(p)->updateParticle(deltaT, attractors[p * 7],
-						cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);
-
-					bool particleToDelete = system.at(p)->deleteAfterLeavingSceneX();
-					if (particleToDelete) {
-						delete system.at(0);													// löschen des Partikel Obj.
-						system.erase(system.begin());
-					}
-				}
-				else if (symbolAttractorIsSet == false) {
-					system.at(p)->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())),
-						cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);					//Partikel werden an beliebige Stelle gezogen				
-				}
-				else if (symbolAttractorIsSet == true)
-				{
-					system.at(p)->updateParticle(deltaT, attractors[p * 7],
-						cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);					//Partikel werden an Symbol gezogen
-				}
-			}
-			else {
-				system.at(p)->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())),
-					cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);						//Partikel werden an beliebige Stelle gezogen
-			}
-			p++;
-		}
-	}
-	else {																			//Bewegung bei Tornado
-		for (int p = 0; p < system.size(); p++) {
-			particle02* partikel = system.at(p);
-
-			partikel->updateParticle(deltaT, ofVec2f(ofRandom(0, sceneSize.x), ofRandom(0, ofGetHeight())), cloudAttractorIsSet, tornadoIsFinished, fileImageHex.getHeight(), sceneSize.x, sceneSize.y);
-
-			if (system.at(p)->deleteAfterLeavingSceneY()) {									//Beim austreten rechts werden die Partikel gelöscht
-				delete system.at(p);												//und links wieder erstellt
-				system.erase(system.begin() + p);
-				p--;
-			}
-		}
-		updateTornado();
-
-	}
-
 }
 
 //--------------------------------------------------------------
@@ -177,15 +89,16 @@ void ofApp::draw() {
 	//ofDrawRectangle(0, 0, 800, 800);
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
-	//drawImage = fileImageHex;
 
-	imgs.updateImage(sceneSize.x, sceneSize.y);
-
-	for (int i = 0; i < system.size(); i++) {
-		system.at(i)->draw();
-        system.at(i)->draw2();
+	if (rainIsActive) {
+		rainParticleSyst->drawRainParticleSystem();
 	}
-
+	else {
+		for (int i = 0; i < imageParticleSystems.size(); i++) {
+			imageParticleSystems.at(i)->drawImageParticleSystem();
+		}
+	}
+	
 	fbo.end();
 
 	//do not draw past this point
@@ -196,69 +109,6 @@ void ofApp::draw() {
 	warpController.getWarp(0)->end();
 }
 
-
-//--------------------------------------------------------------
-
-vector<ofVec2f> ofApp::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
-	int picWidth = a.getWidth();
-	int picHeight = a.getHeight();
-	ofPixels pix;
-	pix = a.getPixels();
-	vector<ofVec2f> pxPos;
-	picPix = 0;
-	for (int i = 3; i <= pix.size(); i += 4) {
-		if (pix[i] > 0) {
-			int width = pix.getWidth();
-
-			int y = i / 4 / width;
-
-			int x = i / 4 % width;
-
-			ofVec2f vec;
-
-			vec.set(x + ((sceneSize.x / 2) - picWidth / 2), y + ((sceneSize.y) - picHeight - 5));
-			pxPos.push_back(vec);
-
-			picPix++;
-		}
-	}
-	return pxPos;
-}
-
-//--------------------------------------------------------------
-void ofApp::startTornado() {
-	status = 0;
-	tornadoStartTime = time;
-	for (int p = 0; p < system.size(); p++) {
-		particle02* partikel = system.at(p);
-		partikel->startTornado();
-	}
-
-}
-
-//--------------------------------------------------------------
-void ofApp::updateTornado() {
-	switch (status) {
-	case 0:															//Status 0: Partikel wandern zur Grenze
-		if ((time - tornadoStartTime) > 1.9) {
-			status = 1;
-			for (int p = 0; p < system.size(); p++) {
-				particle02* partikel = system.at(p);
-				partikel->startStage1();
-			}
-		}
-		break;
-	case 1:															//Status 1: Tornado wandert nach Oben 
-		if ((time - tornadoStartTime) > 20) {
-			status = -1;											//Status -1: Es "schneit"
-		}
-		for (int p = 0; p < system.size(); p++) {
-			particle02* partikel = system.at(p);
-			partikel->updateStage1();
-		}
-		break;
-	}
-}
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
@@ -274,37 +124,29 @@ void ofApp::keyReleased(int key) {
 	}
 
 	switch (key) {
-	case ' ':												//Löschen von Partikel
-		for (int p = 0; p < system.size();) {
-			//schauen ob maxAge erreicht
-			delete system.at(p);						//Löschen des Partikel Obj.
-			system.erase(system.begin() + p);			//Löschen des Pointer auf Partikel
-
-			p++;
-		}
-		maxParticle = 0;									//damit keine neuen Partikel durch die update-Methode ersellt werden
-		break;
-	case '5':												//Tornado
-		startTornado();
-		tornadoIsFinished = false;
-		break;
 	case '4':
-		attractors = pixelInVector(fileImageCloud);
-		cloudAttractorIsSet = true;
-		tornadoIsFinished = true;
+		imageParticleSystems.at(currentImage)->changeAttractorImage(fileImageCloud);
+		rainIsActive = false;
+
+		imageParticleSystems.at(currentImage)->setCloudAttractorIsSet(true);
 		break;
 	case '1':
+		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktUmweltTechnik.png"));
+		rainIsActive = false;
+		currentImage++;
+		break;
 	case '2':
+		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagUmweltTechnik.png"));
+		rainIsActive = false;
+		currentImage++;
+		break;
+
 	case '3':
-
-		attractors = pixelInVector(fileImageHex);
-		symbolAttractorIsSet = true;
-		cloudAttractorIsSet = false;
-		tornadoIsFinished = true;
-
+		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagUmweltWissenschaft.png"));
+		rainIsActive = false;
+		currentImage++;
 		break;
 	}
-	imgs.keyReleased(key);
 }
 
 

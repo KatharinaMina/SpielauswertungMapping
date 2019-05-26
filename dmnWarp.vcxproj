@@ -180,10 +180,10 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\images.cpp" />
+    <ClCompile Include="src\drawableImage.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\particleSwitch.cpp" />
+    <ClCompile Include="src\particle.cpp" />
     <ClCompile Include="..\..\..\addons\ofxCv\libs\CLD\src\ETF.cpp" />
     <ClCompile Include="..\..\..\addons\ofxCv\libs\CLD\src\fdog.cpp" />
     <ClCompile Include="..\..\..\addons\ofxCv\libs\ofxCv\src\Calibration.cpp" />
@@ -209,11 +209,13 @@
     <ClCompile Include="..\..\..\addons\ofxWarp\src\ofxWarp\WarpBilinear.cpp" />
     <ClCompile Include="..\..\..\addons\ofxWarp\src\ofxWarp\WarpPerspective.cpp" />
     <ClCompile Include="..\..\..\addons\ofxWarp\src\ofxWarp\WarpPerspectiveBilinear.cpp" />
+    <ClCompile Include="src\imageParticleSystem.cpp" />
+    <ClCompile Include="src\rainParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\images.h" />
+    <ClInclude Include="src\drawableImage.h" />
     <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="src\particleSwitch.h" />
+    <ClInclude Include="src\particle.h" />
     <ClInclude Include="..\..\..\addons\ofxCv\src\ofxCv.h" />
     <ClInclude Include="..\..\..\addons\ofxCv\libs\CLD\include\CLD\ETF.h" />
     <ClInclude Include="..\..\..\addons\ofxCv\libs\CLD\include\CLD\fdog.h" />
@@ -576,6 +578,8 @@
     <ClInclude Include="..\..\..\addons\ofxWarp\src\ofxWarp\WarpPerspective.h" />
     <ClInclude Include="..\..\..\addons\ofxWarp\src\ofxWarp\WarpPerspectiveBilinear.h" />
     <ClInclude Include="..\..\..\addons\ofxWarp\src\ofxWarp.h" />
+    <ClInclude Include="src\imageParticleSystem.h" />
+    <ClInclude Include="src\rainParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
