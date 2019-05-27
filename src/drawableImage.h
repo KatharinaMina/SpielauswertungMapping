@@ -24,17 +24,25 @@ public:
 	float mass;
 	int y;
 	int x;
+	int redImageColor;
+	int greenImageColor;
+	int blueImageColor;
 	int ticksToMovePictureToRight;
 	int counterToMovePicctureToRight;
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
+	bool pastMiddle;
 
 	void updateImage(float sceneSizeX, float sceneSizeY);
 
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 	int getHeight();
+	bool imageIsOnTop(float sceneSizeY);
+
+	float getImagePosX(float sceneSizeX);
+	float getImagePosY(float sceneSizeY);
 
 	ofImage fileImageHex;
 	ofImage imageToDraw;

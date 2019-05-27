@@ -13,7 +13,7 @@ class imageParticleSystem
 
 public:
 
-	imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageForAttractors,  string imageName);
+	imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex,  string imageName);
 	~imageParticleSystem();
 
 	vector<ofVec2f>attractors;
@@ -35,6 +35,7 @@ public:
 	double time;
 	double tornadoStartTime;
 	int status;
+	bool imageReachedTopAndAttractorIsChanged;
 
 	void setSymbolAttractorIsSet(bool value);
 	void setCloudAttractorIsSet(bool value);
@@ -42,11 +43,14 @@ public:
 	void updateParticleSystem();
 	void drawImageParticleSystem();
 
+	ofImage fileImageHex;
+
 	void imageParticleSystem::changeAttractorImage(ofImage newAttractorImage);
 
 private:
 	drawableImage* imageToDraw;
 	vector<ofVec2f> pixelInVector(ofImage a);
+	void setAttractorsFromHexagonFromPicture();
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
 };

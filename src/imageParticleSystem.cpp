@@ -1,7 +1,7 @@
 #include "imageParticleSystem.h"
 
 
-imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageForAttractors, string imageName) {
+imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName) {
 
 
 	this->imageToDraw = new drawableImage(imageName);
@@ -10,16 +10,15 @@ imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage
 	this->sceneSizeX = sceneSizeX;
 	this->sceneSizeY = sceneSizeY;
 
-	attractors = pixelInVector(fileImageForAttractors);
+	this->fileImageHex = fileImageHex;
+
+	setAttractorsFromHexagonFromPicture();
 	maxParticle = 50;
-	//birthCnt = 0;
-	//parAmount = 4;
-	//tornadoStartTime = -1000;
-	//time = 0;
-	//status = -1;
 
 	setSymbolAttractorIsSet(true);
 	setCloudAttractorIsSet(false);
+
+	imageReachedTopAndAttractorIsChanged = false;
 }
 
 void imageParticleSystem::updateParticleSystem() {
@@ -33,12 +32,10 @@ void imageParticleSystem::updateParticleSystem() {
 		for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 			particles.push_back(new particle);
 
+			int x = ofRandom(0, sceneSizeX);
 			int y = ofRandom(0, sceneSizeY);
-			int x = ofRandom(0, sceneSizeX / 2);
-			int y2 = ofRandom(0, sceneSizeY);
-			int x2 = ofRandom(sceneSizeX / 2, sceneSizeX);
 
-			particles.back()->setup(ofVec2f(x, y), ofVec2f(x2, y2), 20);
+			particles.back()->setup(ofVec2f(x, y), 20);
 		}
 	}
 	else if ((cloudAttractorIsSet == false) && (particles.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
@@ -52,7 +49,7 @@ void imageParticleSystem::updateParticleSystem() {
 	}
 	else if ((cloudAttractorIsSet == true) && (particles.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
-		int newPix = (particles.size() - (picPix / 4));
+		int newPix = (particles.size() - (picPix / 7));
 		for (int i = 0; i < newPix; i++) {
 			delete particles.at(0);													// löschen des Partikel Obj.
 			particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
@@ -62,17 +59,12 @@ void imageParticleSystem::updateParticleSystem() {
 	//----------------------------------------------------------//Updaten der Partikel (Bewegung)
 
 												//Bewegung bei Symbolen
-	for (int p = 0; p < particles.size();) {
+	for (int p = 0; p < particles.size(); p++) {
 		if (p * 7 < attractors.size()) {
 			if (cloudAttractorIsSet == true) {
 				particles.at(p)->updateParticle(deltaT, attractors[p * 7],
 					cloudAttractorIsSet, true, imageHeight, sceneSizeX, sceneSizeY);
 
-				bool particleToDelete = particles.at(p)->deleteAfterLeavingSceneX();
-				if (particleToDelete) {
-					delete particles.at(0);													// löschen des Partikel Obj.
-					particles.erase(particles.begin());
-				}
 			}
 			else if (symbolAttractorIsSet == true)
 			{
@@ -80,12 +72,44 @@ void imageParticleSystem::updateParticleSystem() {
 					cloudAttractorIsSet, true, imageHeight, sceneSizeX, sceneSizeY);					//Partikel werden an Symbol gezogen
 			}
 		}
-		p++;
+	}
+
+
+	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) {
+
+		setAttractorsFromHexagonFromPicture();
+		cloudAttractorIsSet = false;
 	}
 }
 
 void imageParticleSystem::changeAttractorImage(ofImage newAttractorImage) {
 	attractors = pixelInVector(newAttractorImage);
+}
+
+void imageParticleSystem::setAttractorsFromHexagonFromPicture() {
+	int picWidth = fileImageHex.getWidth();
+	int picHeight = fileImageHex.getHeight();
+	ofPixels pix;
+	pix = fileImageHex.getPixels();
+	vector<ofVec2f> pxPos;
+	picPix = 0;
+	for (int i = 3; i <= pix.size(); i += 4) {
+		if (pix[i] > 0) {
+			int width = pix.getWidth();
+
+			int y = i / 4 / width;
+
+			int x = i / 4 % width;
+
+			ofVec2f vec;
+
+			vec.set(x + imageToDraw->getImagePosX(sceneSizeX), y + imageToDraw->getImagePosY(sceneSizeY));
+			pxPos.push_back(vec);
+
+			picPix++;
+		}
+	}
+	attractors = pxPos;
 }
 
 vector<ofVec2f> imageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
@@ -132,7 +156,6 @@ void imageParticleSystem::drawImageParticleSystem() {
 		
 	for (int i = 0; i < particles.size(); i++) {
 		particles.at(i)->draw();
-		particles.at(i)->draw2();
 	}
 }
 

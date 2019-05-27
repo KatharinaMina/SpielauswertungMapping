@@ -10,19 +10,19 @@ void ofApp::setup() {
 	ofBackground(0);
 
 	//test image
-	/*img.setUseTexture(false);
+	img.setUseTexture(false);
 	if (!img.load("testcard.png"))
 	{
 		ofLogError("ofApp::setup") << "Could not load image!";
 		return;
 	}
-*/
+
 	this->tex.enableMipmap();
 	this->tex.loadData(img.getPixels());
 
 	//scene properties
 	sceneSize.set(1280, 800);
-	//area.set(0, 0, sceneSize.x, sceneSize.y);
+	area.set(0, 0, sceneSize.x, sceneSize.y);
 	fbo.allocate(sceneSize.x, sceneSize.y, GL_RGBA);
 
 	//clear fbo to make sure there's no scrap
@@ -136,13 +136,13 @@ void ofApp::keyReleased(int key) {
 		currentImage++;
 		break;
 	case '2':
-		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagUmweltTechnik.png"));
+		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagTechnikUmwelt.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;
 
 	case '3':
-		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagUmweltWissenschaft.png"));
+		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagWissenschaftUmwelt.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;

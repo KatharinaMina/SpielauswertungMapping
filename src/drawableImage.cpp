@@ -1,21 +1,15 @@
 #include "drawableImage.h"
 
-
-
-int r = 121;		//Farbe für Symbol
-int g = 205;
-int b = 205;
-
-bool pastMiddle = true;
-
-
-
 drawableImage::drawableImage(string imageName) {
+	redImageColor = 121;		//Farbe für Symbol
+	greenImageColor = 205;
+	blueImageColor = 205;
 
+	pastMiddle = true;
 	fileImageHex.loadImage("Hexagon.png");
 	imageToDraw.loadImage(imageName);
-	fileImageHex = changeImageColor(fileImageHex, r, g, b);
-	imageToDraw = changeImageColor(imageToDraw, r, g, b);
+	fileImageHex = changeImageColor(fileImageHex, redImageColor, greenImageColor, blueImageColor);
+	imageToDraw = changeImageColor(imageToDraw, redImageColor, greenImageColor, blueImageColor);
 	x = 0;
 	y = 0;
 	ticksToMovePictureToRight = 70;
@@ -60,16 +54,9 @@ void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
 			pastMiddle = true;
 		}
 
-		if (pastMiddle) {
-			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
-			fileImageHex.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
-		}
-		else {
-			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
-			fileImageHex.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
-		}
 
-
+		imageToDraw.draw(getImagePosX(sceneSizeX),getImagePosY(sceneSizeY));
+		fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 	}
 
 	else if (symbolAttractorIsSet) {
@@ -83,6 +70,24 @@ void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
 
 int drawableImage::getHeight() {
 	return imageToDraw.getHeight();
+}
+
+bool drawableImage::imageIsOnTop(float sceneSizeY) {
+
+	int maxYpositionForPicture = sceneSizeY - imageToDraw.getHeight() - 3;
+
+	return y >= maxYpositionForPicture;
+}
+
+float drawableImage::getImagePosX(float sceneSizeX) {
+	if(pastMiddle)
+		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x;
+	else
+		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x;
+}
+
+float drawableImage::getImagePosY(float sceneSizeY) {
+	return (sceneSizeY - imageToDraw.getHeight() - 5) - y;
 }
 
 //--------------------------------------------------------------

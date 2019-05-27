@@ -17,13 +17,9 @@ public:
     
     ofVec2f vel;
 	ofVec2f velocity2;
-    ofVec2f pos;
-    ofVec2f pos2;
+	ofVec2f pos;   
     ofVec2f force;
-	ofVec2f force2;
-
 	ofColor color;
-    ofColor color2;
 
     float maxLife;
     float age;
@@ -40,15 +36,10 @@ public:
 	bool pL;
 	bool particleLeftScene;
   
-    void setup(ofVec2f pos, ofVec2f pos2, float maxAge);
-    void startTornado();
-    void startStage1();
-    void updateStage1();
+    void setup(ofVec2f pos, float maxAge);
     void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool tornadoIsFinished, int imageHeight, float sceneSizeX, float sceneSizeY);
     void draw();
-    void draw2();
-    void keyReleased(int key);
-    void keyPressed(int key);
+
   
 private: 
 

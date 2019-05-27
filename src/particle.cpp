@@ -14,17 +14,15 @@ particle::~particle() {
 
 //--------------------------------------------------------------
 
-void particle::setup(ofVec2f pos, ofVec2f pos2, float maxAge) {
+void particle::setup(ofVec2f pos, float maxAge) {
 	this->pos = pos;									//pointer auf Position ofVec2f position
-    this->pos2 = pos2;
-	vel.set(ofRandom(-20.0, 20.0), ofRandom(-90, -100));	//Die Bewegungsrichtung
+	vel.set(ofRandom(-20.0, 20.0), ofRandom(-90, -100));//Die Bewegungsrichtung
 
 	age = 0.0;											//Alter ist am Anfang 0
 	maxLife = ofRandom(maxAge - 5, maxAge);				//Wie lange der Partikel maximal leben soll
 	size = ofRandom(2, 3);								//Unterschiedliche Partikelgröße
 	mass = ofRandom(100, 200);							//verändert die Partikelgeschwindigkeit
 	color.set(5, 241, 219);
-    color2.set(255,255,255);
     k = 0;
 	l = 0;
 	ticksToMoveParticlesToRight = 70;
@@ -39,15 +37,11 @@ void particle::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttrac
     
 	if (tornadoIsFinished == false) {
 		pos += vel * deltaT;
-        pos2 += vel * deltaT;
 		age += deltaT;
 
 		if (pos.x >= sceneSizeX) {
 			pos.x = 0;
 		}
-        if (pos2.x >= sceneSizeX) {
-            pos2.x = 0;
-        }
 	}
 
 	//---------------------------------------------------------------
@@ -107,17 +101,15 @@ void particle::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttrac
 			vel = mass * vel.getNormalized();
 		}
 		pos += (vel / 1.2 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
-       pos2 += (vel / 1.2 * deltaT);
-
 
 	}
 
 	if (tornadoIsFinished == true && cloudAttractorIsSet == false) {
-		if (!cloudAttractorIsSet) {
-			k = 0;
-			l = 0;
-			counterToMoveParticlesToRight = 0;
-		}
+
+		k = 0;
+		l = 0;
+		counterToMoveParticlesToRight = 0;
+		
 		age += deltaT;
 		vel *= 0.1;
 		ofVec2f force = attractor - pos;			//Anziehungskraft						
@@ -142,7 +134,7 @@ void particle::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttrac
 			vel = mass * vel.getNormalized();
 		}
 		pos += (vel / 1.5 * deltaT);				//Position = m/s * s [Partikel bleiben statisch]
-        pos2 += (vel / 1.5 * deltaT);
+
 	}
 
 }
@@ -159,31 +151,6 @@ void particle::draw() {
 	
     
 }
-void particle::draw2(){
-    ofSetColor(this->color2);
-    ofDrawCircle(pos2, size);
-}
-
-//--------------------------------------------------------------
-
-void particle::startTornado() {
-	int distance = pos.y - ofGetHeight() / 3.5 * 3;
-    
-	vel.y = -distance / 2;
-}
-
-//--------------------------------------------------------------
-
-void particle::startStage1() {
-	vel.y = ofRandom(5, 15)*(-1);
-}
-
-//--------------------------------------------------------------
-
-void particle::updateStage1() {
-	vel += ofVec2f(ofRandom(1.5, 2.5), ofRandom(0.3, 0.35)*(-1));
-	color.set(5, 241, 219);
-}
 
 //--------------------------------------------------------------
 
@@ -194,7 +161,7 @@ float particle::getAgeNorm() {
 //--------------------------------------------------------------
 
 float particle::deleteAfterLeavingSceneY() {
-	return pos.y < 0 || pos.y > ofGetHeight() || pos2.y < 0 || pos.y > ofGetHeight();
+	return pos.y < 0 || pos.y > ofGetHeight();
 
 }
 
