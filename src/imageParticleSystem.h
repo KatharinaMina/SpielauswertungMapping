@@ -41,6 +41,11 @@ public:
 	void setCloudAttractorIsSet(bool value);
 
 	void updateParticleSystem();
+	void deleteParticlesForRocketEffect();
+	void deleteParticlesForHexagon();
+	void createParticlesForHexagon();
+	void createParticlesForCloud();
+	void deleteParticleAfterLeavingOntheRightAndCreateThemOnTheLeft(int p);
 	void drawImageParticleSystem();
 
 	ofImage fileImageHex;

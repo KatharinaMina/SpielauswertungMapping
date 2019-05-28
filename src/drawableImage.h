@@ -36,6 +36,10 @@ public:
 
 	void updateImage(float sceneSizeX, float sceneSizeY);
 
+	void drawImage(float sceneSizeX, float sceneSizeY);
+
+	void doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
+
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 	int getHeight();

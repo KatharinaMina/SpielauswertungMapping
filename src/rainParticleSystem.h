@@ -36,6 +36,7 @@ public:
 	int status;
 
 	void updateParticleSystem();
+	void createParticlesForRain();
 	void createParticleSystem();
 	void deleteParticleSystem();
 	void drawRainParticleSystem();

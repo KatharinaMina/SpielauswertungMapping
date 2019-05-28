@@ -37,7 +37,11 @@ public:
 	bool particleLeftScene;
   
     void setup(ofVec2f pos, float maxAge);
-    void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool tornadoIsFinished, int imageHeight, float sceneSizeX, float sceneSizeY);
+    void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool imageIsOnTop, bool tornadoIsFinished, int imageHeight, float sceneSizeX, float sceneSizeY);
+	void doMovementOfParticlesAtRain(bool tornadoIsFinished, double deltaT, float sceneSizeX);
+	void doMovementOfParticlesAtSymbols(double deltaT, ofVec2f &attractor);
+	void doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHeight, float sceneSizeX, ofVec2f &attractor, double deltaT);
+	void doMovementOfHexagonOnTheTop(ofVec2f &attractor, float sceneSizeX, double deltaT);
     void draw();
 
   
