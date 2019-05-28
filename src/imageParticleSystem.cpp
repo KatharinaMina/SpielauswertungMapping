@@ -73,6 +73,34 @@ void imageParticleSystem::updateParticleSystem() {
 }
 
 //----------------------------------------------------------
+void imageParticleSystem::createParticlesForHexagon()
+{
+	int newPix = (picPix / 7) - particles.size();
+	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
+		particles.push_back(new particle);
+
+		int x = sceneSizeX / 2;
+		int y = sceneSizeY;
+
+		particles.back()->setup(ofVec2f(x, y), 20);
+	}
+}
+
+//----------------------------------------------------------
+void imageParticleSystem::createParticlesForCloud()
+{
+	int newPix = (picPix / 7) - particles.size();
+	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
+		particles.push_back(new particle);
+
+		int x = sceneSizeX / 2;
+		int y = imageHeight;
+
+		particles.back()->setup(ofVec2f(x, y), 20);
+	}
+}
+
+//----------------------------------------------------------
 void imageParticleSystem::deleteParticlesForRocketEffect()
 {
 	int newPix = (particles.size() - (picPix / 7));
@@ -90,34 +118,6 @@ void imageParticleSystem::deleteParticlesForHexagon()
 	for (int i = 0; i < newPix; i++) {
 		delete particles.at(0);													// löschen des Partikel Obj.
 		particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
-	}
-}
-
-//----------------------------------------------------------
-void imageParticleSystem::createParticlesForHexagon()
-{
-	int newPix = (picPix / 7) - particles.size();
-	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
-		particles.push_back(new particle);
-
-		int x = ofRandom(0, sceneSizeX);
-		int y = ofRandom(0, sceneSizeY);
-
-		particles.back()->setup(ofVec2f(x, y), 20);
-	}
-}
-
-//----------------------------------------------------------
-void imageParticleSystem::createParticlesForCloud()
-{
-	int newPix = (picPix / 7) - particles.size();
-	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
-		particles.push_back(new particle);
-
-		int x = sceneSizeX / 2;
-		int y = imageHeight;
-
-		particles.back()->setup(ofVec2f(x, y), 20);
 	}
 }
 
