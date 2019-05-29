@@ -16,14 +16,16 @@ void particle::setup(ofVec2f pos, float maxAge) {
 
 	age = 0.0;											//Alter ist am Anfang 0
 	maxLife = ofRandom(maxAge - 5, maxAge);				//Wie lange der Partikel maximal leben soll
-	size = ofRandom(2, 3);								//Unterschiedliche Partikelgröße
-	mass = ofRandom(100, 200);							//verändert die Partikelgeschwindigkeit
+	size = ofRandom(4.0, 0.01);								//Unterschiedliche Partikelgröße
+	mass = ofRandom(100, 250);							//verändert die Partikelgeschwindigkeit
 	color.set(5, 241, 219);
 	k = 0;
 	l = 0;
 	ticksToMoveParticlesToRight = 70;
 	counterToMoveParticlesToRight = 0;
 	particleLeftScene = false;
+    
+    //tex.load("img/overlay.png");                    //siehe Tobis Code Textur
 }
 
 //--------------------------------------------------------------

@@ -40,7 +40,7 @@ void rainParticleSystem::createParticlesForRain()
 {
 	for (int i = 0; i < parAmount; i++) {
 		particles.push_back(new particle);
-		int rgen = ofRandom(0, sceneSizeX);
+		int rgen = ofRandom(0, sceneSizeX/2);
 		particles.back()->setup(ofVec2f(rgen, sceneSizeY), 20);
 	}
 	birthCnt = 0;

@@ -46,6 +46,6 @@ public:
 
   
 private: 
-
+    //ofImage tex;
 };
 #endif 
