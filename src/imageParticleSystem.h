@@ -50,7 +50,7 @@ public:
 
 	ofImage fileImageHex;
 
-	void imageParticleSystem::changeAttractorImage(ofImage newAttractorImage);
+	void changeAttractorImage(ofImage newAttractorImage);
 
 private:
 	drawableImage* imageToDraw;

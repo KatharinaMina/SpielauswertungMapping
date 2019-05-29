@@ -170,9 +170,12 @@ void particle::doMovementOfHexagonOnTheTop(ofVec2f &attractor, float sceneSizeX,
 void particle::draw() {
 	if (pos.x > 0 || pos.x < 300) {
 		ofSetColor(this->color);
+        color.set(getAgeNorm() * 241,241/ getAgeNorm() ,219);
+
 	}
 	else {
 		ofSetColor(255, 255, 255);
+        
 	}
 	ofDrawCircle(pos, size);
 

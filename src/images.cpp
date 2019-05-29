@@ -3,7 +3,9 @@
 
 
 bool pastMiddle = true;
-
+int r = 121;
+int g = 205;
+int b = 205;
 
 
 images::images() {

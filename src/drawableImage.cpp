@@ -1,4 +1,5 @@
 #include "drawableImage.h"
+#include "images.h"
 
 //--------------------------------------------------------------
 drawableImage::drawableImage(string imageName) {
