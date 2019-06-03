@@ -41,6 +41,8 @@ public:
 	void setup();
 	void drawImageIntoScreen(float sceneSizeX, float sceneSizeY);
 	void updateImage(float sceneSizeX, float sceneSizeY);
+	void doPlacementOfSymbolInGameEvaluation(float sceneSizeX, float sceneSizeY);
+	void doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
 	void draw();
 	void keyReleased(int key);
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);

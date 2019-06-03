@@ -2,7 +2,7 @@
 
 
 imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName) {
-	this->imageToDraw = new drawableImage(imageName);
+	this->imageToDraw = new drawableImage(imageName, sceneSizeX, sceneSizeY);
 	this->imageHeight = imageToDraw->getHeight();
 
 	this->sceneSizeX = sceneSizeX;
@@ -15,6 +15,9 @@ imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage
 
 	setSymbolAttractorIsSet(true);
 	setCloudAttractorIsSet(false);
+	ticksToMoveImageToTop = 90;
+	counterToMoveImageToTop = 0;
+	fileImageCloud.loadImage("Wolke.png");
 
 	imageReachedTopAndAttractorIsChanged = false;
 }
@@ -70,6 +73,14 @@ void imageParticleSystem::updateParticleSystem() {
 		setAttractorsFromHexagonFromPicture();
 		cloudAttractorIsSet = false;
 	}
+
+	if (counterToMoveImageToTop < ticksToMoveImageToTop) {
+		counterToMoveImageToTop++;
+	}
+	else if (counterToMoveImageToTop = ticksToMoveImageToTop) {
+		changeAttractorImage(fileImageCloud);
+		setCloudAttractorIsSet(true);
+	}
 }
 
 //----------------------------------------------------------
@@ -94,7 +105,8 @@ void imageParticleSystem::createParticlesForCloud()
 		particles.push_back(new particle);
 
 		int x = sceneSizeX / 2;
-		int y = imageHeight;
+		int y = 3;
+ 			//imageToDraw->getMaxHeight();
 
 		particles.back()->setup(ofVec2f(x, y), 20);
 	}

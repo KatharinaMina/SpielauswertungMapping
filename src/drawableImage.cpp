@@ -2,7 +2,7 @@
 #include "images.h"
 
 //--------------------------------------------------------------
-drawableImage::drawableImage(string imageName) {
+drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSizeY) {
 	redImageColor = 121;		//Farbe für Symbol
 	greenImageColor = 205;
 	blueImageColor = 205;
@@ -16,6 +16,7 @@ drawableImage::drawableImage(string imageName) {
 	y = 0;
 	ticksToMovePictureToRight = 70;
 	counterToMovePicctureToRight = 0;
+	maxYpositionForPicture = ofRandom(sceneSizeY - imageToDraw.getHeight() - 3, sceneSizeY - imageToDraw.getHeight() *2 - 3);
 }
 
 //--------------------------------------------------------------
@@ -27,7 +28,7 @@ drawableImage::~drawableImage() {
 //--------------------------------------------------------------
 void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
 	
-	int maxYpositionForPicture = sceneSizeY - imageToDraw.getHeight() - 3;
+	
 
 
 	if (cloudAttractorIsSet) {
@@ -85,10 +86,12 @@ int drawableImage::getHeight() {
 	return imageToDraw.getHeight();
 }
 
+int drawableImage::getMaxHeight() {
+	return maxYpositionForPicture;
+}
+
 //--------------------------------------------------------------
 bool drawableImage::imageIsOnTop(float sceneSizeY) {
-
-	int maxYpositionForPicture = sceneSizeY - imageToDraw.getHeight() - 5;
 
 	return y >= maxYpositionForPicture;
 }

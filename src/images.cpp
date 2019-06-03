@@ -1,7 +1,5 @@
 #include "images.h"
 
-
-
 bool pastMiddle = true;
 int r = 121;
 int g = 205;
@@ -21,9 +19,6 @@ images::~images() {
 //--------------------------------------------------------------
 
 void images::setup() {
-	//this->pos = pos;									//pointer auf Position ofVec2f position
-	//vel.set(ofRandom(-20.0, 20.0), ofRandom(90, 100));	//Die Bewegungsrichtung
-	//color.set(5, 241, 219);
 
 	fileImageHex.loadImage("Hexagon.png");
 	fileImageUT.loadImage("PktUmweltTechnik.png");
@@ -60,46 +55,11 @@ void images::updateImage(float sceneSizeX, float sceneSizeY) {
 
 
 	if (cloudAttractorIsSet) {
-		if (y <= maxYpositionForPicture) {
-			y += 3;
-		}
-		else if (counterToMovePicctureToRight < ticksToMovePictureToRight) {
-			counterToMovePicctureToRight++;
-		}
-		else {
-			if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
-				x += 3;
-			}
-			else {					// mittelpkt - x  jetzt wird x wieder zu null
-				x -= 3;
-			}
-		}
-
-		if (pastMiddle && x >= sceneSizeX / 2 + imageToDraw.getWidth()) {
-			pastMiddle = false;
-		}
-
-		if (!pastMiddle && x <= 0) {
-			pastMiddle = true;
-		}
-
-		if (pastMiddle) {
-			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
-			ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
-		}
-		else {
-			imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
-			ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
-		}
-
-
+		doMovementOfSymbolsOfCloud(maxYpositionForPicture, sceneSizeX, sceneSizeY);
 	}
 
 	else if (symbolAttractorIsSet) {
-		y = 0;
-		x = 0;
-		counterToMovePicctureToRight = 0;
-		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));
+		doPlacementOfSymbolInGameEvaluation(sceneSizeX, sceneSizeY);
 	}
 	else if (tornadoIsFinished == false) {
 		y = 0;
@@ -109,7 +69,50 @@ void images::updateImage(float sceneSizeX, float sceneSizeY) {
 
 }
 
+//--------------------------------------------------------------
+void images::doPlacementOfSymbolInGameEvaluation(float sceneSizeX, float sceneSizeY)
+{
+	y = 0;
+	x = 0;
+	counterToMovePicctureToRight = 0;
+	imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));
+}
 
+//--------------------------------------------------------------
+void images::doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
+{
+	if (y <= maxYpositionForPicture) {
+		y += 3;
+	}
+	else if (counterToMovePicctureToRight < ticksToMovePictureToRight) {
+		counterToMovePicctureToRight++;
+	}
+	else {
+		if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
+			x += 3;
+		}
+		else {					// mittelpkt - x  jetzt wird x wieder zu null
+			x -= 3;
+		}
+	}
+
+	if (pastMiddle && x >= sceneSizeX / 2 + imageToDraw.getWidth()) {
+		pastMiddle = false;
+	}
+
+	if (!pastMiddle && x <= 0) {
+		pastMiddle = true;
+	}
+
+	if (pastMiddle) {
+		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
+		ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
+	}
+	else {
+		imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
+		ima.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x, (sceneSizeY - imageToDraw.getHeight() - 5) - y);
+	}
+}
 
 //--------------------------------------------------------------
 ofImage images::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
@@ -140,7 +143,7 @@ ofImage images::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			/
 	return imageToDraw;
 }
 
-
+//--------------------------------------------------------------
 void images::keyReleased(int key) {
 
 	switch (key) {

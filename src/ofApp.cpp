@@ -53,18 +53,25 @@ void ofApp::setup() {
 
 
 	fileImageHex.loadImage("Hexagon.png");
-	fileImageCloud.loadImage("Wolke.png");
+
 
 	rainIsActive = true;
-
-	this->rainParticleSyst = new rainParticleSystem(sceneSize.x, sceneSize.y);
+	int particleSystems = 7;
+	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;
+	for (int i = 0; i <= particleSystems-1; i++) {
+		rainParticleSyst.push_back( new rainParticleSystem(i * sceneSizeForSingleParticleSystem ,sceneSizeForSingleParticleSystem, sceneSize.y));
+		//sceneSizeForSingleParticleSystem += sceneSizeForSingleParticleSystem;
+	}
+	
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	if (rainIsActive) {
-		rainParticleSyst->updateParticleSystem();
+		for (int i = 0; i < rainParticleSyst.size(); i++) {
+			rainParticleSyst.at(i)->updateParticleSystem();
+		}
 	}
 	else {
 		for (int i = 0; i < imageParticleSystems.size(); i++) {
@@ -91,21 +98,23 @@ void ofApp::draw() {
 
 
 	if (rainIsActive) {
-		rainParticleSyst->drawRainParticleSystem();
+		for (int i = 0; i < rainParticleSyst.size(); i++) {
+			rainParticleSyst.at(i)->drawRainParticleSystem();
+		}
 	}
 	else {
 		for (int i = 0; i < imageParticleSystems.size(); i++) {
 			imageParticleSystems.at(i)->drawImageParticleSystem();
 		}
 	}
-	
+
 	fbo.end();
 
 	//do not draw past this point
 	//draw warp
 	warpController.getWarp(0)->begin();
 	fbo.draw(0, 0);
-    
+
 	warpController.getWarp(0)->end();
 }
 
@@ -124,17 +133,12 @@ void ofApp::keyReleased(int key) {
 	}
 
 	switch (key) {
-	case '4':
-		imageParticleSystems.at(currentImage)->changeAttractorImage(fileImageCloud);
-		rainIsActive = false;
-
-		imageParticleSystems.at(currentImage)->setCloudAttractorIsSet(true);
-		break;
 	case '1':
 		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktUmweltTechnik.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;
+
 	case '2':
 		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagTechnikUmwelt.png"));
 		rainIsActive = false;
@@ -144,9 +148,10 @@ void ofApp::keyReleased(int key) {
 	case '3':
 		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagWissenschaftUmwelt.png"));
 		rainIsActive = false;
-		currentImage++;
+		currentImage++;	
 		break;
 	}
+
 }
 
 

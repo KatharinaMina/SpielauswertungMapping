@@ -13,7 +13,7 @@ class drawableImage
 
 public:
 
-	drawableImage(string imageName);
+	drawableImage(string imageName, float sceneSizeX, float sceneSizeY);
 	~drawableImage();
 
 	ofColor color;
@@ -24,6 +24,7 @@ public:
 	float mass;
 	int y;
 	int x;
+	int maxYpositionForPicture;
 	int redImageColor;
 	int greenImageColor;
 	int blueImageColor;
@@ -47,6 +48,7 @@ public:
 
 	float getImagePosX(float sceneSizeX);
 	float getImagePosY(float sceneSizeY);
+	int getMaxHeight();
 
 	ofImage fileImageHex;
 	ofImage imageToDraw;

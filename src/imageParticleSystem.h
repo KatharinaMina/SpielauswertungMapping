@@ -25,6 +25,8 @@ public:
 	int maxParticle;
 	int picPix;
 	int k;
+	int ticksToMoveImageToTop;
+	int counterToMoveImageToTop;
 	bool tornadoStarted;
 	bool editingWarp;
 	//------------------------------------------
@@ -49,6 +51,7 @@ public:
 	void drawImageParticleSystem();
 
 	ofImage fileImageHex;
+	ofImage fileImageCloud;
 
 	void changeAttractorImage(ofImage newAttractorImage);
 

@@ -50,12 +50,11 @@ class ofApp : public ofBaseApp{
 		vector<particle*> system;
 
 		vector<imageParticleSystem*> imageParticleSystems;
-		rainParticleSystem* rainParticleSyst;
+		vector<rainParticleSystem*> rainParticleSyst;
 
 
 		ofImage img;
 		ofImage fileImageHex;
-		ofImage fileImageCloud;
 		ofImage imageToDraw;
 		
 		ofImage drawImage;
@@ -67,6 +66,8 @@ class ofApp : public ofBaseApp{
 		int maxParticle;
 		int picPix;
 		int k;
+		int ticksToMoveParticlesToRight;
+		int counterToMoveParticlesToRight;
 		bool rainIsActive;
 		bool editingWarp;
 		
