@@ -29,7 +29,7 @@ public:
 	int greenImageColor;
 	int blueImageColor;
 	int ticksToMovePictureToRight;
-	int counterToMovePicctureToRight;
+	int counterToMovePictureToRight;
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;

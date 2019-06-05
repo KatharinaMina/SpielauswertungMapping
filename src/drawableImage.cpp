@@ -12,11 +12,12 @@ drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSize
 	imageToDraw.loadImage(imageName);
 	fileImageHex = changeImageColor(fileImageHex, redImageColor, greenImageColor, blueImageColor);
 	imageToDraw = changeImageColor(imageToDraw, redImageColor, greenImageColor, blueImageColor);
-	x = 0;
+	x =ofRandom(1,4);
 	y = 0;
 	ticksToMovePictureToRight = 70;
-	counterToMovePicctureToRight = 0;
+	counterToMovePictureToRight = 0;
 	maxYpositionForPicture = ofRandom(sceneSizeY - imageToDraw.getHeight() - 3, sceneSizeY - imageToDraw.getHeight() *2 - 3);
+
 }
 
 //--------------------------------------------------------------
@@ -27,9 +28,6 @@ drawableImage::~drawableImage() {
 
 //--------------------------------------------------------------
 void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
-	
-	
-
 
 	if (cloudAttractorIsSet) {
 		doMovementOfImageAtCloud(maxYpositionForPicture, sceneSizeX, sceneSizeY);
@@ -46,7 +44,7 @@ void drawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 {
 	y = 0;
 	x = 0;
-	counterToMovePicctureToRight = 0;
+	counterToMovePictureToRight = 0;
 	imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));
 }
 
@@ -56,8 +54,8 @@ void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	if (y <= maxYpositionForPicture) {
 		y += 3;
 	}
-	else if (counterToMovePicctureToRight < ticksToMovePictureToRight) {
-		counterToMovePicctureToRight++;
+	else if (counterToMovePictureToRight < ticksToMovePictureToRight) {
+		counterToMovePictureToRight++;
 	}
 	else {
 		if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   

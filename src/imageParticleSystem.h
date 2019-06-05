@@ -45,8 +45,8 @@ public:
 	void updateParticleSystem();
 	void deleteParticlesForRocketEffect();
 	void deleteParticlesForHexagon();
-	void createParticlesForHexagon();
-	void createParticlesForCloud();
+	void createParticlesForHexagonInSymbol();
+	void createParticlesForHexagonInCloud();
 	void deleteParticleAfterLeavingOntheRightAndCreateThemOnTheLeft(int p);
 	void drawImageParticleSystem();
 

@@ -30,10 +30,10 @@ void imageParticleSystem::updateParticleSystem() {
 
 
 	if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY) == false)) {			//Ertsellen von Partiklen für Symbole
-		createParticlesForHexagon();
+		createParticlesForHexagonInSymbol();
 	}
 	else if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY))) {			//Ertsellen von Partiklen für Symbole
-		createParticlesForCloud();
+		createParticlesForHexagonInCloud();
 	}
 	else if ((cloudAttractorIsSet == false) && (particles.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
@@ -68,11 +68,6 @@ void imageParticleSystem::updateParticleSystem() {
 		}
 	}
 
-	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) {
-
-		setAttractorsFromHexagonFromPicture();
-		cloudAttractorIsSet = false;
-	}
 
 	if (counterToMoveImageToTop < ticksToMoveImageToTop) {
 		counterToMoveImageToTop++;
@@ -81,10 +76,16 @@ void imageParticleSystem::updateParticleSystem() {
 		changeAttractorImage(fileImageCloud);
 		setCloudAttractorIsSet(true);
 	}
+
+	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) {
+		setAttractorsFromHexagonFromPicture();
+		cloudAttractorIsSet = false;
+	}
+
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::createParticlesForHexagon()
+void imageParticleSystem::createParticlesForHexagonInSymbol()
 {
 	int newPix = (picPix / 7) - particles.size();
 	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
@@ -98,15 +99,14 @@ void imageParticleSystem::createParticlesForHexagon()
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::createParticlesForCloud()
+void imageParticleSystem::createParticlesForHexagonInCloud()
 {
 	int newPix = (picPix / 7) - particles.size();
 	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 		particles.push_back(new particle);
 
 		int x = sceneSizeX / 2;
-		int y = 3;
- 			//imageToDraw->getMaxHeight();
+		int y = imageToDraw->getImagePosY(sceneSizeY) + imageHeight;
 
 		particles.back()->setup(ofVec2f(x, y), 20);
 	}
