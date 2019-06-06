@@ -7,17 +7,21 @@ drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSize
 	greenImageColor = 205;
 	blueImageColor = 205;
 
+
 	pastMiddle = true;
 	fileImageHex.loadImage("Hexagon.png");
 	imageToDraw.loadImage(imageName);
 	fileImageHex = changeImageColor(fileImageHex, redImageColor, greenImageColor, blueImageColor);
 	imageToDraw = changeImageColor(imageToDraw, redImageColor, greenImageColor, blueImageColor);
-	x =ofRandom(1,4);
+	x = ofRandom(1, 4);
 	y = 0;
 	ticksToMovePictureToRight = 70;
 	counterToMovePictureToRight = 0;
-	maxYpositionForPicture = ofRandom(sceneSizeY - imageToDraw.getHeight() - 3, sceneSizeY - imageToDraw.getHeight() *2 - 3);
+	newMaxHeight = 0;
+	imageHeight = imageToDraw.getHeight();
+	//maxYpositionForPicture = ofRandom(sceneSizeY - imageToDraw.getHeight() - 3, sceneSizeY - imageToDraw.getHeight() * 2 - 3);
 
+	maxYpositionForPicture = setMaxHeightPosition(sceneSizeY);
 }
 
 //--------------------------------------------------------------
@@ -79,6 +83,17 @@ void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 }
 
+int drawableImage::setMaxHeightPosition(float sceneSizeY)
+{
+	for (int i = 0; i <= 4; i++) {
+		newMaxHeight += imageHeight / 2;
+	}
+	maxHeightPositions.push_back(new int(newMaxHeight));
+
+	maxHeightPosition = (int) maxHeightPositions.at(0);
+	return maxHeightPosition;
+}
+
 //--------------------------------------------------------------
 int drawableImage::getHeight() {
 	return imageToDraw.getHeight();
@@ -96,7 +111,7 @@ bool drawableImage::imageIsOnTop(float sceneSizeY) {
 
 //--------------------------------------------------------------
 float drawableImage::getImagePosX(float sceneSizeX) {
-	if(pastMiddle)
+	if (pastMiddle)
 		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x;
 	else
 		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x;

@@ -30,17 +30,24 @@ public:
 	int blueImageColor;
 	int ticksToMovePictureToRight;
 	int counterToMovePictureToRight;
+	int imageHeight;
+	int newMaxHeight;
+	int maxHeightPosition;
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
 	bool pastMiddle;
 
+	
 	void updateImage(float sceneSizeX, float sceneSizeY);
 
 	void drawImage(float sceneSizeX, float sceneSizeY);
 
 	void doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
 
+	int setMaxHeightPosition(float sceneSizeY);
+	
+	vector<int*> maxHeightPositions;
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 	int getHeight();
