@@ -32,7 +32,7 @@ public:
 	int counterToMovePictureToRight;
 	int imageHeight;
 	int newMaxHeight;
-	int maxHeightPosition;
+	float maxHeightPosition;
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
@@ -47,7 +47,7 @@ public:
 
 	int setMaxHeightPosition(float sceneSizeY);
 	
-	vector<int*> maxHeightPositions;
+	vector<float>maxHeightPositions;
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 	int getHeight();

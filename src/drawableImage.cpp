@@ -17,10 +17,8 @@ drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSize
 	y = 0;
 	ticksToMovePictureToRight = 70;
 	counterToMovePictureToRight = 0;
-	newMaxHeight = 0;
+	newMaxHeight = sceneSizeY - imageToDraw.getHeight() - 3;
 	imageHeight = imageToDraw.getHeight();
-	//maxYpositionForPicture = ofRandom(sceneSizeY - imageToDraw.getHeight() - 3, sceneSizeY - imageToDraw.getHeight() * 2 - 3);
-
 	maxYpositionForPicture = setMaxHeightPosition(sceneSizeY);
 }
 
@@ -85,13 +83,12 @@ void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 
 int drawableImage::setMaxHeightPosition(float sceneSizeY)
 {
-	for (int i = 0; i <= 4; i++) {
-		newMaxHeight += imageHeight / 2;
+	for (float i = 0; i <= 4; i++) {
+		newMaxHeight -= imageHeight / 2;
+		maxHeightPositions.push_back(newMaxHeight);
 	}
-	maxHeightPositions.push_back(new int(newMaxHeight));
-
-	maxHeightPosition = (int) maxHeightPositions.at(0);
-	return maxHeightPosition;
+	int rgen = ofRandom(0, 4);
+	return (int)maxHeightPositions.at(rgen);
 }
 
 //--------------------------------------------------------------

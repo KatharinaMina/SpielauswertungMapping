@@ -50,17 +50,13 @@ void ofApp::setup() {
 	ofSetBackgroundColor(0, 0, 0);
 	//ofSetFrameRate(60);
 
-
-
 	fileImageHex.loadImage("Hexagon.png");
-
 
 	rainIsActive = true;
 	int particleSystems = 7;
 	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;
 	for (int i = 0; i <= particleSystems-1; i++) {
 		rainParticleSyst.push_back( new rainParticleSystem(i * sceneSizeForSingleParticleSystem ,sceneSizeForSingleParticleSystem, sceneSize.y));
-		//sceneSizeForSingleParticleSystem += sceneSizeForSingleParticleSystem;
 	}
 	
 
