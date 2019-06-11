@@ -13,12 +13,13 @@ class rainParticleSystem
 
 public:
 
-	rainParticleSystem(int sceneSizeX, int sceneSizeY);
-	~rainParticleSystem();
+	rainParticleSystem(float startSceneX, float sceneSizeX, float sceneSizeY);
+	~rainParticleSystem(); 
 
 	vector<ofVec2f>attractors;
 	vector<particle*> particles;
 
+	int startSceneX;
 	int sceneSizeX;
 	int sceneSizeY;
 	int maxParticle;
@@ -37,8 +38,6 @@ public:
 
 	void updateParticleSystem();
 	void createParticlesForRain();
-	void createParticleSystem();
-	void deleteParticleSystem();
 	void drawRainParticleSystem();
 
 

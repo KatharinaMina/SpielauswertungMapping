@@ -2,7 +2,7 @@
 #include "images.h"
 
 //--------------------------------------------------------------
-drawableImage::drawableImage(string imageName) {
+drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSizeY) {
 	redImageColor = 121;		//Farbe für Symbol
 	greenImageColor = 205;
 	blueImageColor = 205;
@@ -12,10 +12,13 @@ drawableImage::drawableImage(string imageName) {
 	imageToDraw.loadImage(imageName);
 	fileImageHex = changeImageColor(fileImageHex, redImageColor, greenImageColor, blueImageColor);
 	imageToDraw = changeImageColor(imageToDraw, redImageColor, greenImageColor, blueImageColor);
-	x = 0;
-	y = 0;
+	xToMoveInCloud = ofRandom(1, 4);
+	yToMoveIntoCloud = 0;
 	ticksToMovePictureToRight = 70;
-	counterToMovePicctureToRight = 0;
+	counterToMovePictureToRight = 0;
+	newMaxHeight = sceneSizeY - imageToDraw.getHeight() - 3;
+	imageHeight = imageToDraw.getHeight();
+	maxYpositionForPicture = setMaxHeightPosition(sceneSizeY);
 }
 
 //--------------------------------------------------------------
@@ -26,9 +29,6 @@ drawableImage::~drawableImage() {
 
 //--------------------------------------------------------------
 void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
-	
-	int maxYpositionForPicture = sceneSizeY - imageToDraw.getHeight() - 3;
-
 
 	if (cloudAttractorIsSet) {
 		doMovementOfImageAtCloud(maxYpositionForPicture, sceneSizeX, sceneSizeY);
@@ -43,82 +43,73 @@ void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
 //--------------------------------------------------------------
 void drawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 {
-	y = 0;
-	x = 0;
-	counterToMovePicctureToRight = 0;
-	imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));
+	yToMoveIntoCloud = 0;
+	xToMoveInCloud = 0;
+	counterToMovePictureToRight = 0;
+
+	imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));		//unten Symbol
+	fileImageHex.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));		//unten Hexagon
 }
 
 //--------------------------------------------------------------
 void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
-	if (y <= maxYpositionForPicture) {
-		y += 3;
+	if (yToMoveIntoCloud <= maxYpositionForPicture) {		//y-Bewegung zur Cloud 
+		yToMoveIntoCloud += 3;
 	}
-	else if (counterToMovePicctureToRight < ticksToMovePictureToRight) {
-		counterToMovePicctureToRight++;
+	else if (counterToMovePictureToRight < ticksToMovePictureToRight) {
+		counterToMovePictureToRight++;
 	}
-	else {
-		if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
-			x += 3;
+	else {													//x-Bewegung in Cloud 
+		if (pastMiddle) {									//von der Mitte nach rechts: mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
+			xToMoveInCloud += 3;
 		}
-		else {					// mittelpkt - x  jetzt wird x wieder zu null
-			x -= 3;
+		else {												//von links in die Mitte: mittelpkt - x  jetzt wird x wieder zu null
+			xToMoveInCloud -= 3;
 		}
 	}
 
-	if (pastMiddle && x >= sceneSizeX / 2 + imageToDraw.getWidth()) {
+	if (pastMiddle && xToMoveInCloud >= sceneSizeX / 2 + imageToDraw.getWidth()) {		//links von Mitte
 		pastMiddle = false;
 	}
 
-	if (!pastMiddle && x <= 0) {
+	if (!pastMiddle && xToMoveInCloud <= 0) {											//rechts von Mitte
 		pastMiddle = true;
 	}
 
+	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		//zeichnen des Symbols an neuer Position (für Bewegung des Symbols)
+	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		//zeichnen des Hexagons an neuer Position (für Bewegung des Hexagons)
 
-	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
-	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
+}
+
+int drawableImage::setMaxHeightPosition(float sceneSizeY)			// Array für maximale Y-Werte, damit Höhe der Hexagons zueinnadner passt und bei Wabenstruktur ineinander einhaken können
+{
+	for (float i = 0; i <= 4; i++) {								//setzten der gewünschten Werte
+		newMaxHeight -= imageHeight / 2;
+		maxHeightPositions.push_back(newMaxHeight);
+	}
+	int rgen = ofRandom(0, 4);										
+	return (int)maxHeightPositions.at(rgen);						//random Arrayposition zur Auswahl von einer random y-Position
 }
 
 //--------------------------------------------------------------
-int drawableImage::getHeight() {
-	return imageToDraw.getHeight();
+bool drawableImage::imageIsOnTop(float sceneSizeY) {			//schauen ob Symbol und Partikel in Cloud angelangt sind 
+
+	return yToMoveIntoCloud >= maxYpositionForPicture;
 }
 
 //--------------------------------------------------------------
-bool drawableImage::imageIsOnTop(float sceneSizeY) {
-
-	int maxYpositionForPicture = sceneSizeY - imageToDraw.getHeight() - 5;
-
-	return y >= maxYpositionForPicture;
-}
-
-//--------------------------------------------------------------
-float drawableImage::getImagePosX(float sceneSizeX) {
-	if(pastMiddle)
-		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x;
-	else
-		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x;
-}
-
-//--------------------------------------------------------------
-float drawableImage::getImagePosY(float sceneSizeY) {
-	return (sceneSizeY - imageToDraw.getHeight() - 5) - y;
-}
-
-//--------------------------------------------------------------
-ofImage drawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
-
+ofImage drawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Verarbeiten der Farbinformation der einzelnen Bildpixel 
 	int threshold = 1;
 
 	int picWidth = imageToDraw.getWidth();
 	int picHeight = imageToDraw.getHeight();
 
 
-	for (int x = 0; x < picWidth; x++) {
+	for (int x = 0; x < picWidth; x++) {													//durchlaufen aller Pixel und setzten der neuen rgb-Werte
 		for (int y = 0; y < picHeight; y++)
 		{
-			int index = (x + y * picWidth) * 4;
+			int index = (x + y * picWidth) * 4;												
 
 			if (imageToDraw.getPixelsRef()[index + 3] >= threshold) {
 				imageToDraw.getPixelsRef()[index] = r;
@@ -128,9 +119,37 @@ ofImage drawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b
 		}
 	}
 
-	ofSetColor(255, 255, 255);
+	ofSetColor(255, 255, 255);																//setzten der allg. Farbe wieder auf weiß, um keine Beeinträchtigung bei neuer Farbsetztung zu erhalten
 
 	imageToDraw.update();
 
 	return imageToDraw;
+}
+
+//--------------------------------------------------------------
+int drawableImage::getHeight() {
+	return imageToDraw.getHeight();
+}
+
+//--------------------------------------------------------------
+int drawableImage::getWidth() {
+	return imageToDraw.getWidth();
+}
+
+//--------------------------------------------------------------
+int drawableImage::getMaxHeight() {
+	return maxYpositionForPicture;
+}
+
+//--------------------------------------------------------------
+float drawableImage::getImagePosX(float sceneSizeX) {
+	if (pastMiddle)
+		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) + xToMoveInCloud;
+	else
+		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) - xToMoveInCloud;
+}
+
+//--------------------------------------------------------------
+float drawableImage::getImagePosY(float sceneSizeY) {
+	return (sceneSizeY - imageToDraw.getHeight() - 5) - yToMoveIntoCloud;
 }

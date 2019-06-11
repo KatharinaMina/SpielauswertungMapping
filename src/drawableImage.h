@@ -13,7 +13,7 @@ class drawableImage
 
 public:
 
-	drawableImage(string imageName);
+	drawableImage(string imageName, float sceneSizeX, float sceneSizeY);
 	~drawableImage();
 
 	ofColor color;
@@ -22,17 +22,21 @@ public:
 	float age;
 	float size;
 	float mass;
-	int y;
-	int x;
+	int yToMoveIntoCloud;
+	int xToMoveInCloud;
+	int maxYpositionForPicture;
 	int redImageColor;
 	int greenImageColor;
 	int blueImageColor;
 	int ticksToMovePictureToRight;
-	int counterToMovePicctureToRight;
+	int counterToMovePictureToRight;
+	int imageHeight;
+	int newMaxHeight;
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
 	bool pastMiddle;
+
 
 	void updateImage(float sceneSizeX, float sceneSizeY);
 
@@ -40,13 +44,18 @@ public:
 
 	void doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
 
+	int setMaxHeightPosition(float sceneSizeY);
+
+	vector<float>maxHeightPositions;
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 	int getHeight();
+	int getWidth();
 	bool imageIsOnTop(float sceneSizeY);
 
 	float getImagePosX(float sceneSizeX);
 	float getImagePosY(float sceneSizeY);
+	int getMaxHeight();
 
 	ofImage fileImageHex;
 	ofImage imageToDraw;

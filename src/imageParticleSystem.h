@@ -13,7 +13,7 @@ class imageParticleSystem
 
 public:
 
-	imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex,  string imageName);
+	imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName);
 	~imageParticleSystem();
 
 	vector<ofVec2f>attractors;
@@ -22,9 +22,12 @@ public:
 	int sceneSizeX;
 	int sceneSizeY;
 	int imageHeight;
+	int imageWidth;
 	int maxParticle;
 	int picPix;
 	int k;
+	int ticksToMoveImageToTop;
+	int counterToMoveImageToTop;
 	bool tornadoStarted;
 	bool editingWarp;
 	//------------------------------------------
@@ -43,12 +46,13 @@ public:
 	void updateParticleSystem();
 	void deleteParticlesForRocketEffect();
 	void deleteParticlesForHexagon();
-	void createParticlesForHexagon();
-	void createParticlesForCloud();
+	void createParticlesForHexagonInSymbol();
+	void createParticlesForHexagonInCloud();
 	void deleteParticleAfterLeavingOntheRightAndCreateThemOnTheLeft(int p);
 	void drawImageParticleSystem();
 
 	ofImage fileImageHex;
+	ofImage fileImageCloud;
 
 	void changeAttractorImage(ofImage newAttractorImage);
 

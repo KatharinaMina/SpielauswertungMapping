@@ -15,61 +15,62 @@
 
 
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp {
 
-	public:
-		void setup();
-		void update();
-		void draw();
-		void exit();
+public:
+	void setup();
+	void update();
+	void draw();
+	void exit();
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void mouseEntered(int x, int y);
-		void mouseExited(int x, int y);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
-
-	
-	private:
-		//warp
-		ofxWarpController warpController;
-		ofTexture tex;
-		ofRectangle area;
-		ofVec2f sceneSize;
-		ofVec2f force;
-
-		ofFbo fbo;
-
-		vector<ofVec2f>attractors;
-		vector<particle*> system;
-
-		vector<imageParticleSystem*> imageParticleSystems;
-		rainParticleSystem* rainParticleSyst;
+	void keyPressed(int key);
+	void keyReleased(int key);
+	void mouseMoved(int x, int y);
+	void mouseDragged(int x, int y, int button);
+	void mousePressed(int x, int y, int button);
+	void mouseReleased(int x, int y, int button);
+	void mouseEntered(int x, int y);
+	void mouseExited(int x, int y);
+	void windowResized(int w, int h);
+	void dragEvent(ofDragInfo dragInfo);
+	void gotMessage(ofMessage msg);
 
 
-		ofImage img;
-		ofImage fileImageHex;
-		ofImage fileImageCloud;
-		ofImage imageToDraw;
-		
-		ofImage drawImage;
+private:
+	//warp
+	ofxWarpController warpController;
+	ofTexture tex;
+	ofRectangle area;
+	ofVec2f sceneSize;
+	ofVec2f force;
 
-		ofColor color;
-		
+	ofFbo fbo;
 
-		int currentImage;
-		int maxParticle;
-		int picPix;
-		int k;
-		bool rainIsActive;
-		bool editingWarp;
-		
+	vector<ofVec2f>attractors;
+	vector<particle*> system;
+
+	vector<imageParticleSystem*> imageParticleSystems;
+	vector<rainParticleSystem*> rainParticleSyst;
+
+
+	ofImage img;
+	ofImage fileImageHex;
+	ofImage imageToDraw;
+
+	ofImage drawImage;
+
+	ofColor color;
+
+
+	int currentImage;
+	int maxParticle;
+	int picPix;
+	int k;
+	int ticksToMoveParticlesToRight;
+	int counterToMoveParticlesToRight;
+	bool rainIsActive;
+	bool editingWarp;
+
 
 
 };

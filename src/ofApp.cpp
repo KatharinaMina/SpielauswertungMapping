@@ -50,23 +50,26 @@ void ofApp::setup() {
 	ofSetBackgroundColor(0, 0, 0);
 	//ofSetFrameRate(60);
 
-
-
 	fileImageHex.loadImage("Hexagon.png");
-	fileImageCloud.loadImage("Wolke.png");
+																							
+	rainIsActive = true;																	
+	int particleSystems = 7;													//Anzahl der Regenpartikelsysteme (für einzelne Stelen)
+	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;		//berechnen der Breite der einzelen Regenpartikelsysteme
+	for (int i = 0; i <= particleSystems - 1; i++) {							//erstellen der Regenpartikelsysteme
+		rainParticleSyst.push_back(new rainParticleSystem(i * sceneSizeForSingleParticleSystem, sceneSizeForSingleParticleSystem, sceneSize.y));
+	}
 
-	rainIsActive = true;
-
-	this->rainParticleSyst = new rainParticleSystem(sceneSize.x, sceneSize.y);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	if (rainIsActive) {
-		rainParticleSyst->updateParticleSystem();
+	if (rainIsActive) {												//Bewegung der Partikel im Regenpartikelsystem
+		for (int i = 0; i < rainParticleSyst.size(); i++) {
+			rainParticleSyst.at(i)->updateParticleSystem();
+		}
 	}
-	else {
+	else {															//Bewegung der Bildpartikelsysteme und Symbole, wenn Regen false
 		for (int i = 0; i < imageParticleSystems.size(); i++) {
 			imageParticleSystems.at(i)->updateParticleSystem();
 		}
@@ -90,22 +93,24 @@ void ofApp::draw() {
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
 
-	if (rainIsActive) {
-		rainParticleSyst->drawRainParticleSystem();
+	if (rainIsActive) {																	//zeichnen des Regenpartikelsystems
+		for (int i = 0; i < rainParticleSyst.size(); i++) {
+			rainParticleSyst.at(i)->drawRainParticleSystem();
+		}
 	}
-	else {
+	else {																				//zeichnen des Bildpartikelsystems
 		for (int i = 0; i < imageParticleSystems.size(); i++) {
 			imageParticleSystems.at(i)->drawImageParticleSystem();
 		}
 	}
-	
+
 	fbo.end();
 
 	//do not draw past this point
 	//draw warp
 	warpController.getWarp(0)->begin();
 	fbo.draw(0, 0);
-    
+
 	warpController.getWarp(0)->end();
 }
 
@@ -113,28 +118,24 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
 
-	if (key == 'f')
+	if (key == 'f')								//fullscreen
 	{
 		ofToggleFullscreen();
 	}
 
-	if (key == 'e') {
+	if (key == 'e') {							//Mapping
 		editingWarp = !editingWarp;
 		warpController.getWarp(0)->setEditing(editingWarp);
 	}
 
+	//Einlesen der einzelnen Bilder und übergebend er Initialwerte
 	switch (key) {
-	case '4':
-		imageParticleSystems.at(currentImage)->changeAttractorImage(fileImageCloud);
-		rainIsActive = false;
-
-		imageParticleSystems.at(currentImage)->setCloudAttractorIsSet(true);
-		break;
 	case '1':
 		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktUmweltTechnik.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;
+
 	case '2':
 		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagTechnikUmwelt.png"));
 		rainIsActive = false;
@@ -147,6 +148,7 @@ void ofApp::keyReleased(int key) {
 		currentImage++;
 		break;
 	}
+
 }
 
 
