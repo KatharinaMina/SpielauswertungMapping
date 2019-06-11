@@ -55,10 +55,10 @@ void ofApp::setup() {
 	rainIsActive = true;
 	int particleSystems = 7;
 	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;
-	for (int i = 0; i <= particleSystems-1; i++) {
-		rainParticleSyst.push_back( new rainParticleSystem(i * sceneSizeForSingleParticleSystem ,sceneSizeForSingleParticleSystem, sceneSize.y));
+	for (int i = 0; i <= particleSystems - 1; i++) {
+		rainParticleSyst.push_back(new rainParticleSystem(i * sceneSizeForSingleParticleSystem, sceneSizeForSingleParticleSystem, sceneSize.y));
 	}
-	
+
 
 }
 
@@ -144,7 +144,7 @@ void ofApp::keyReleased(int key) {
 	case '3':
 		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagWissenschaftUmwelt.png"));
 		rainIsActive = false;
-		currentImage++;	
+		currentImage++;
 		break;
 	}
 

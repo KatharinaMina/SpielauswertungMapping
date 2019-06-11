@@ -22,8 +22,12 @@ public:
 	float age;
 	float size;
 	float mass;
-	int y;
-	int x;
+	int yToMoveIntoCloud;
+	int xToMoveInCloud;
+	int oldPicWidth;
+	int newPicWidth;
+	int oldPicHeight;
+	int newPicHeight;
 	int maxYpositionForPicture;
 	int redImageColor;
 	int greenImageColor;
@@ -32,25 +36,29 @@ public:
 	int counterToMovePictureToRight;
 	int imageHeight;
 	int newMaxHeight;
-	float maxHeightPosition;
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
 	bool pastMiddle;
 
-	
+
 	void updateImage(float sceneSizeX, float sceneSizeY);
 
 	void drawImage(float sceneSizeX, float sceneSizeY);
 
 	void doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
 
+	void doScalingOfImageAtCloud(int maxYpositionForPicture);
+
+	void scaleImage();
+
 	int setMaxHeightPosition(float sceneSizeY);
-	
+
 	vector<float>maxHeightPositions;
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 	int getHeight();
+	int getWidth();
 	bool imageIsOnTop(float sceneSizeY);
 
 	float getImagePosX(float sceneSizeX);

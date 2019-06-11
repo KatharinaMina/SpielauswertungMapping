@@ -13,8 +13,8 @@ drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSize
 	imageToDraw.loadImage(imageName);
 	fileImageHex = changeImageColor(fileImageHex, redImageColor, greenImageColor, blueImageColor);
 	imageToDraw = changeImageColor(imageToDraw, redImageColor, greenImageColor, blueImageColor);
-	x = ofRandom(1, 4);
-	y = 0;
+	xToMoveInCloud = ofRandom(1, 4);
+	yToMoveIntoCloud = 0;
 	ticksToMovePictureToRight = 70;
 	counterToMovePictureToRight = 0;
 	newMaxHeight = sceneSizeY - imageToDraw.getHeight() - 3;
@@ -44,41 +44,61 @@ void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
 //--------------------------------------------------------------
 void drawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 {
-	y = 0;
-	x = 0;
+	yToMoveIntoCloud = 0;
+	xToMoveInCloud = 0;
 	counterToMovePictureToRight = 0;
 	imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));
+	fileImageHex.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));
 }
 
 //--------------------------------------------------------------
 void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
-	if (y <= maxYpositionForPicture) {
-		y += 3;
+	if (yToMoveIntoCloud <= maxYpositionForPicture) {
+		yToMoveIntoCloud += 3;
 	}
 	else if (counterToMovePictureToRight < ticksToMovePictureToRight) {
 		counterToMovePictureToRight++;
 	}
 	else {
+		doScalingOfImageAtCloud(maxYpositionForPicture);
 		if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
-			x += 3;
+			xToMoveInCloud += 3;
 		}
 		else {					// mittelpkt - x  jetzt wird x wieder zu null
-			x -= 3;
+			xToMoveInCloud -= 3;
 		}
 	}
 
-	if (pastMiddle && x >= sceneSizeX / 2 + imageToDraw.getWidth()) {
+	if (pastMiddle && xToMoveInCloud >= sceneSizeX / 2 + imageToDraw.getWidth()) {
 		pastMiddle = false;
 	}
 
-	if (!pastMiddle && x <= 0) {
+	if (!pastMiddle && xToMoveInCloud <= 0) {
 		pastMiddle = true;
 	}
 
 
 	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
+
+}
+
+void drawableImage::doScalingOfImageAtCloud(int maxYpositionForPicture)
+{
+	oldPicWidth = imageToDraw.getWidth();
+	newPicWidth = imageToDraw.getWidth() - oldPicWidth / 100;
+	oldPicHeight = imageToDraw.getHeight();
+	newPicHeight = imageToDraw.getHeight() - oldPicHeight / 100;
+
+	if (newPicHeight >= 80) {
+		scaleImage();
+	}
+}
+
+void drawableImage::scaleImage()
+{
+	imageToDraw.resize(newPicWidth, newPicHeight);
 }
 
 int drawableImage::setMaxHeightPosition(float sceneSizeY)
@@ -96,6 +116,10 @@ int drawableImage::getHeight() {
 	return imageToDraw.getHeight();
 }
 
+int drawableImage::getWidth() {
+	return imageToDraw.getWidth();
+}
+
 int drawableImage::getMaxHeight() {
 	return maxYpositionForPicture;
 }
@@ -103,20 +127,20 @@ int drawableImage::getMaxHeight() {
 //--------------------------------------------------------------
 bool drawableImage::imageIsOnTop(float sceneSizeY) {
 
-	return y >= maxYpositionForPicture;
+	return yToMoveIntoCloud >= maxYpositionForPicture;
 }
 
 //--------------------------------------------------------------
 float drawableImage::getImagePosX(float sceneSizeX) {
 	if (pastMiddle)
-		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) + x;
+		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) + xToMoveInCloud;
 	else
-		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) - x;
+		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) - xToMoveInCloud;
 }
 
 //--------------------------------------------------------------
 float drawableImage::getImagePosY(float sceneSizeY) {
-	return (sceneSizeY - imageToDraw.getHeight() - 5) - y;
+	return (sceneSizeY - imageToDraw.getHeight() - 5) - yToMoveIntoCloud;
 }
 
 //--------------------------------------------------------------

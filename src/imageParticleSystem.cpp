@@ -4,6 +4,7 @@
 imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName) {
 	this->imageToDraw = new drawableImage(imageName, sceneSizeX, sceneSizeY);
 	this->imageHeight = imageToDraw->getHeight();
+	this->imageWidth = imageToDraw->getWidth();
 
 	this->sceneSizeX = sceneSizeX;
 	this->sceneSizeY = sceneSizeY;
@@ -29,17 +30,17 @@ void imageParticleSystem::updateParticleSystem() {
 	time += deltaT;
 
 
-	if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY) == false)) {			//Ertsellen von Partiklen für Symbole
+	if ((cloudAttractorIsSet == false) && (particles.size() < this->picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY) == false)) {			//Ertsellen von Partiklen für Symbole
 		createParticlesForHexagonInSymbol();
 	}
-	else if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY))) {			//Ertsellen von Partiklen für Symbole
+	else if ((cloudAttractorIsSet == false) && (particles.size() < this->picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY))) {			//Ertsellen von Partiklen für Symbole
 		createParticlesForHexagonInCloud();
 	}
-	else if ((cloudAttractorIsSet == false) && (particles.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
+	else if ((cloudAttractorIsSet == false) && (particles.size() > this->picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > this->picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
 		deleteParticlesForHexagon();
 	}
-	else if ((cloudAttractorIsSet == true) && (particles.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
+	else if ((cloudAttractorIsSet == true) && (particles.size() > this->picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > this->picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
 		deleteParticlesForRocketEffect();
 	}
@@ -69,15 +70,27 @@ void imageParticleSystem::updateParticleSystem() {
 	}
 
 
-	if (counterToMoveImageToTop < ticksToMoveImageToTop) {
+	if (counterToMoveImageToTop < ticksToMoveImageToTop) { //Delay um hochzufliegen 
 		counterToMoveImageToTop++;
 	}
-	else if (counterToMoveImageToTop = ticksToMoveImageToTop) {
+	else if (counterToMoveImageToTop == ticksToMoveImageToTop) {
 		changeAttractorImage(fileImageCloud);
 		setCloudAttractorIsSet(true);
 	}
 
-	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) {
+	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) { //muss unter anderen Delay-If-Anweisung bleiben
+
+
+		oldPicWidth = fileImageHex.getWidth();
+
+		oldPicHeight = fileImageHex.getHeight();
+
+		newPicWidth = oldPicWidth - oldPicWidth / 100;
+		newPicHeight = oldPicHeight - oldPicHeight / 100;
+
+		if (newPicHeight >= 80) {
+			fileImageHex.resize(newPicWidth, newPicHeight);			
+		}
 		setAttractorsFromHexagonFromPicture();
 		cloudAttractorIsSet = false;
 	}
@@ -87,7 +100,7 @@ void imageParticleSystem::updateParticleSystem() {
 //----------------------------------------------------------
 void imageParticleSystem::createParticlesForHexagonInSymbol()
 {
-	int newPix = (picPix / 7) - particles.size();
+	int newPix = (this->picPix / 7) - particles.size();
 	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 		particles.push_back(new particle);
 
@@ -101,7 +114,7 @@ void imageParticleSystem::createParticlesForHexagonInSymbol()
 //----------------------------------------------------------
 void imageParticleSystem::createParticlesForHexagonInCloud()
 {
-	int newPix = (picPix / 7) - particles.size();
+	int newPix = (this->picPix / 7) - particles.size();
 	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 		particles.push_back(new particle);
 
@@ -115,7 +128,7 @@ void imageParticleSystem::createParticlesForHexagonInCloud()
 //----------------------------------------------------------
 void imageParticleSystem::deleteParticlesForRocketEffect()
 {
-	int newPix = (particles.size() - (picPix / 7));
+	int newPix = (particles.size() - (this->picPix / 7));
 	for (int i = 0; i < newPix; i++) {
 		delete particles.at(0);													// löschen des Partikel Obj.
 		particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
@@ -125,7 +138,7 @@ void imageParticleSystem::deleteParticlesForRocketEffect()
 //----------------------------------------------------------
 void imageParticleSystem::deleteParticlesForHexagon()
 {
-	int newPix = (particles.size() - (picPix / 7));
+	int newPix = (particles.size() - (this->picPix / 7));
 
 	for (int i = 0; i < newPix; i++) {
 		delete particles.at(0);													// löschen des Partikel Obj.
@@ -166,8 +179,8 @@ void imageParticleSystem::setAttractorsFromHexagonFromPicture() {
 	ofPixels pix;
 	pix = fileImageHex.getPixels();
 	vector<ofVec2f> pxPos;
-	picPix = 0;
 	for (int i = 3; i <= pix.size(); i += 4) {
+		int test = pix[i];
 		if (pix[i] > 0) {
 			int width = pix.getWidth();
 
@@ -180,7 +193,7 @@ void imageParticleSystem::setAttractorsFromHexagonFromPicture() {
 			vec.set(x + imageToDraw->getImagePosX(sceneSizeX), y + imageToDraw->getImagePosY(sceneSizeY));
 			pxPos.push_back(vec);
 
-			picPix++;
+			this->picPix++;
 		}
 	}
 	attractors = pxPos;
@@ -193,7 +206,7 @@ vector<ofVec2f> imageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der
 	ofPixels pix;
 	pix = a.getPixels();
 	vector<ofVec2f> pxPos;
-	picPix = 0;
+	this->picPix = 0;
 	for (int i = 3; i <= pix.size(); i += 4) {
 		if (pix[i] > 0) {
 			int width = pix.getWidth();
@@ -207,7 +220,7 @@ vector<ofVec2f> imageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der
 			vec.set(x + ((sceneSizeX / 2) - picWidth / 2), y + ((sceneSizeY)-picHeight - 7));
 			pxPos.push_back(vec);
 
-			picPix++;
+			this->picPix++;
 		}
 	}
 	return pxPos;
