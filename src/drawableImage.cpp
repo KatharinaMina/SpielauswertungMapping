@@ -61,7 +61,6 @@ void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 		counterToMovePictureToRight++;
 	}
 	else {
-		doScalingOfImageAtCloud(maxYpositionForPicture);
 		if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
 			xToMoveInCloud += 3;
 		}
@@ -82,23 +81,6 @@ void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 
-}
-
-void drawableImage::doScalingOfImageAtCloud(int maxYpositionForPicture)
-{
-	oldPicWidth = imageToDraw.getWidth();
-	newPicWidth = imageToDraw.getWidth() - oldPicWidth / 100;
-	oldPicHeight = imageToDraw.getHeight();
-	newPicHeight = imageToDraw.getHeight() - oldPicHeight / 100;
-
-	if (newPicHeight >= 80) {
-		scaleImage();
-	}
-}
-
-void drawableImage::scaleImage()
-{
-	imageToDraw.resize(newPicWidth, newPicHeight);
 }
 
 int drawableImage::setMaxHeightPosition(float sceneSizeY)

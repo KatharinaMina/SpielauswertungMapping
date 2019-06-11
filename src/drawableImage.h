@@ -24,10 +24,6 @@ public:
 	float mass;
 	int yToMoveIntoCloud;
 	int xToMoveInCloud;
-	int oldPicWidth;
-	int newPicWidth;
-	int oldPicHeight;
-	int newPicHeight;
 	int maxYpositionForPicture;
 	int redImageColor;
 	int greenImageColor;
@@ -47,10 +43,6 @@ public:
 	void drawImage(float sceneSizeX, float sceneSizeY);
 
 	void doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
-
-	void doScalingOfImageAtCloud(int maxYpositionForPicture);
-
-	void scaleImage();
 
 	int setMaxHeightPosition(float sceneSizeY);
 

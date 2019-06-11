@@ -4,7 +4,6 @@
 imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName) {
 	this->imageToDraw = new drawableImage(imageName, sceneSizeX, sceneSizeY);
 	this->imageHeight = imageToDraw->getHeight();
-	this->imageWidth = imageToDraw->getWidth();
 
 	this->sceneSizeX = sceneSizeX;
 	this->sceneSizeY = sceneSizeY;
@@ -16,7 +15,7 @@ imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage
 
 	setSymbolAttractorIsSet(true);
 	setCloudAttractorIsSet(false);
-	ticksToMoveImageToTop = 90;
+	ticksToMoveImageToTop = 100;
 	counterToMoveImageToTop = 0;
 	fileImageCloud.loadImage("Wolke.png");
 
@@ -29,22 +28,20 @@ void imageParticleSystem::updateParticleSystem() {
 	double deltaT = ofGetLastFrameTime();
 	time += deltaT;
 
-
-	if ((cloudAttractorIsSet == false) && (particles.size() < this->picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY) == false)) {			//Ertsellen von Partiklen für Symbole
+	if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY) == false)) {			//Ertsellen von Partiklen für Symbole
 		createParticlesForHexagonInSymbol();
 	}
-	else if ((cloudAttractorIsSet == false) && (particles.size() < this->picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY))) {			//Ertsellen von Partiklen für Symbole
+	else if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY))) {			//Ertsellen von Partiklen für Symbole
 		createParticlesForHexagonInCloud();
 	}
-	else if ((cloudAttractorIsSet == false) && (particles.size() > this->picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > this->picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
+	else if ((cloudAttractorIsSet == false) && (particles.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
 		deleteParticlesForHexagon();
 	}
-	else if ((cloudAttractorIsSet == true) && (particles.size() > this->picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > this->picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
+	else if ((cloudAttractorIsSet == true) && (particles.size() > picPix / 7)) {			//Löschen von Überschüssigen Partikeln für Symboleelse if(system.size() > picPix / 7) {			//Löschen von Überschüssigen Partikeln für Symbole
 
 		deleteParticlesForRocketEffect();
 	}
-
 
 	//Bewegung bei Symbolen
 	for (int p = 0; p < particles.size(); p++) {
@@ -52,7 +49,6 @@ void imageParticleSystem::updateParticleSystem() {
 			if (cloudAttractorIsSet == true) {
 				particles.at(p)->updateParticle(deltaT, attractors[p * 7],
 					cloudAttractorIsSet, this->imageToDraw->imageIsOnTop(sceneSizeY), true, imageHeight, sceneSizeX, sceneSizeY);
-
 			}
 			else if (symbolAttractorIsSet == true)
 			{
@@ -69,28 +65,15 @@ void imageParticleSystem::updateParticleSystem() {
 		}
 	}
 
-
-	if (counterToMoveImageToTop < ticksToMoveImageToTop) { //Delay um hochzufliegen 
+	if (counterToMoveImageToTop < ticksToMoveImageToTop) {
 		counterToMoveImageToTop++;
 	}
-	else if (counterToMoveImageToTop == ticksToMoveImageToTop) {
+	else if (counterToMoveImageToTop = ticksToMoveImageToTop) {
 		changeAttractorImage(fileImageCloud);
 		setCloudAttractorIsSet(true);
 	}
 
-	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) { //muss unter anderen Delay-If-Anweisung bleiben
-
-
-		oldPicWidth = fileImageHex.getWidth();
-
-		oldPicHeight = fileImageHex.getHeight();
-
-		newPicWidth = oldPicWidth - oldPicWidth / 100;
-		newPicHeight = oldPicHeight - oldPicHeight / 100;
-
-		if (newPicHeight >= 80) {
-			fileImageHex.resize(newPicWidth, newPicHeight);			
-		}
+	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) {
 		setAttractorsFromHexagonFromPicture();
 		cloudAttractorIsSet = false;
 	}
@@ -100,7 +83,7 @@ void imageParticleSystem::updateParticleSystem() {
 //----------------------------------------------------------
 void imageParticleSystem::createParticlesForHexagonInSymbol()
 {
-	int newPix = (this->picPix / 7) - particles.size();
+	int newPix = (picPix / 7) - particles.size();
 	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 		particles.push_back(new particle);
 
@@ -114,7 +97,7 @@ void imageParticleSystem::createParticlesForHexagonInSymbol()
 //----------------------------------------------------------
 void imageParticleSystem::createParticlesForHexagonInCloud()
 {
-	int newPix = (this->picPix / 7) - particles.size();
+	int newPix = (picPix / 7) - particles.size();
 	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 		particles.push_back(new particle);
 
@@ -128,7 +111,7 @@ void imageParticleSystem::createParticlesForHexagonInCloud()
 //----------------------------------------------------------
 void imageParticleSystem::deleteParticlesForRocketEffect()
 {
-	int newPix = (particles.size() - (this->picPix / 7));
+	int newPix = (particles.size() - (picPix / 7));
 	for (int i = 0; i < newPix; i++) {
 		delete particles.at(0);													// löschen des Partikel Obj.
 		particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
@@ -138,7 +121,7 @@ void imageParticleSystem::deleteParticlesForRocketEffect()
 //----------------------------------------------------------
 void imageParticleSystem::deleteParticlesForHexagon()
 {
-	int newPix = (particles.size() - (this->picPix / 7));
+	int newPix = (particles.size() - (picPix / 7));
 
 	for (int i = 0; i < newPix; i++) {
 		delete particles.at(0);													// löschen des Partikel Obj.
@@ -179,8 +162,8 @@ void imageParticleSystem::setAttractorsFromHexagonFromPicture() {
 	ofPixels pix;
 	pix = fileImageHex.getPixels();
 	vector<ofVec2f> pxPos;
+	picPix = 0;
 	for (int i = 3; i <= pix.size(); i += 4) {
-		int test = pix[i];
 		if (pix[i] > 0) {
 			int width = pix.getWidth();
 
@@ -193,7 +176,7 @@ void imageParticleSystem::setAttractorsFromHexagonFromPicture() {
 			vec.set(x + imageToDraw->getImagePosX(sceneSizeX), y + imageToDraw->getImagePosY(sceneSizeY));
 			pxPos.push_back(vec);
 
-			this->picPix++;
+			picPix++;
 		}
 	}
 	attractors = pxPos;
@@ -206,7 +189,7 @@ vector<ofVec2f> imageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der
 	ofPixels pix;
 	pix = a.getPixels();
 	vector<ofVec2f> pxPos;
-	this->picPix = 0;
+	picPix = 0;
 	for (int i = 3; i <= pix.size(); i += 4) {
 		if (pix[i] > 0) {
 			int width = pix.getWidth();
@@ -220,7 +203,7 @@ vector<ofVec2f> imageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der
 			vec.set(x + ((sceneSizeX / 2) - picWidth / 2), y + ((sceneSizeY)-picHeight - 7));
 			pxPos.push_back(vec);
 
-			this->picPix++;
+			picPix++;
 		}
 	}
 	return pxPos;

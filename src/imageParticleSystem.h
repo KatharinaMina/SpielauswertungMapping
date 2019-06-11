@@ -22,8 +22,8 @@ public:
 	int sceneSizeX;
 	int sceneSizeY;
 	int imageHeight;
-	int imageWidth;
 	int maxParticle;
+	int picPix;
 	int k;
 	int ticksToMoveImageToTop;
 	int counterToMoveImageToTop;
@@ -37,11 +37,6 @@ public:
 	double time;
 	double tornadoStartTime;
 	int status;
-
-	int newPicWidth;
-	int newPicHeight;
-	int oldPicHeight;
-	int oldPicWidth;
 	bool imageReachedTopAndAttractorIsChanged;
 
 	void setSymbolAttractorIsSet(bool value);
@@ -66,7 +61,6 @@ private:
 	void setAttractorsFromHexagonFromPicture();
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
-	int picPix;
 };
 #endif 
 #pragma once
