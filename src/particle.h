@@ -29,18 +29,18 @@ public:
 	float deleteAfterLeavingSceneY();
 	bool deleteAfterLeavingSceneX();
 	
-	int k;
-	int l;
+	int valueToMoveToTop;
+	int valueToMoveToRight;
 	int ticksToMoveParticlesToRight;
 	int counterToMoveParticlesToRight;
 	bool pL;
 	bool particleLeftScene;
   
     void setup(ofVec2f pos, float maxAge);
-    void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool imageIsOnTop, bool tornadoIsFinished, int imageHeight, float sceneSizeX, float sceneSizeY);
+    void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool imageIsOnTop, bool tornadoIsFinished, int imageHeight, int imageWidth, float sceneSizeX, float sceneSizeY);
 	void doMovementOfParticlesAtRain(bool tornadoIsFinished, double deltaT, float sceneSizeX);
 	void doMovementOfParticlesAtSymbols(double deltaT, ofVec2f &attractor);
-	void doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHeight, float sceneSizeX, ofVec2f &attractor, double deltaT);
+	void doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHeight, int imageWidth, float sceneSizeX, ofVec2f &attractor, double deltaT);
 	void doMovementOfHexagonOnTheTop(ofVec2f &attractor, float sceneSizeX, double deltaT);
     void draw();
 

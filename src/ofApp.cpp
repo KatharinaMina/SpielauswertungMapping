@@ -51,11 +51,11 @@ void ofApp::setup() {
 	//ofSetFrameRate(60);
 
 	fileImageHex.loadImage("Hexagon.png");
-
-	rainIsActive = true;
-	int particleSystems = 7;
-	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;
-	for (int i = 0; i <= particleSystems - 1; i++) {
+																							
+	rainIsActive = true;																	
+	int particleSystems = 7;													//Anzahl der Regenpartikelsysteme (für einzelne Stelen)
+	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;		//berechnen der Breite der einzelen Regenpartikelsysteme
+	for (int i = 0; i <= particleSystems - 1; i++) {							//erstellen der Regenpartikelsysteme
 		rainParticleSyst.push_back(new rainParticleSystem(i * sceneSizeForSingleParticleSystem, sceneSizeForSingleParticleSystem, sceneSize.y));
 	}
 
@@ -64,12 +64,12 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	if (rainIsActive) {
+	if (rainIsActive) {												//Bewegung der Partikel im Regenpartikelsystem
 		for (int i = 0; i < rainParticleSyst.size(); i++) {
 			rainParticleSyst.at(i)->updateParticleSystem();
 		}
 	}
-	else {
+	else {															//Bewegung der Bildpartikelsysteme und Symbole, wenn Regen false
 		for (int i = 0; i < imageParticleSystems.size(); i++) {
 			imageParticleSystems.at(i)->updateParticleSystem();
 		}
@@ -93,12 +93,12 @@ void ofApp::draw() {
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
 
-	if (rainIsActive) {
+	if (rainIsActive) {																	//zeichnen des Regenpartikelsystems
 		for (int i = 0; i < rainParticleSyst.size(); i++) {
 			rainParticleSyst.at(i)->drawRainParticleSystem();
 		}
 	}
-	else {
+	else {																				//zeichnen des Bildpartikelsystems
 		for (int i = 0; i < imageParticleSystems.size(); i++) {
 			imageParticleSystems.at(i)->drawImageParticleSystem();
 		}
@@ -118,16 +118,17 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
 
-	if (key == 'f')
+	if (key == 'f')								//fullscreen
 	{
 		ofToggleFullscreen();
 	}
 
-	if (key == 'e') {
+	if (key == 'e') {							//Mapping
 		editingWarp = !editingWarp;
 		warpController.getWarp(0)->setEditing(editingWarp);
 	}
 
+	//Einlesen der einzelnen Bilder und übergebend er Initialwerte
 	switch (key) {
 	case '1':
 		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktUmweltTechnik.png"));

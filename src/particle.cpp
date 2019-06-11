@@ -11,34 +11,36 @@ particle::~particle() {
 
 //--------------------------------------------------------------
 void particle::setup(ofVec2f pos, float maxAge) {
-	this->pos = pos;									//pointer auf Position ofVec2f position
-	vel.set(ofRandom(-20.0, 20.0), ofRandom(-90, -100));//Die Bewegungsrichtung
+	this->pos = pos;										//pointer auf Position ofVec2f position
+	vel.set(ofRandom(-20.0, 20.0), ofRandom(-90, -100));	//Die Bewegungsrichtung
 
-	age = 0.0;											//Alter ist am Anfang 0
-	maxLife = ofRandom(maxAge - 5, maxAge);				//Wie lange der Partikel maximal leben soll
-	size = ofRandom(4.0, 0.01);								//Unterschiedliche Partikelgröße
-	mass = ofRandom(100, 250);							//verändert die Partikelgeschwindigkeit
+	age = 0.0;												//Alter ist am Anfang 0
+	maxLife = ofRandom(maxAge - 5, maxAge);					//Wie lange der Partikel maximal leben soll
+	size = ofRandom(4.0, 0.01);
+	mass = ofRandom(100, 250);								//verändert die Partikelgeschwindigkeit
 	color.set(5, 241, 219);
-	k = 0;
-	l = 0;
-	ticksToMoveParticlesToRight = 70;
-	counterToMoveParticlesToRight = 0;
-	particleLeftScene = false;
-    
-    //tex.load("img/overlay.png");                    //siehe Tobis Code Textur
+	valueToMoveToTop = 0;									//Counter der bewirkt, dass sich Partikel mit Attraktor nach oben bewegen
+	valueToMoveToRight = 0;									//Counter der bewirkt, dass sich Partikel mit Attraktor nach rechts bewegen
+	ticksToMoveParticlesToRight = 70;						//Framerate für Bewegungsgeschwindigkeit
+	counterToMoveParticlesToRight = 0;						//Counter für Pause oben
+	particleLeftScene = false;								//Partikel sind rechts außerhalb der ScenesizeX
+
+	//tex.load("img/overlay.png");							//siehe Tobis Code Textur
 }
 
 //--------------------------------------------------------------
-void particle::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool imageIsOnTop, bool tornadoIsFinished, int imageHeight, float sceneSizeX, float sceneSizeY) {
+void particle::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool imageIsOnTop, bool tornadoIsFinished, int imageHeight, int imageWidth, float sceneSizeX, float sceneSizeY) {
+
+	//Bewegung der Partikel in den unterschiedlichen Einstellungen
 
 	doMovementOfParticlesAtRain(tornadoIsFinished, deltaT, sceneSizeX);
 
 	if (cloudAttractorIsSet == true) {
-		doMovementOfParticlesAtRocketEffect(sceneSizeY, imageHeight, sceneSizeX, attractor, deltaT);
+		doMovementOfParticlesAtRocketEffect(sceneSizeY, imageHeight, imageWidth, sceneSizeX, attractor, deltaT);
 	}
 
 	if (tornadoIsFinished == true && cloudAttractorIsSet == false) {
-		doMovementOfParticlesAtSymbols(deltaT, attractor);				//Position = m/s * s [Partikel bleiben statisch]
+		doMovementOfParticlesAtSymbols(deltaT, attractor);
 	}
 
 	if (imageIsOnTop == true) {
@@ -50,7 +52,7 @@ void particle::updateParticle(double deltaT, ofVec2f attractor, bool cloudAttrac
 //--------------------------------------------------------------
 void particle::doMovementOfParticlesAtRain(bool tornadoIsFinished, double deltaT, float sceneSizeX)
 {
-	if (tornadoIsFinished == false) {
+	if (tornadoIsFinished == false) {				//Bewegung des Partikels von unten nach oben
 		pos += vel * deltaT;
 		age += deltaT;
 
@@ -63,87 +65,85 @@ void particle::doMovementOfParticlesAtRain(bool tornadoIsFinished, double deltaT
 //--------------------------------------------------------------
 void particle::doMovementOfParticlesAtSymbols(double deltaT, ofVec2f &attractor)
 {
-	k = 0;
-	l = 0;
+	valueToMoveToTop = 0;
+	valueToMoveToRight = 0;
 	counterToMoveParticlesToRight = 0;
 
 	age += deltaT;
 	vel *= 0.1;
-	ofVec2f force = attractor - pos;			//Anziehungskraft						
+	ofVec2f force = attractor - pos;				//Anziehungskraft						
 
-	if (50 < force.length() < 150) {
-		force = 8 * force.getNormalized();		//Anziehungskraft des Attraktors auf die Partikel
+	if (50 < force.length() < 150) {				//Bewegung der Partikel in einem Radius von 50 bis 150 um den Attraktor befinden
+		force = 8 * force.getNormalized();			//Anziehungskraft des Attraktors auf die Partikel
 
-		vel += force;							//Bewegung zum Attraktor
+		vel += force;								//Bewegung zum Attraktor
 		vel = mass * vel.getNormalized();
 	}
-	else if (force.length() < 500) {
+	else if (150 < force.length() < 500) {			//Bewegung der Partikel in einem Radius von 150 bis 500 um den Attraktor befinden
 		force = 5 * force.getNormalized();
 
 		vel += force;
 		vel = mass * vel.getNormalized();
 	}
-	else {
+	else {											//Bewegung der Partikel in einem Radius von mehr als 500 um den Attraktor befinden
 		force = 1 * force.getNormalized();
 		vel += force;
 		vel = mass * vel.getNormalized();
 	}
-	pos += (vel / 1.5 * deltaT);
+	pos += (vel / 1.5 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
 }
 
 //--------------------------------------------------------------
-void particle::doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHeight, float sceneSizeX, ofVec2f &attractor, double deltaT)
+void particle::doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHeight, int imageWidth, float sceneSizeX, ofVec2f &attractor, double deltaT)
 {
-	// setzen des Attraktors und der Bewegugsgeschwindigkeit
-	int y = ((sceneSizeY / 2) + imageHeight);
-	int x = ofRandom(sceneSizeX / 2 - imageHeight / 2, sceneSizeX / 2 + imageHeight / 2);
+	int y = ((sceneSizeY / 2) + imageHeight);												//Anfangshöhe für Attraktor
+	int x = ofRandom(sceneSizeX / 2 - imageWidth / 2, sceneSizeX / 2 + imageWidth / 2);		//Breite des Attraktors
 
-	ofVec2f force2 = attractor - pos;
-	if (y - k - imageHeight > 250) {
-		k += 2;
+	if (y - valueToMoveToTop - imageHeight > 250) {						//erhöhen des Counters je nach Geschwindigkeit zur Bewegung nach oben 
+		valueToMoveToTop += 3;											//Bewegung um 3 nach oben (pro Frame)
 	}
-	else if (y - k - imageHeight > 10) {
-		k += 2;
+	else if (y - valueToMoveToTop - imageHeight > 10) {					//erhöhen des Counters je nach Geschwindigkeit zur Bewegung nach oben
+		valueToMoveToTop += 2;											//Bewegung um 2 nach oben (pro Frame)
 
 	}
-	else if (counterToMoveParticlesToRight < ticksToMoveParticlesToRight) {
-		counterToMoveParticlesToRight++;
+	else if (counterToMoveParticlesToRight < ticksToMoveParticlesToRight) {			//Pause oben 
+		counterToMoveParticlesToRight++;											
 	}
-	else if (y - k - imageHeight <= 10) {
-		l += 3;
+	else if (y - valueToMoveToTop - imageHeight <= 10) {		//erhöhen des Counters je nach Geschwindigkeit zur Bewegung nach rechts (Bewegung um 3 nach rechts (pro Frame))
+		valueToMoveToRight += 3;
 	}
 
-	attractor.set(x + l, y - k);
+	attractor.set(x + valueToMoveToRight, y - valueToMoveToTop);		//setzten des Attraktors bei Bewegung mit angepassten Koordinaten
 
 
 	age += deltaT;
 	vel *= 0.1;
-	ofVec2f force = attractor - pos;			//Anziehungskraft						
+	ofVec2f force = (attractor - pos);				//Anziehungskraft						
 
-	if (50 < force.length() < 150) {
-		force = 3 * force.getNormalized();		//Anziehungskraft des Attraktors auf die Partikel
+	if (30 < force.length() < 150) {				//Bewegung der Partikel in einem Radius von 30 bis 150 um den Attraktor befinden
+		force = 17 * force.getNormalized();			//Anziehungskraft des Attraktors auf die Partikel
 
-		vel += force;							//Bewegung zum Attraktor
-		vel = mass * vel.getNormalized();
+		vel += force;								//Bewegung zum Attraktor
+		vel = mass / 1.2 * vel.getNormalized();
 	}
-	else if (force.length() < 500) {
-		force = 7 * force.getNormalized();
+	else if (150 < force.length() < 500) {			//Bewegung der Partikel in einem Radius von 150 bis 500 um den Attraktor befinden
+		force = 14 * force.getNormalized();
 
 		vel += force;
 		vel = mass * vel.getNormalized();
 	}
-	else {
-		force = 1 * force.getNormalized();
+	else {											//Bewegung der Partikel in einem Radius mehr als 500 um den Attraktor befinden
+		force = 11 * force.getNormalized();
 		vel += force;
 		vel = mass * vel.getNormalized();
 	}
-	pos += (vel / 1.2 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
+	pos += (vel / 1.3 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
 }
 
 //--------------------------------------------------------------
 void particle::doMovementOfHexagonOnTheTop(ofVec2f &attractor, float sceneSizeX, double deltaT)
 {
-	if (attractor.x + l >= sceneSizeX + 120) {
+	if (attractor.x + valueToMoveToRight >= sceneSizeX + 120) {
 		particleLeftScene = true;
 	}
 	else {
@@ -153,13 +153,13 @@ void particle::doMovementOfHexagonOnTheTop(ofVec2f &attractor, float sceneSizeX,
 	vel *= 0.1;
 	ofVec2f force = attractor - pos;			//Anziehungskraft						
 
-	if (50 < force.length() < 150) {
+	if (50 < force.length() < 150) {			//Bewegung der Partikel in einem Radius von 50 bis 150 um den Attraktor befinden
 		force = 60 * force.getNormalized();		//Anziehungskraft des Attraktors auf die Partikel
 
 		vel += force;							//Bewegung zum Attraktor
 		vel = mass * vel.getNormalized();
 	}
-	else {
+	else {										//Bewegung der Partikel in einem Radius von mehr als 150 um den Attraktor befinden
 		force = 60 * force.getNormalized();
 
 		vel += force;
@@ -171,12 +171,12 @@ void particle::doMovementOfHexagonOnTheTop(ofVec2f &attractor, float sceneSizeX,
 //--------------------------------------------------------------
 void particle::draw() {
 	if (pos.x > 0 || pos.x < 300) {
-		ofSetColor(this->color);
-        color.set(getAgeNorm() * 241,241/ getAgeNorm() ,219);
+		ofSetColor(this->color);				//setzten der Partikel auf Türkis
+		// color.set(getAgeNorm() * 241,241/ getAgeNorm() ,219);		//Farbeffekt (Disco) 
 	}
 	else {
 		ofSetColor(255, 255, 255);
-        
+
 	}
 	ofDrawCircle(pos, size);
 

@@ -22,6 +22,7 @@ public:
 	int sceneSizeX;
 	int sceneSizeY;
 	int imageHeight;
+	int imageWidth;
 	int maxParticle;
 	int picPix;
 	int k;
