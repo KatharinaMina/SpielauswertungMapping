@@ -63,6 +63,7 @@ void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	else {													//x-Bewegung in Cloud 
 		if (pastMiddle) {									//von der Mitte nach rechts: mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
 			xToMoveInCloud += 3;
+
 		}
 		else {												//von links in die Mitte: mittelpkt - x  jetzt wird x wieder zu null
 			xToMoveInCloud -= 3;
@@ -81,6 +82,8 @@ void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		//zeichnen des Hexagons an neuer Position (für Bewegung des Hexagons)
 
 }
+
+
 
 int drawableImage::setMaxHeightPosition(float sceneSizeY)			// Array für maximale Y-Werte, damit Höhe der Hexagons zueinnadner passt und bei Wabenstruktur ineinander einhaken können
 {

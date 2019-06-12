@@ -57,7 +57,7 @@ void particle::doMovementOfParticlesAtRain(bool tornadoIsFinished, double deltaT
 		age += deltaT;
 
 		if (pos.x >= sceneSizeX) {
-			pos.x = 0;
+			pos.x = ofRandom (0,-5); //Random, damit beim Beginn keine gerade Linie entsteht
 		}
 	}
 }
@@ -74,21 +74,21 @@ void particle::doMovementOfParticlesAtSymbols(double deltaT, ofVec2f &attractor)
 	ofVec2f force = attractor - pos;				//Anziehungskraft						
 
 	if (50 < force.length() < 150) {				//Bewegung der Partikel in einem Radius von 50 bis 150 um den Attraktor befinden
-		force = 8 * force.getNormalized();			//Anziehungskraft des Attraktors auf die Partikel
+		force = 10 * force.getNormalized();			//Anziehungskraft des Attraktors auf die Partikel
 
 		vel += force;								//Bewegung zum Attraktor
 		vel = mass * vel.getNormalized();
 	}
 	else if (150 < force.length() < 500) {			//Bewegung der Partikel in einem Radius von 150 bis 500 um den Attraktor befinden
-		force = 5 * force.getNormalized();
+		force = 8 * force.getNormalized();
 
 		vel += force;
 		vel = mass * vel.getNormalized();
 	}
 	else {											//Bewegung der Partikel in einem Radius von mehr als 500 um den Attraktor befinden
-		force = 1 * force.getNormalized();
+		force = 2 * force.getNormalized();
 		vel += force;
-		vel = mass * vel.getNormalized();
+		vel = mass /1.2* vel.getNormalized();
 	}
 	pos += (vel / 1.5 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
 }
@@ -124,20 +124,26 @@ void particle::doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHe
 		force = 17 * force.getNormalized();			//Anziehungskraft des Attraktors auf die Partikel
 
 		vel += force;								//Bewegung zum Attraktor
-		vel = mass / 1.2 * vel.getNormalized();
+		vel =( mass / 1.2) * vel.getNormalized();		//Anpassung des Raketeneffekts, damit die Partikel nicht schneller nach oben gehen als das Symbol
 	}
-	else if (150 < force.length() < 500) {			//Bewegung der Partikel in einem Radius von 150 bis 500 um den Attraktor befinden
+	else if (150 < force.length() < 250) {			//Bewegung der Partikel in einem Radius von 150 bis 500 um den Attraktor befinden
 		force = 14 * force.getNormalized();
 
 		vel += force;
-		vel = mass * vel.getNormalized();
+		vel = mass * 10 * vel.getNormalized();
+	}
+	else if (250 < force.length() < 500) {			//Bewegung der Partikel in einem Radius von 150 bis 500 um den Attraktor befinden
+		force = 14 * force.getNormalized();
+
+		vel += force;
+		vel = mass * 4* vel.getNormalized();
 	}
 	else {											//Bewegung der Partikel in einem Radius mehr als 500 um den Attraktor befinden
-		force = 11 * force.getNormalized();
+		force = 20 * force.getNormalized();
 		vel += force;
 		vel = mass * vel.getNormalized();
 	}
-	pos += (vel / 1.3 * deltaT);					//Position = m/s * s [Partikel bleiben statisch]
+	pos += (vel / 1.7 * deltaT);					//Position = m/s * s [Partikel bleiben statisch] // Kraft der Anziehung wenn die Symbole nach rechts gehen
 }
 
 //--------------------------------------------------------------
