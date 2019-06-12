@@ -4,9 +4,19 @@
 
 #include "ofMain.h"
 #include "ofxCv.h"
+#include "ofxXmlSettings.h"
 #include "ofxOpenCv.h"
 
 
+enum particleMode {
+	PARTICLE_MODE_DEFAULT,
+	PARTICLE_MODE_ATTRACTOR,
+	PARTICLE_MODE_RAIN,
+	PARTICLE_MODE_RADIAL,
+	PARTICLE_MODE_DETRACTOR,
+	PARTICLE_MODE_POLY,
+	PARTICLE_MODE_BRUNIG
+};
 
 class particle
 {
@@ -36,7 +46,7 @@ public:
 	bool pL;
 	bool particleLeftScene;
   
-    void setup(ofVec2f pos, float maxAge);
+    void setup(ofVec2f pos, float maxAge, particleMode newMode);
     void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool imageIsOnTop, bool tornadoIsFinished, int imageHeight, int imageWidth, float sceneSizeX, float sceneSizeY);
 	void doMovementOfParticlesAtRain(bool tornadoIsFinished, double deltaT, float sceneSizeX);
 	void doMovementOfParticlesAtSymbols(double deltaT, ofVec2f &attractor);

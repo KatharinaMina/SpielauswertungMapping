@@ -113,7 +113,7 @@ void imageParticleSystem::deleteParticlesForRocketEffect()
 {
 	int newPix = (particles.size() - (picPix / 7));
 	for (int i = 0; i < newPix; i++) {
-		delete particles.at(0);													// löschen des Partikel Obj.
+		delete particles.at(0);													//löschen des Partikel Obj.
 		particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
 	}
 }
