@@ -14,7 +14,7 @@ drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSize
 	imageToDraw = changeImageColor(imageToDraw, redImageColor, greenImageColor, blueImageColor);
 	xToMoveInCloud = ofRandom(1, 4);
 	yToMoveIntoCloud = 0;
-	ticksToMovePictureToRight = 70;
+	ticksToMovePictureToRight = 150;
 	counterToMovePictureToRight = 0;
 	newMaxHeight = sceneSizeY - imageToDraw.getHeight() - 3;
 	imageHeight = imageToDraw.getHeight();

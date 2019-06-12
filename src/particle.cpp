@@ -57,7 +57,7 @@ void particle::doMovementOfParticlesAtRain(bool tornadoIsFinished, double deltaT
 		age += deltaT;
 
 		if (pos.x >= sceneSizeX) {
-			pos.x = ofRandom (0,-5); //Random, damit beim Beginn keine gerade Linie entsteht
+			pos.x = ofRandom (-1,-5); //Random, damit beim Beginn keine gerade Linie entsteht
 		}
 	}
 }
@@ -99,13 +99,14 @@ void particle::doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHe
 	int y = ((sceneSizeY / 2) + imageHeight);												//Anfangshöhe für Attraktor
 	int x = ofRandom(sceneSizeX / 2 - imageWidth / 2, sceneSizeX / 2 + imageWidth / 2);		//Breite des Attraktors
 
-	if (y - valueToMoveToTop - imageHeight > 250) {						//erhöhen des Counters je nach Geschwindigkeit zur Bewegung nach oben 
+	if (y - valueToMoveToTop - imageHeight > 200) {						//erhöhen des Counters je nach Geschwindigkeit zur Bewegung nach oben 
 		valueToMoveToTop += 3;											//Bewegung um 3 nach oben (pro Frame)
 	}
 	else if (y - valueToMoveToTop - imageHeight > 10) {					//erhöhen des Counters je nach Geschwindigkeit zur Bewegung nach oben
 		valueToMoveToTop += 2;											//Bewegung um 2 nach oben (pro Frame)
 
 	}
+
 	else if (counterToMoveParticlesToRight < ticksToMoveParticlesToRight) {			//Pause oben 
 		counterToMoveParticlesToRight++;											
 	}
@@ -166,19 +167,19 @@ void particle::doMovementOfHexagonOnTheTop(ofVec2f &attractor, float sceneSizeX,
 		vel = mass * vel.getNormalized();
 	}
 	else {										//Bewegung der Partikel in einem Radius von mehr als 150 um den Attraktor befinden
-		force = 60 * force.getNormalized();
+		force = 100 * force.getNormalized();
 
 		vel += force;
-		vel = mass * vel.getNormalized();
+		vel = mass/2 * vel.getNormalized();
 	}
-	pos += (vel / 1.5 * deltaT);				//Position = m/s * s [Partikel bleiben statisch]
+	pos += (vel  * deltaT);				//Position = m/s * s [Partikel bleiben statisch] //vel/1.5 weg, damit die am Hexagon bleiben
 }
 
 //--------------------------------------------------------------
 void particle::draw() {
 	if (pos.x > 0 || pos.x < 300) {
 		ofSetColor(this->color);				//setzten der Partikel auf Türkis
-		// color.set(getAgeNorm() * 241,241/ getAgeNorm() ,219);		//Farbeffekt (Disco) 
+		 color.set(getAgeNorm() * 241,241/ getAgeNorm() ,219);		//Farbeffekt (Disco) 
 	}
 	else {
 		ofSetColor(255, 255, 255);

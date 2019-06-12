@@ -90,9 +90,11 @@ void images::doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneS
 	else {
 		if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
 			x += 3;
+			
 		}
 		else {					// mittelpkt - x  jetzt wird x wieder zu null
 			x -= 3;
+			
 		}
 	}
 

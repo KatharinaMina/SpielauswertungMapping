@@ -18,7 +18,7 @@ imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage
 	setCloudAttractorIsSet(false);
 	ticksToMoveImageToTop = 200;
 	counterToMoveImageToTop = 0;
-	fileImageCloud.loadImage("Wolke.png");
+	fileImageCloud.loadImage("Hexagon.png");
 
 	imageReachedTopAndAttractorIsChanged = false;
 }
@@ -41,7 +41,7 @@ void imageParticleSystem::updateParticleSystem() {
 	}
 	else if ((cloudAttractorIsSet == true) && (particles.size() > picPix / 7)) {															//Löschen von Überschüssigen Partikeln für Raketeneffekt 
 
-		deleteParticlesForRocketEffect();
+		//deleteParticlesForRocketEffect();
 	}
 
 	//Bewegungen
@@ -142,8 +142,8 @@ void imageParticleSystem::deleteParticleAfterLeavingOntheRightAndCreateThemOnThe
 		//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 		particles.push_back(new particle);
 
-		int x = -20;
-		int y = ofRandom(0, imageToDraw->getHeight());
+		int x = -50;
+		int y = imageToDraw->getHeight();
 
 		particles.back()->setup(ofVec2f(x, y), 20);
 
