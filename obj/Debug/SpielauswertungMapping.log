@@ -1,89 +1,76 @@
-﻿  particle.cpp
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch
+﻿  drawableImage.cpp
+  imageParticleSystem.cpp
+  images.cpp
+  main.cpp
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file src\images.cpp)
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file src\drawableImage.cpp)
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file src\main.cpp)
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file src\imageParticleSystem.cpp)
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(23): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(24): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(25): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(26): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(27): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(28): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(29): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(133): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(134): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(135): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\images.cpp(136): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(11): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(12): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(117): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(118): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(119): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(120): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(21): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(32): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(35): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(38): warning C4018: '>': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(42): warning C4018: '>': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(48): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(49): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(166): warning C4018: '<=': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(193): warning C4018: '<=': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\imageparticlesystem.cpp(217): warning C4018: '<': signed/unsigned mismatch
+  ofApp.cpp
+  particle.cpp
+  rainParticleSystem.cpp
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file src\rainParticleSystem.cpp)
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file src\ofApp.cpp)
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\rainparticlesystem.cpp(32): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\rainparticlesystem.cpp(55): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file src\particle.cpp)
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(53): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(68): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(73): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(97): warning C4018: '<': signed/unsigned mismatch
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\ofapp.cpp(102): warning C4018: '<': signed/unsigned mismatch
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\particle.cpp(77): warning C4804: '<': unsafe use of type 'bool' in operation
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\particle.cpp(83): warning C4804: '<': unsafe use of type 'bool' in operation
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\particle.cpp(125): warning C4804: '<': unsafe use of type 'bool' in operation
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\particle.cpp(131): warning C4804: '<': unsafe use of type 'bool' in operation
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\particle.cpp(137): warning C4804: '<': unsafe use of type 'bool' in operation
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\particle.cpp(164): warning C4804: '<': unsafe use of type 'bool' in operation
-  ETF.cpp
-  fdog.cpp
-  Calibration.cpp
-  ContourFinder.cpp
-  Distance.cpp
-  Flow.cpp
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\distance.cpp(30): warning C4700: uninitialized local variable 'bestScore' used
-  Helpers.cpp
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxCv\libs\ofxCv\src\Calibration.cpp)
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxCv\libs\ofxCv\src\ContourFinder.cpp)
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxCv\libs\ofxCv\src\Flow.cpp)
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\calibration.cpp(478): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\helpers.cpp(78): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\helpers.cpp(101): warning C4018: '>': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\helpers.cpp(107): warning C4018: '>': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\helpers.cpp(115): warning C4018: '<': signed/unsigned mismatch
-  Kalman.cpp
-  ObjectFinder.cpp
-  RunningBackground.cpp
-  Tracker.cpp
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxCv\libs\ofxCv\src\Tracker.cpp)
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxCv\libs\ofxCv\src\Kalman.cpp)
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\tracker.h(326): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxCv\libs\ofxCv\src\ObjectFinder.cpp)
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\objectfinder.cpp(57): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\objectfinder.cpp(85): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\include\ofxcv\wrappers.h(258): warning C4018: '<': signed/unsigned mismatch (compiling source file ..\..\..\addons\ofxCv\libs\ofxCv\src\ObjectFinder.cpp)
-  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\objectfinder.cpp(37): note: see reference to function template instantiation 'void ofxCv::equalizeHist<cv::Mat,cv::Mat>(const S &,D &)' being compiled
-          with
-          [
-              S=cv::Mat,
-              D=cv::Mat
-          ]
-  Utilities.cpp
-  Wrappers.cpp
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\utilities.cpp(46): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\utilities.cpp(55): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxcv\libs\ofxcv\src\utilities.cpp(64): warning C4018: '<': signed/unsigned mismatch
-  ofxCvColorImage.cpp
-  ofxCvContourFinder.cpp
-  ofxCvFloatImage.cpp
-  ofxCvGrayscaleImage.cpp
-  ofxCvHaarFinder.cpp
-  ofxCvImage.cpp
-  ofxCvShortImage.cpp
-  Controller.cpp
-  WarpBase.cpp
-  WarpBilinear.cpp
-  WarpPerspective.cpp
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(118): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(120): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbase.cpp(449): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(225): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(274): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(277): warning C4018: '>=': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(288): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(291): warning C4018: '>=': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(443): warning C4018: '>': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(447): warning C4018: '>': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(479): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(484): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(501): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(519): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(564): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(570): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(587): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(605): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(681): warning C4018: '<': signed/unsigned mismatch
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxwarp\src\ofxwarp\warpbilinear.cpp(699): warning C4018: '<': signed/unsigned mismatch
-  WarpPerspectiveBilinear.cpp
-  ofxXmlSettings.cpp
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxxmlsettings\src\ofxxmlsettings.cpp(575): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\addons\ofxxmlsettings\src\ofxxmlsettings.cpp(583): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
-  tinyxml.cpp
-  tinyxmlerror.cpp
-  tinyxmlparser.cpp
-     Creating library bin\SpielauswertungMapping_debug.lib and object bin\SpielauswertungMapping_debug.exp
   SpielauswertungMapping.vcxproj -> C:\Users\Katon\Desktop\Projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myApps\SpielauswertungMapping\bin\SpielauswertungMapping_debug.exe
   
   	                   2	C:\Users\Katon\Desktop\Projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\fmodex\lib\vs\Win32\

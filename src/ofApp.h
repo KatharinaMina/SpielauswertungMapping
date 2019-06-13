@@ -22,7 +22,6 @@ public:
 	void update();
 	void draw();
 	void exit();
-
 	void keyPressed(int key);
 	void keyReleased(int key);
 	void mouseMoved(int x, int y);
@@ -44,15 +43,6 @@ private:
 	ofVec2f sceneSize;
 	ofVec2f force;
 
-	ofFbo fbo;
-
-	vector<ofVec2f>attractors;
-	vector<particle*> system;
-
-	vector<imageParticleSystem*> imageParticleSystems;
-	vector<rainParticleSystem*> rainParticleSyst;
-
-
 	ofImage img;
 	ofImage fileImageHex;
 	ofImage imageToDraw;
@@ -61,6 +51,13 @@ private:
 
 	ofColor color;
 
+	ofFbo fbo;
+
+	vector<ofVec2f>attractors;
+	vector<Particle*> system;
+
+	vector<ImageParticleSystem*> imageParticleSystems;
+	vector<RainParticleSystem*> rainParticleSyst;
 
 	int currentImage;
 	int maxParticle;

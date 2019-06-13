@@ -8,16 +8,16 @@
 #include "particle.h"
 #include "drawableImage.h"
 
-class rainParticleSystem
+class RainParticleSystem
 {
 
 public:
 
-	rainParticleSystem(float startSceneX, float sceneSizeX, float sceneSizeY);
-	~rainParticleSystem(); 
+	RainParticleSystem(float startSceneX, float sceneSizeX, float sceneSizeY);
+	~RainParticleSystem(); 
 
 	vector<ofVec2f>attractors;
-	vector<particle*> particles;
+	vector<Particle*> particles;
 
 	int startSceneX;
 	int sceneSizeX;
@@ -25,17 +25,16 @@ public:
 	int maxParticle;
 	int picPix;
 	int k;
+	int status;
 	bool tornadoStarted;
 	bool editingWarp;
-	//------------------------------------------
 	float birthCnt;
 	float maxLife;
 	float parAmount;
 	float height;
 	double time;
 	double tornadoStartTime;
-	int status;
-
+	
 	void updateParticleSystem();
 	void createParticlesForRain();
 	void drawRainParticleSystem();

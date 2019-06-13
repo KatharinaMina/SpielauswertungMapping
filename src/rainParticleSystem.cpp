@@ -1,7 +1,7 @@
 #include "rainParticleSystem.h"
 
 
-rainParticleSystem::rainParticleSystem(float startSceneX, float sceneSizeX, float sceneSizeY) {
+RainParticleSystem::RainParticleSystem(float startSceneX, float sceneSizeX, float sceneSizeY) {
 
 	this->startSceneX = startSceneX;
 	this->sceneSizeX = sceneSizeX;
@@ -17,7 +17,7 @@ rainParticleSystem::rainParticleSystem(float startSceneX, float sceneSizeX, floa
 }
 
 //--------------------------------------------------------------
-void rainParticleSystem::updateParticleSystem() {
+void RainParticleSystem::updateParticleSystem() {
 
 	double deltaT = ofGetLastFrameTime();
 	time += deltaT;
@@ -37,11 +37,11 @@ void rainParticleSystem::updateParticleSystem() {
 }
 
 //--------------------------------------------------------------
-void rainParticleSystem::createParticlesForRain()
+void RainParticleSystem::createParticlesForRain()
 {
 	for (int i = 0; i < parAmount; i++) {
 
-		particles.push_back(new particle);
+		particles.push_back(new Particle);
 		int rgen = ofRandom(startSceneX, startSceneX + sceneSizeX);
 
 		particles.back()->setup(ofVec2f(rgen, sceneSizeY), 20);
@@ -50,7 +50,7 @@ void rainParticleSystem::createParticlesForRain()
 }
 
 //--------------------------------------------------------------
-void rainParticleSystem::drawRainParticleSystem() {
+void RainParticleSystem::drawRainParticleSystem() {
 
 	for (int i = 0; i < particles.size(); i++) {
 		particles.at(i)->draw();

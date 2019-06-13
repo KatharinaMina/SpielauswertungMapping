@@ -6,19 +6,19 @@ int g = 205;
 int b = 205;
 
 
-images::images() {
+Images::Images() {
 
 }
 
 //--------------------------------------------------------------
 
-images::~images() {
+Images::~Images() {
 
 }
 
 //--------------------------------------------------------------
 
-void images::setup() {
+void Images::setup() {
 
 	fileImageHex.loadImage("Hexagon.png");
 	fileImageUT.loadImage("PktUmweltTechnik.png");
@@ -36,19 +36,19 @@ void images::setup() {
 
 //--------------------------------------------------------------
 
-void images::draw() {
+void Images::draw() {
 
 }
 
 //--------------------------------------------------------------
 
-void images::drawImageIntoScreen(float sceneSizeX, float sceneSizeY) {
+void Images::drawImageIntoScreen(float sceneSizeX, float sceneSizeY) {
 
 }
 
 //--------------------------------------------------------------
 
-void images::updateImage(float sceneSizeX, float sceneSizeY) {
+void Images::updateImage(float sceneSizeX, float sceneSizeY) {
 	ima = changeImageColor(fileImageHex, r, g, b);
 
 	int maxYpositionForPicture = sceneSizeY - imageToDraw.getHeight() - 3;
@@ -70,7 +70,7 @@ void images::updateImage(float sceneSizeX, float sceneSizeY) {
 }
 
 //--------------------------------------------------------------
-void images::doPlacementOfSymbolInGameEvaluation(float sceneSizeX, float sceneSizeY)
+void Images::doPlacementOfSymbolInGameEvaluation(float sceneSizeX, float sceneSizeY)
 {
 	y = 0;
 	x = 0;
@@ -79,7 +79,7 @@ void images::doPlacementOfSymbolInGameEvaluation(float sceneSizeX, float sceneSi
 }
 
 //--------------------------------------------------------------
-void images::doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
+void Images::doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
 	if (y <= maxYpositionForPicture) {
 		y += 3;
@@ -117,7 +117,7 @@ void images::doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneS
 }
 
 //--------------------------------------------------------------
-ofImage images::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
+ofImage Images::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
 
 	int threshold = 1;
 
@@ -146,7 +146,7 @@ ofImage images::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			/
 }
 
 //--------------------------------------------------------------
-void images::keyReleased(int key) {
+void Images::keyReleased(int key) {
 
 	switch (key) {
 		//--------------------------------------------------// ab hier laden der unterschiedlichen Bilder
@@ -188,13 +188,13 @@ void images::keyReleased(int key) {
 
 //--------------------------------------------------------------
 
-float images::getAgeNorm() {
+float Images::getAgeNorm() {
 	return age / maxLife;
 }
 
 //--------------------------------------------------------------
 
-float images::deleteAfterLeavingSceneY() {
+float Images::deleteAfterLeavingSceneY() {
 	return pos.y < 0 || pos.y > ofGetHeight();
 
 }

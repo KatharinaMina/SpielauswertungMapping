@@ -8,20 +8,29 @@
 
 
 
-class images
+class Images
 {
 public:
 
-	images();
-	~images();
+	Images();
+	~Images();
 
 	ofVec2f vel;
 	ofVec2f velocity2;
 	ofVec2f pos;
 	ofVec2f force;
 	ofVec2f force2;
-
 	ofColor color;
+	ofImage fileImageHex;
+	ofImage fileImageUT;
+	ofImage fileImageTU;
+	ofImage fileImageUW;
+	ofImage fileImageAWU;
+	ofImage fileImageATU;
+	ofImage fileImageCloud;
+	ofImage imageToDraw;
+	ofImage attractorToDraw;
+	ofImage ima;
 
 	float maxLife;
 	float age;
@@ -46,18 +55,7 @@ public:
 	void draw();
 	void keyReleased(int key);
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
-
-	ofImage fileImageHex;
-	ofImage fileImageUT;
-	ofImage fileImageTU;
-	ofImage fileImageUW;
-	ofImage fileImageAWU;
-	ofImage fileImageATU;
-	ofImage fileImageCloud;
-	ofImage imageToDraw;
-	ofImage attractorToDraw;
-	ofImage ima;
-
+	
 private:
 
 };

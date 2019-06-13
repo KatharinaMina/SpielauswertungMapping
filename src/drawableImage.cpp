@@ -2,7 +2,7 @@
 #include "images.h"
 
 //--------------------------------------------------------------
-drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSizeY) {
+DrawableImage::DrawableImage(string imageName, float sceneSizeX, float sceneSizeY) {
 	redImageColor = 121;		//Farbe für Symbol
 	greenImageColor = 205;
 	blueImageColor = 205;
@@ -22,13 +22,13 @@ drawableImage::drawableImage(string imageName, float sceneSizeX, float sceneSize
 }
 
 //--------------------------------------------------------------
-drawableImage::~drawableImage() {
+DrawableImage::~DrawableImage() {
 
 }
 
 
 //--------------------------------------------------------------
-void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
+void DrawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
 
 	if (cloudAttractorIsSet) {
 		doMovementOfImageAtCloud(maxYpositionForPicture, sceneSizeX, sceneSizeY);
@@ -41,7 +41,7 @@ void drawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
 }
 
 //--------------------------------------------------------------
-void drawableImage::drawImage(float sceneSizeX, float sceneSizeY)
+void DrawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 {
 	yToMoveIntoCloud = 0;
 	xToMoveInCloud = 0;
@@ -52,7 +52,7 @@ void drawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 }
 
 //--------------------------------------------------------------
-void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
+void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
 	if (yToMoveIntoCloud <= maxYpositionForPicture) {		//y-Bewegung zur Cloud 
 		yToMoveIntoCloud += 3;
@@ -85,7 +85,7 @@ void drawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 
 
 
-int drawableImage::setMaxHeightPosition(float sceneSizeY)			// Array für maximale Y-Werte, damit Höhe der Hexagons zueinnadner passt und bei Wabenstruktur ineinander einhaken können
+int DrawableImage::setMaxHeightPosition(float sceneSizeY)			// Array für maximale Y-Werte, damit Höhe der Hexagons zueinnadner passt und bei Wabenstruktur ineinander einhaken können
 {
 	for (float i = 0; i <= 4; i++) {								//setzten der gewünschten Werte
 		newMaxHeight -= imageHeight / 2;
@@ -96,13 +96,13 @@ int drawableImage::setMaxHeightPosition(float sceneSizeY)			// Array für maximal
 }
 
 //--------------------------------------------------------------
-bool drawableImage::imageIsOnTop(float sceneSizeY) {			//schauen ob Symbol und Partikel in Cloud angelangt sind 
+bool DrawableImage::imageIsOnTop(float sceneSizeY) {			//schauen ob Symbol und Partikel in Cloud angelangt sind 
 
 	return yToMoveIntoCloud >= maxYpositionForPicture;
 }
 
 //--------------------------------------------------------------
-ofImage drawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Verarbeiten der Farbinformation der einzelnen Bildpixel 
+ofImage DrawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Verarbeiten der Farbinformation der einzelnen Bildpixel 
 	int threshold = 1;
 
 	int picWidth = imageToDraw.getWidth();
@@ -130,22 +130,22 @@ ofImage drawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b
 }
 
 //--------------------------------------------------------------
-int drawableImage::getHeight() {
+int DrawableImage::getHeight() {
 	return imageToDraw.getHeight();
 }
 
 //--------------------------------------------------------------
-int drawableImage::getWidth() {
+int DrawableImage::getWidth() {
 	return imageToDraw.getWidth();
 }
 
 //--------------------------------------------------------------
-int drawableImage::getMaxHeight() {
+int DrawableImage::getMaxHeight() {
 	return maxYpositionForPicture;
 }
 
 //--------------------------------------------------------------
-float drawableImage::getImagePosX(float sceneSizeX) {
+float DrawableImage::getImagePosX(float sceneSizeX) {
 	if (pastMiddle)
 		return (sceneSizeX / 2 - imageToDraw.getWidth() / 2) + xToMoveInCloud;
 	else
@@ -153,6 +153,6 @@ float drawableImage::getImagePosX(float sceneSizeX) {
 }
 
 //--------------------------------------------------------------
-float drawableImage::getImagePosY(float sceneSizeY) {
+float DrawableImage::getImagePosY(float sceneSizeY) {
 	return (sceneSizeY - imageToDraw.getHeight() - 5) - yToMoveIntoCloud;
 }

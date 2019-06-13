@@ -8,15 +8,17 @@
 
 
 
-class drawableImage
+class DrawableImage
 {
 
 public:
 
-	drawableImage(string imageName, float sceneSizeX, float sceneSizeY);
-	~drawableImage();
+	DrawableImage(string imageName, float sceneSizeX, float sceneSizeY);
+	~DrawableImage();
 
 	ofColor color;
+	ofImage fileImageHex;
+	ofImage imageToDraw;
 
 	float maxLife;
 	float age;
@@ -32,34 +34,23 @@ public:
 	int counterToMovePictureToRight;
 	int imageHeight;
 	int newMaxHeight;
+	int getHeight();
+	int getWidth();
+	int getMaxHeight();
 	bool pL;
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
 	bool pastMiddle;
 
-
 	void updateImage(float sceneSizeX, float sceneSizeY);
-
 	void drawImage(float sceneSizeX, float sceneSizeY);
-
 	void doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
-
 	int setMaxHeightPosition(float sceneSizeY);
-
-	vector<float>maxHeightPositions;
-	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
-
-	int getHeight();
-	int getWidth();
 	bool imageIsOnTop(float sceneSizeY);
-
 	float getImagePosX(float sceneSizeX);
 	float getImagePosY(float sceneSizeY);
-	int getMaxHeight();
-
-	ofImage fileImageHex;
-	ofImage imageToDraw;
-
+	vector<float>maxHeightPositions;
+	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 private:
 

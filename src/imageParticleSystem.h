@@ -8,16 +8,18 @@
 #include "particle.h"
 #include "drawableImage.h"
 
-class imageParticleSystem
+class ImageParticleSystem
 {
 
 public:
 
-	imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName);
-	~imageParticleSystem();
+	ImageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName);
+	~ImageParticleSystem();
 
 	vector<ofVec2f>attractors;
-	vector<particle*> particles;
+	vector<Particle*> particles;
+	ofImage fileImageHex;
+	ofImage fileImageCloud;
 
 	int sceneSizeX;
 	int sceneSizeY;
@@ -28,20 +30,16 @@ public:
 	int k;
 	int ticksToMoveImageToTop;
 	int counterToMoveImageToTop;
+	int status;
 	bool tornadoStarted;
 	bool editingWarp;
-	//------------------------------------------
+	bool imageReachedTopAndAttractorIsChanged;
 	float birthCnt;
 	float maxLife;
 	float parAmount;
 	float height;
 	double time;
-	double tornadoStartTime;
-	int status;
-	bool imageReachedTopAndAttractorIsChanged;
-
-	void setSymbolAttractorIsSet(bool value);
-	void setCloudAttractorIsSet(bool value);
+	double tornadoStartTime;	
 
 	void updateParticleSystem();
 	void deleteParticlesForRocketEffect();
@@ -50,14 +48,12 @@ public:
 	void createParticlesForHexagonInCloud();
 	void deleteParticleAfterLeavingOntheRightAndCreateThemOnTheLeft(int p);
 	void drawImageParticleSystem();
-
-	ofImage fileImageHex;
-	ofImage fileImageCloud;
-
+	void setSymbolAttractorIsSet(bool value);
+	void setCloudAttractorIsSet(bool value);
 	void changeAttractorImage(ofImage newAttractorImage);
 
 private:
-	drawableImage* imageToDraw;
+	DrawableImage* imageToDraw;
 	vector<ofVec2f> pixelInVector(ofImage a);
 	void setAttractorsFromHexagonFromPicture();
 	bool symbolAttractorIsSet;

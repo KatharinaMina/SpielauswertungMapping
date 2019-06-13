@@ -56,7 +56,7 @@ void ofApp::setup() {
 	int particleSystems = 7;													//Anzahl der Regenpartikelsysteme (für einzelne Stelen)
 	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;		//berechnen der Breite der einzelen Regenpartikelsysteme
 	for (int i = 0; i <= particleSystems - 1; i++) {							//erstellen der Regenpartikelsysteme
-		rainParticleSyst.push_back(new rainParticleSystem(i * sceneSizeForSingleParticleSystem, sceneSizeForSingleParticleSystem, sceneSize.y));
+		rainParticleSyst.push_back(new RainParticleSystem(i * sceneSizeForSingleParticleSystem, sceneSizeForSingleParticleSystem, sceneSize.y));
 	}
 
 
@@ -131,19 +131,19 @@ void ofApp::keyReleased(int key) {
 	//Einlesen der einzelnen Bilder und übergebend er Initialwerte
 	switch (key) {
 	case '1':
-		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktUmweltTechnik.png"));
+		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktUmweltTechnik.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;
 
 	case '2':
-		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagTechnikUmwelt.png"));
+		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagTechnikUmwelt.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;
 
 	case '3':
-		imageParticleSystems.push_back(new imageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagWissenschaftUmwelt.png"));
+		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagWissenschaftUmwelt.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;

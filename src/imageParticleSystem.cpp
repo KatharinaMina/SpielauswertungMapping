@@ -1,8 +1,8 @@
 #include "imageParticleSystem.h"
 
 
-imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName) {
-	this->imageToDraw = new drawableImage(imageName, sceneSizeX, sceneSizeY);
+ImageParticleSystem::ImageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage fileImageHex, string imageName) {
+	this->imageToDraw = new DrawableImage(imageName, sceneSizeX, sceneSizeY);
 	this->imageHeight = imageToDraw->getHeight();
 	this->imageWidth = imageToDraw->getWidth();
 
@@ -24,7 +24,7 @@ imageParticleSystem::imageParticleSystem(int sceneSizeX, int sceneSizeY, ofImage
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::updateParticleSystem() {
+void ImageParticleSystem::updateParticleSystem() {
 
 	double deltaT = ofGetLastFrameTime();
 	time += deltaT;
@@ -81,11 +81,11 @@ void imageParticleSystem::updateParticleSystem() {
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::createParticlesForHexagonInSymbol()
+void ImageParticleSystem::createParticlesForHexagonInSymbol()
 {
 	int newPix = (picPix / 7) - particles.size();
 	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
-		particles.push_back(new particle);
+		particles.push_back(new Particle);
 
 		int x = sceneSizeX / 2;
 		int y = sceneSizeY;
@@ -95,11 +95,11 @@ void imageParticleSystem::createParticlesForHexagonInSymbol()
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::createParticlesForHexagonInCloud()
+void ImageParticleSystem::createParticlesForHexagonInCloud()
 {
 	int newPix = (picPix / 7) - particles.size();
 	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
-		particles.push_back(new particle);
+		particles.push_back(new Particle);
 
 		int x = sceneSizeX / 2;
 		int y = imageToDraw->getImagePosY(sceneSizeY) + imageHeight;
@@ -109,7 +109,7 @@ void imageParticleSystem::createParticlesForHexagonInCloud()
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::deleteParticlesForRocketEffect()
+void ImageParticleSystem::deleteParticlesForRocketEffect()
 {
 	int newPix = (particles.size() - (picPix / 7));
 	for (int i = 0; i < newPix; i++) {
@@ -119,7 +119,7 @@ void imageParticleSystem::deleteParticlesForRocketEffect()
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::deleteParticlesForHexagon()
+void ImageParticleSystem::deleteParticlesForHexagon()
 {
 	int newPix = (particles.size() - (picPix / 7));
 
@@ -130,7 +130,7 @@ void imageParticleSystem::deleteParticlesForHexagon()
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::deleteParticleAfterLeavingOntheRightAndCreateThemOnTheLeft(int p)
+void ImageParticleSystem::deleteParticleAfterLeavingOntheRightAndCreateThemOnTheLeft(int p)
 {
 	bool particleToDelete = particles.at(p)->deleteAfterLeavingSceneX();
 
@@ -140,7 +140,7 @@ void imageParticleSystem::deleteParticleAfterLeavingOntheRightAndCreateThemOnThe
 		particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
 
 		//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
-		particles.push_back(new particle);
+		particles.push_back(new Particle);
 
 		int x = -50;
 		int y = imageToDraw->getHeight();
@@ -151,12 +151,12 @@ void imageParticleSystem::deleteParticleAfterLeavingOntheRightAndCreateThemOnThe
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::changeAttractorImage(ofImage newAttractorImage) {		//Attraktor wird von Cloud auf Hexagon gewechselt und umgekehrt
+void ImageParticleSystem::changeAttractorImage(ofImage newAttractorImage) {		//Attraktor wird von Cloud auf Hexagon gewechselt und umgekehrt
 	attractors = pixelInVector(newAttractorImage);
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::setAttractorsFromHexagonFromPicture() {				//Hexagon wird als Attraktor gesetzt (Pixel von Hexagon werden in Attraktoren umgewandelt)
+void ImageParticleSystem::setAttractorsFromHexagonFromPicture() {				//Hexagon wird als Attraktor gesetzt (Pixel von Hexagon werden in Attraktoren umgewandelt)
 	int picWidth = fileImageHex.getWidth();
 	int picHeight = fileImageHex.getHeight();
 	ofPixels pix;
@@ -183,7 +183,7 @@ void imageParticleSystem::setAttractorsFromHexagonFromPicture() {				//Hexagon w
 }
 
 //----------------------------------------------------------
-vector<ofVec2f> imageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
+vector<ofVec2f> ImageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
 	int picWidth = a.getWidth();
 	int picHeight = a.getHeight();
 	ofPixels pix;
@@ -210,7 +210,7 @@ vector<ofVec2f> imageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::drawImageParticleSystem() {			//zeichnen der Bilder und der Partikel
+void ImageParticleSystem::drawImageParticleSystem() {			//zeichnen der Bilder und der Partikel
 
 	imageToDraw->updateImage(sceneSizeX, sceneSizeY);
 
@@ -220,14 +220,14 @@ void imageParticleSystem::drawImageParticleSystem() {			//zeichnen der Bilder un
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::setSymbolAttractorIsSet(bool value) {	
+void ImageParticleSystem::setSymbolAttractorIsSet(bool value) {	
 
 	imageToDraw->symbolAttractorIsSet = value;
 	symbolAttractorIsSet = value;
 }
 
 //----------------------------------------------------------
-void imageParticleSystem::setCloudAttractorIsSet(bool value) {
+void ImageParticleSystem::setCloudAttractorIsSet(bool value) {
 
 	imageToDraw->cloudAttractorIsSet = value;
 	cloudAttractorIsSet = value;
