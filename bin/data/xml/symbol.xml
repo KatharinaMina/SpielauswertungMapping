@@ -1,0 +1,21 @@
+<default>
+	<sizeMin>0.01</sizeMin>
+	<sizeMax>4.0</sizeMax>
+	<massMin>100</massMin>
+    <massMax>250</massMax>
+	<drag>0</drag>
+	<maxLife>ofRandom(maxAge - 5, maxAge)</maxLife>
+	<velMin>-80</velMin>
+	<velMax>80</velMax>
+	<color>(5, 241, 219)</color>
+    <age>0.0</age>
+    <valueToMoveToTop>0</valueToMoveToTop>
+    <valueToMoveToRight>0</valueToMoveToRight>
+    <counterToMoveParticlesToRight>70</counterToMoveParticlesToRight>
+    <particleLeftScene>false</particleLeftScene>
+    
+</default>
+
+    vel.set(ofRandom(-20.0, 20.0), ofRandom(-90, -100));	
+		
+

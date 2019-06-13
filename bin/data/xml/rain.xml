@@ -1,0 +1,10 @@
+<default>
+	<sizeMin>0.05</sizeMin>
+	<sizeMax>4</sizeMax>
+	<mass>100</mass>
+	<drag>0</drag>
+	<maxLife>10</maxLife>
+	<velMin>-80</velMin>
+	<velMax>80</velMax>
+	<color></color>
+</default>

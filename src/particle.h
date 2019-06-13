@@ -31,6 +31,9 @@ public:
     ofVec2f force;
 	ofColor color;
 
+	void setMode(particleMode newMode);
+	particleMode mode;
+
     float maxLife;
     float age;
     float getAgeNorm();
