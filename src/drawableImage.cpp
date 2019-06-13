@@ -3,7 +3,8 @@
 
 //--------------------------------------------------------------
 DrawableImage::DrawableImage(string imageName, float sceneSizeX, float sceneSizeY) {
-	redImageColor = 121;		//Farbe für Symbol
+	//Color for symbol
+	redImageColor = 121;	
 	greenImageColor = 205;
 	blueImageColor = 205;
 
@@ -47,69 +48,69 @@ void DrawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 	xToMoveInCloud = 0;
 	counterToMovePictureToRight = 0;
 
-	imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));		//unten Symbol
-	fileImageHex.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));		//unten Hexagon
+	imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));		//Symbol at bottom
+	fileImageHex.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));		//Hexagon at bottom
 }
 
 //--------------------------------------------------------------
 void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
-	if (yToMoveIntoCloud <= maxYpositionForPicture) {		//y-Bewegung zur Cloud 
+	if (yToMoveIntoCloud <= maxYpositionForPicture) {		//y-Movement into cloud
 		yToMoveIntoCloud += 3;
 	}
 	else if (counterToMovePictureToRight < ticksToMovePictureToRight) {
 		counterToMovePictureToRight++;
 	}
-	else {													//x-Bewegung in Cloud 
-		if (pastMiddle) {									//von der Mitte nach rechts: mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
+	else {													//x-Movement in cloud
+		if (pastMiddle) {									//from the middle to right: midpoint + x and x  gets increased til its Scenesize   
 			xToMoveInCloud += 3;
 
 		}
-		else {												//von links in die Mitte: mittelpkt - x  jetzt wird x wieder zu null
+		else {												//From left to the middle: midpoint - x  decreased til x is 0 again
 			xToMoveInCloud -= 3;
 		}
 	}
 
-	if (pastMiddle && xToMoveInCloud >= sceneSizeX / 2 + imageToDraw.getWidth()) {		//links von Mitte
+	if (pastMiddle && xToMoveInCloud >= sceneSizeX / 2 + imageToDraw.getWidth()) {		//Left from middle
 		pastMiddle = false;
 	}
 
-	if (!pastMiddle && xToMoveInCloud <= 0) {											//rechts von Mitte
+	if (!pastMiddle && xToMoveInCloud <= 0) {											//Rigth from middle
 		pastMiddle = true;
 	}
 
-	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		//zeichnen des Symbols an neuer Position (für Bewegung des Symbols)
-	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		//zeichnen des Hexagons an neuer Position (für Bewegung des Hexagons)
+	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		
+	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		
 
 }
 
 
 
-int DrawableImage::setMaxHeightPosition(float sceneSizeY)			// Array für maximale Y-Werte, damit Höhe der Hexagons zueinnadner passt und bei Wabenstruktur ineinander einhaken können
+int DrawableImage::setMaxHeightPosition(float sceneSizeY)			// Array for max y-values (so that height of the hexagons fits together and can hook into one another in honeycomb structure)
 {
-	for (float i = 0; i <= 4; i++) {								//setzten der gewünschten Werte
+	for (float i = 0; i <= 4; i++) {								//alculate the max y-values
 		newMaxHeight -= imageHeight / 2;
 		maxHeightPositions.push_back(newMaxHeight);
 	}
 	int rgen = ofRandom(0, 4);										
-	return (int)maxHeightPositions.at(rgen);						//random Arrayposition zur Auswahl von einer random y-Position
+	return (int)maxHeightPositions.at(rgen);						//random array position to choose random y-position
 }
 
 //--------------------------------------------------------------
-bool DrawableImage::imageIsOnTop(float sceneSizeY) {			//schauen ob Symbol und Partikel in Cloud angelangt sind 
+bool DrawableImage::imageIsOnTop(float sceneSizeY) {			//see if symbol and particles reached cloud
 
 	return yToMoveIntoCloud >= maxYpositionForPicture;
 }
 
 //--------------------------------------------------------------
-ofImage DrawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Verarbeiten der Farbinformation der einzelnen Bildpixel 
+ofImage DrawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Processing the color information of the individual image pixels
 	int threshold = 1;
 
 	int picWidth = imageToDraw.getWidth();
 	int picHeight = imageToDraw.getHeight();
 
 
-	for (int x = 0; x < picWidth; x++) {													//durchlaufen aller Pixel und setzten der neuen rgb-Werte
+	for (int x = 0; x < picWidth; x++) {													//go through all pixel and set new rgb-values
 		for (int y = 0; y < picHeight; y++)
 		{
 			int index = (x + y * picWidth) * 4;												
@@ -122,7 +123,7 @@ ofImage DrawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b
 		}
 	}
 
-	ofSetColor(255, 255, 255);																//setzten der allg. Farbe wieder auf weiß, um keine Beeinträchtigung bei neuer Farbsetztung zu erhalten
+	ofSetColor(255, 255, 255);																//set color to white again so the colors don't distort themself 
 
 	imageToDraw.update();
 

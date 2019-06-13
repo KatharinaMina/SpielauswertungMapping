@@ -53,9 +53,9 @@ void ofApp::setup() {
 	fileImageHex.loadImage("Hexagon.png");
 																							
 	rainIsActive = true;																	
-	int particleSystems = 7;													//Anzahl der Regenpartikelsysteme (für einzelne Stelen)
-	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;		//berechnen der Breite der einzelen Regenpartikelsysteme
-	for (int i = 0; i <= particleSystems - 1; i++) {							//erstellen der Regenpartikelsysteme
+	int particleSystems = 7;													//number of rainparticlesystems (one for single stele)
+	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;		//calculate the widht for every single rainparticlesystem
+	for (int i = 0; i <= particleSystems - 1; i++) {							//create all rainparticlesystem
 		rainParticleSyst.push_back(new RainParticleSystem(i * sceneSizeForSingleParticleSystem, sceneSizeForSingleParticleSystem, sceneSize.y));
 	}
 
@@ -64,12 +64,12 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	if (rainIsActive) {												//Bewegung der Partikel im Regenpartikelsystem
+	if (rainIsActive) {												//Movement of the particles of the rainparticlesystems
 		for (int i = 0; i < rainParticleSyst.size(); i++) {
 			rainParticleSyst.at(i)->updateParticleSystem();
 		}
 	}
-	else {															//Bewegung der Bildpartikelsysteme und Symbole, wenn Regen false
+	else {															//Movement of Imageparticlesystems and symbols when rain is false
 		for (int i = 0; i < imageParticleSystems.size(); i++) {
 			imageParticleSystems.at(i)->updateParticleSystem();
 		}
@@ -93,12 +93,12 @@ void ofApp::draw() {
 	//ofDrawCircle(sceneSize.x *.5, sceneSize.y * .5, 300);
 
 
-	if (rainIsActive) {																	//zeichnen des Regenpartikelsystems
+	if (rainIsActive) {																	//drawing the rainparticlesystems 
 		for (int i = 0; i < rainParticleSyst.size(); i++) {
 			rainParticleSyst.at(i)->drawRainParticleSystem();
 		}
 	}
-	else {																				//zeichnen des Bildpartikelsystems
+	else {																				//drawing the imageparticlesystems
 		for (int i = 0; i < imageParticleSystems.size(); i++) {
 			imageParticleSystems.at(i)->drawImageParticleSystem();
 		}
@@ -128,7 +128,7 @@ void ofApp::keyReleased(int key) {
 		warpController.getWarp(0)->setEditing(editingWarp);
 	}
 
-	//Einlesen der einzelnen Bilder und übergebend er Initialwerte
+	//read in the single images and hand over all initial values
 	switch (key) {
 	case '1':
 		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktUmweltTechnik.png"));

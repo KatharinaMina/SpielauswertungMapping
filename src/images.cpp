@@ -88,11 +88,11 @@ void Images::doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneS
 		counterToMovePicctureToRight++;
 	}
 	else {
-		if (pastMiddle) {		// mittelpkt + x und x  wird immer hochgezählt bis zur Scenesize   
+		if (pastMiddle) {		// midpoint + x and x: increase x til its scenesize
 			x += 3;
 			
 		}
-		else {					// mittelpkt - x  jetzt wird x wieder zu null
+		else {					// midpoint - x: decrease x til its 0 again
 			x -= 3;
 			
 		}
@@ -117,7 +117,7 @@ void Images::doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneS
 }
 
 //--------------------------------------------------------------
-ofImage Images::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
+ofImage Images::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			//loading all the pixel from picture and convert them into vectors
 
 	int threshold = 1;
 
@@ -149,8 +149,8 @@ ofImage Images::changeImageColor(ofImage imageToDraw, int r, int g, int b) {			/
 void Images::keyReleased(int key) {
 
 	switch (key) {
-		//--------------------------------------------------// ab hier laden der unterschiedlichen Bilder
-	case '1':												//Bild 1: UmweltTechnik
+		//--------------------------------------------------//load all the images 
+	case '1':												//image 1: UmweltTechnik
 		imageToDraw = changeImageColor(fileImageUT, r, g, b);
 
 
@@ -159,7 +159,7 @@ void Images::keyReleased(int key) {
 		tornadoIsFinished = true;
 
 		break;
-	case '2':												//Bild 2: UmweltWissenschaft
+	case '2':												//image 2: UmweltWissenschaft
 
 		imageToDraw = changeImageColor(fileImageUW, r, g, b);
 
@@ -168,7 +168,7 @@ void Images::keyReleased(int key) {
 		tornadoIsFinished = true;
 
 		break;
-	case '3':												//Bild 3: AlltagTechnikUmwelt
+	case '3':												//image 3: AlltagTechnikUmwelt
 
 		imageToDraw = changeImageColor(fileImageAWU, r, g, b);
 
@@ -176,11 +176,6 @@ void Images::keyReleased(int key) {
 		cloudAttractorIsSet = false;
 		tornadoIsFinished = true;
 
-		break;
-	case '4':
-		//attractorToDraw = changeImageColor(fileImageCloud, r, g, b);
-		cloudAttractorIsSet = true;
-		tornadoIsFinished = true;
 		break;
 	}
 

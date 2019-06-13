@@ -29,34 +29,34 @@ void ImageParticleSystem::updateParticleSystem() {
 	double deltaT = ofGetLastFrameTime();
 	time += deltaT;
 
-	if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY) == false)) {		//Ertsellen von Partiklen für Symbole unten
+	if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY) == false)) {		//Creating particles for symbol on bottom 
 		createParticlesForHexagonInSymbol();
 	}
-	else if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY))) {			//Ertsellen von Partiklen für Symbole in der Cloud
+	else if ((cloudAttractorIsSet == false) && (particles.size() < picPix / 7) && (this->imageToDraw->imageIsOnTop(sceneSizeY))) {			//Creating particles for symbol in cloud 
 		createParticlesForHexagonInCloud();
 	}
-	else if ((cloudAttractorIsSet == false) && (particles.size() > picPix / 7)) {															//Löschen von Überschüssigen Partikeln für Hexagon unten
+	else if ((cloudAttractorIsSet == false) && (particles.size() > picPix / 7)) {															//Deleting unused particles for hexagon on bottom
 
 		deleteParticlesForHexagon();
 	}
-	else if ((cloudAttractorIsSet == true) && (particles.size() > picPix / 7)) {															//Löschen von Überschüssigen Partikeln für Raketeneffekt 
+	else if ((cloudAttractorIsSet == true) && (particles.size() > picPix / 7)) {															//Deleting unused particles for rocketeffect 
 
 		//deleteParticlesForRocketEffect();
 	}
 
-	//Bewegungen
+	//Movement
 	for (int p = 0; p < particles.size(); p++) {
 		if (p * 7 < attractors.size()) {
-			if (cloudAttractorIsSet == true) {																											//Bewegung bei Raketeneffekt
+			if (cloudAttractorIsSet == true) {																											//Movement at rocketeffect
 				particles.at(p)->updateParticle(deltaT, attractors[p * 7],
 					cloudAttractorIsSet, this->imageToDraw->imageIsOnTop(sceneSizeY), true, imageHeight, imageWidth, sceneSizeX, sceneSizeY);
 			}
-			else if (symbolAttractorIsSet == true)																										//Bewegung bei Symbol unten
+			else if (symbolAttractorIsSet == true)																										//Movement at Symbol at the bottom
 			{
 				particles.at(p)->updateParticle(deltaT, attractors[p * 7],
 					cloudAttractorIsSet, this->imageToDraw->imageIsOnTop(sceneSizeY), true, imageHeight, imageWidth, sceneSizeX, sceneSizeY);					
 				
-				if (this->imageToDraw->imageIsOnTop(sceneSizeY))																						//löschen der Partikel nachdem diese rechts aus der ScenesizeX ausgetreten sind
+				if (this->imageToDraw->imageIsOnTop(sceneSizeY))																						//Deleting the particle after they left scene at right
 				{
 					deleteParticleAfterLeavingOntheRightAndCreateThemOnTheLeft(p);
 				}
@@ -64,16 +64,16 @@ void ImageParticleSystem::updateParticleSystem() {
 		}
 	}
 
-	if (counterToMoveImageToTop < ticksToMoveImageToTop) {			//Pause (da pro Frame aufgerufen) bevor Symbol und Partikel zum Raketeneffekt übergehen
+	if (counterToMoveImageToTop < ticksToMoveImageToTop) {			//Delay (every Frame) before the symbol and particle pass to the rocket effect
 		counterToMoveImageToTop++;
 		
 	}
-	else if (counterToMoveImageToTop == ticksToMoveImageToTop) {	//Symbol und Partikel geht in Raketeneffekt über
+	else if (counterToMoveImageToTop == ticksToMoveImageToTop) {	//Symbol and particles do over in rocketeffect
 		changeAttractorImage(fileImageCloud);
 		setCloudAttractorIsSet(true);
 	}
 
-	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) {				//Symbol und Partikel sind an maximaler y-Position angekommen und Hexagon wird als Attraktor gesetzt
+	if (this->imageToDraw->imageIsOnTop(sceneSizeY)) {				//Symbol and particles reached max. y-position and attractor gets changed from rocketeffect to hexagon
 		setAttractorsFromHexagonFromPicture();
 		cloudAttractorIsSet = false;
 	}
@@ -84,7 +84,7 @@ void ImageParticleSystem::updateParticleSystem() {
 void ImageParticleSystem::createParticlesForHexagonInSymbol()
 {
 	int newPix = (picPix / 7) - particles.size();
-	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
+	for (int i = 1; i <= newPix; i++) {											//Go through pixel  i = 1 (there is no pixel 0)
 		particles.push_back(new Particle);
 
 		int x = sceneSizeX / 2;
@@ -98,7 +98,7 @@ void ImageParticleSystem::createParticlesForHexagonInSymbol()
 void ImageParticleSystem::createParticlesForHexagonInCloud()
 {
 	int newPix = (picPix / 7) - particles.size();
-	for (int i = 1; i <= newPix; i++) {											//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
+	for (int i = 1; i <= newPix; i++) {											//Go through pixel  i = 1 (there is no pixel 0)
 		particles.push_back(new Particle);
 
 		int x = sceneSizeX / 2;
@@ -113,8 +113,8 @@ void ImageParticleSystem::deleteParticlesForRocketEffect()
 {
 	int newPix = (particles.size() - (picPix / 7));
 	for (int i = 0; i < newPix; i++) {
-		delete particles.at(0);													//löschen des Partikel Obj.
-		particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
+		delete particles.at(0);													//Deleting particle object
+		particles.erase(particles.begin());										//Deleting pointer to particle
 	}
 }
 
@@ -124,8 +124,8 @@ void ImageParticleSystem::deleteParticlesForHexagon()
 	int newPix = (particles.size() - (picPix / 7));
 
 	for (int i = 0; i < newPix; i++) {
-		delete particles.at(0);													//löschen des Partikel Obj.
-		particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
+		delete particles.at(0);													//Deleting particle object
+		particles.erase(particles.begin());										//Deleting pointer to particle
 	}
 }
 
@@ -136,8 +136,8 @@ void ImageParticleSystem::deleteParticleAfterLeavingOntheRightAndCreateThemOnThe
 
 	if (particleToDelete) {
 
-		delete particles.at(0);													//löschen des Partikel Obj.
-		particles.erase(particles.begin());										//löschen der des Pointer auf Partikel
+		delete particles.at(0);													//Deleting particle object
+		particles.erase(particles.begin());										//Deleting pointer to particle
 
 		//Durchgehen ab Partikel i = 1 da es kein Pixel 0 gibt
 		particles.push_back(new Particle);
@@ -151,19 +151,19 @@ void ImageParticleSystem::deleteParticleAfterLeavingOntheRightAndCreateThemOnThe
 }
 
 //----------------------------------------------------------
-void ImageParticleSystem::changeAttractorImage(ofImage newAttractorImage) {		//Attraktor wird von Cloud auf Hexagon gewechselt und umgekehrt
+void ImageParticleSystem::changeAttractorImage(ofImage newAttractorImage) {		//Attractor is changed between hexagon and cloud 
 	attractors = pixelInVector(newAttractorImage);
 }
 
 //----------------------------------------------------------
-void ImageParticleSystem::setAttractorsFromHexagonFromPicture() {				//Hexagon wird als Attraktor gesetzt (Pixel von Hexagon werden in Attraktoren umgewandelt)
+void ImageParticleSystem::setAttractorsFromHexagonFromPicture() {				//Hexagon is attracot (pixel from hexagon get converted in attractors)
 	int picWidth = fileImageHex.getWidth();
 	int picHeight = fileImageHex.getHeight();
 	ofPixels pix;
 	pix = fileImageHex.getPixels();
 	vector<ofVec2f> pxPos;
 	picPix = 0;
-	for (int i = 3; i <= pix.size(); i += 4) {									//i gibt an das wir jede vierte Information des Pixels verarbeiten (rgba)
+	for (int i = 3; i <= pix.size(); i += 4) {									//i specifys that every fourth color information of the pixel is handled (rgba)
 		if (pix[i] > 0) {
 			int width = pix.getWidth();
 
@@ -173,7 +173,7 @@ void ImageParticleSystem::setAttractorsFromHexagonFromPicture() {				//Hexagon w
 
 			ofVec2f vec;
 
-			vec.set(x + imageToDraw->getImagePosX(sceneSizeX), y + imageToDraw->getImagePosY(sceneSizeY));		//holt sich Position des Symbols um Bewegung zu folgen
+			vec.set(x + imageToDraw->getImagePosX(sceneSizeX), y + imageToDraw->getImagePosY(sceneSizeY));		//Gets position of image and so that the attractor follows movement
 			pxPos.push_back(vec);
 
 			picPix++;
@@ -183,14 +183,14 @@ void ImageParticleSystem::setAttractorsFromHexagonFromPicture() {				//Hexagon w
 }
 
 //----------------------------------------------------------
-vector<ofVec2f> ImageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der farbigen Pixel eines Bildes und Umwandeln in Vektoren
+vector<ofVec2f> ImageParticleSystem::pixelInVector(ofImage a) {			//Read in all the coloured pixels of image and vonvert them in vectors
 	int picWidth = a.getWidth();
 	int picHeight = a.getHeight();
 	ofPixels pix;
 	pix = a.getPixels();
 	vector<ofVec2f> pxPos;
 	picPix = 0;
-	for (int i = 3; i <= pix.size(); i += 4) {							//i gibt an das wir jede vierte Information des Pixels verarbeiten (rgba)
+	for (int i = 3; i <= pix.size(); i += 4) {							//i specifys that every fourth color information of the pixel is handled (rgba)
 		if (pix[i] > 0) {
 			int width = pix.getWidth();
 
@@ -200,7 +200,7 @@ vector<ofVec2f> ImageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der
 
 			ofVec2f vec;
 
-			vec.set(x + ((sceneSizeX / 2) - picWidth / 2), y - ((sceneSizeY)-picHeight - 7));		//setzten der Position an ScenesizeY
+			vec.set(x + ((sceneSizeX / 2) - picWidth / 2), y - ((sceneSizeY)-picHeight - 7));		
 			pxPos.push_back(vec);
 
 			picPix++;
@@ -210,7 +210,7 @@ vector<ofVec2f> ImageParticleSystem::pixelInVector(ofImage a) {			//Einlesen der
 }
 
 //----------------------------------------------------------
-void ImageParticleSystem::drawImageParticleSystem() {			//zeichnen der Bilder und der Partikel
+void ImageParticleSystem::drawImageParticleSystem() {			//Drawing of symbols and particles
 
 	imageToDraw->updateImage(sceneSizeX, sceneSizeY);
 

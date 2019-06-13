@@ -23,13 +23,13 @@ void RainParticleSystem::updateParticleSystem() {
 	time += deltaT;
 
 	//----------------------------------------------------------
-	if ((birthCnt >= 0) && (status == -1)) {					//Ertsellen von Partiklen für Regenpartikelsystem
+	if ((birthCnt >= 0) && (status == -1)) {					//Create the particle for the rainparticlesystems
 		createParticlesForRain();
 	}
-	//----------------------------------------------------------//Updaten der Partikel (Bewegung)
+	//----------------------------------------------------------//Update particle (Movement)
 
 
-	for (int p = 0; p < particles.size(); p++) {				//´Bewegung der Partikel von unten nach oben
+	for (int p = 0; p < particles.size(); p++) {				//Movement of particles from bottom to top
 		particles.at(p)->updateParticle(deltaT, ofVec2f(ofRandom(startSceneX, startSceneX + sceneSizeX), 0),
 			false, false, false, 0, 0, startSceneX + sceneSizeX, sceneSizeY);						
 	}
