@@ -10,8 +10,8 @@ particle::~particle() {
 }
 
 //--------------------------------------------------------------
-void particle::setup(ofVec2f pos, float maxAge, particleMode newMode) {
-	mode = newMode;
+void particle::setup(ofVec2f pos, float maxAge) {
+	//mode = newMode;
 	this->pos = pos;										//pointer auf Position ofVec2f position
 	vel.set(ofRandom(-20.0, 20.0), ofRandom(-90, -100));	//Die Bewegungsrichtung
 
