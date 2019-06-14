@@ -6,20 +6,22 @@ DrawableImage::DrawableImage(string imageName, float sceneSizeX, float sceneSize
 	//Color for symbol
 	redImageColor = 121;	
 	greenImageColor = 205;
-	blueImageColor = 205;
-
+	blueImageColor = 205;	
 	pastMiddle = true;
 	fileImageHex.loadImage("Hexagon.png");
 	imageToDraw.loadImage(imageName);
 	fileImageHex = changeImageColor(fileImageHex, redImageColor, greenImageColor, blueImageColor);
 	imageToDraw = changeImageColor(imageToDraw, redImageColor, greenImageColor, blueImageColor);
-	xToMoveInCloud = ofRandom(1, 4);
+	xToMoveInCloud = ofRandom(0, 9);
+	yToMoveInCloud = 0;
 	yToMoveIntoCloud = 0;
 	ticksToMovePictureToRight = 150;
 	counterToMovePictureToRight = 0;
 	newMaxHeight = sceneSizeY - imageToDraw.getHeight() - 3;
 	imageHeight = imageToDraw.getHeight();
 	maxYpositionForPicture = setMaxHeightPosition(sceneSizeY);
+	newCloudVelX = setSpeedAtCloud(sceneSizeX);
+	newCloudVelY = setYAtCloud(sceneSizeY);
 }
 
 //--------------------------------------------------------------
@@ -46,6 +48,7 @@ void DrawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 {
 	yToMoveIntoCloud = 0;
 	xToMoveInCloud = 0;
+	yToMoveInCloud = 0;
 	counterToMovePictureToRight = 0;
 
 	imageToDraw.draw((sceneSizeX / 2 - imageToDraw.getWidth() / 2), (sceneSizeY - imageToDraw.getHeight() - 5));		//Symbol at bottom
@@ -56,18 +59,26 @@ void DrawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
 	if (yToMoveIntoCloud <= maxYpositionForPicture) {		//y-Movement into cloud
-		yToMoveIntoCloud += 3;
+		yToMoveIntoCloud += 0.005*sceneSizeY;				
 	}
 	else if (counterToMovePictureToRight < ticksToMovePictureToRight) {
 		counterToMovePictureToRight++;
 	}
 	else {													//x-Movement in cloud
 		if (pastMiddle) {									//from the middle to right: midpoint + x and x  gets increased til its Scenesize   
-			xToMoveInCloud += 3;
+			xToMoveInCloud += newCloudVelX;
+			/*if (yToMoveInCloud > 0) {
+				xToMoveInCloud -= newCloudVelY;
 
+
+			}
+			else if(yToMoveInCloud< maxYpositionForPicture){*/
+				yToMoveInCloud -= newCloudVelY;
+
+		//	}
 		}
 		else {												//From left to the middle: midpoint - x  decreased til x is 0 again
-			xToMoveInCloud -= 3;
+			xToMoveInCloud -= newCloudVelX;
 		}
 	}
 
@@ -75,7 +86,7 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 		pastMiddle = false;
 	}
 
-	if (!pastMiddle && xToMoveInCloud <= 0) {											//Rigth from middle
+	if (!pastMiddle && xToMoveInCloud <= 0) {											//Right from middle
 		pastMiddle = true;
 	}
 
@@ -92,8 +103,25 @@ int DrawableImage::setMaxHeightPosition(float sceneSizeY)			// Array for max y-v
 		newMaxHeight -= imageHeight / 2;
 		maxHeightPositions.push_back(newMaxHeight);
 	}
-	int rgen = ofRandom(0, 4);										
+	int rgen = ofRandom(0, 3);										
 	return (int)maxHeightPositions.at(rgen);						//random array position to choose random y-position
+}
+int DrawableImage::setSpeedAtCloud(float sceneSizeX) {
+for (int i = 0; i <= 10; i++) {								//alculate the max y-values
+	newXToMoveInCloud = ofRandom(0.0015*sceneSizeX, 0.005 * sceneSizeX);
+    cloudVelX.push_back(newXToMoveInCloud);
+	}
+    int rgen = ofRandom(0, 9);
+	return (float)cloudVelX.at(rgen);
+}
+
+int DrawableImage::setYAtCloud(float sceneSizeY) {
+	for (int i = 0; i <= 10; i++) {								//alculate the max y-values
+		newYToMoveInCloud = ofRandom(0.0015*sceneSizeY, 0.005 * sceneSizeY);
+		cloudVelY.push_back(newYToMoveInCloud);
+	}
+	int rgen = ofRandom(0, 9);
+	return (float)cloudVelY.at(rgen);
 }
 
 //--------------------------------------------------------------

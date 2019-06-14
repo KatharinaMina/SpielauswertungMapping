@@ -97,14 +97,19 @@ void Particle::doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHe
 {
 	int y = ((sceneSizeY / 2) + imageHeight);												//Beginning height for attractor
 	int x = ofRandom(sceneSizeX / 2 - imageWidth / 2, sceneSizeX / 2 + imageWidth / 2);		//Width for attractor
+	
 
-	if (y - valueToMoveToTop - imageHeight > 200) {						//Increase counter depending on velocity for movement to top
-		valueToMoveToTop += 3;											//Movement by 3 to top (pro Frame)
+	
+	
+	  if (y - valueToMoveToTop - imageHeight > 200) {						//Increase counter depending on velocity for movement to top
+		valueToMoveToTop += 3;											//Movement by 3 to top (pro Frame)	
 	}
+
+
 	else if (y - valueToMoveToTop - imageHeight > 10) {					//Increase counter depending on velocity for movement to top
 		valueToMoveToTop += 2;											//Movement by 3 to top (pro Frame)
-
 	}
+	
 
 	else if (counterToMoveParticlesToRight < ticksToMoveParticlesToRight) {			//Delay on top 
 		counterToMoveParticlesToRight++;											
@@ -120,23 +125,29 @@ void Particle::doMovementOfParticlesAtRocketEffect(float sceneSizeY, int imageHe
 	vel *= 0.1;
 	ofVec2f force = (attractor - pos);				//Attraction					
 
-	if (30 < force.length() < 150) {				//Movement of the particle which is located at a radius of 30 to 150 around the attractor
-		force = 17 * force.getNormalized();			
+	if ( force.length() < 30) {				//Movement of the particle which is located at a radius of 30 to 150 around the attractor
+		force = 5 * force.getNormalized();			
 
 		vel += force;								//Movement to attractor
-		vel =( mass / 1.2) * vel.getNormalized();	//Particle don't pass the symbol
+		vel =( mass /10) * vel.getNormalized();	//Particle don't pass the symbol
+	}
+	else if (30 < force.length() < 150) {			//Movement of the particle which is located at a radius of 150 to 250 around the attractor
+		force = 14 * force.getNormalized();
+
+		vel += force;
+		vel = mass /1.2 * vel.getNormalized();
 	}
 	else if (150 < force.length() < 250) {			//Movement of the particle which is located at a radius of 150 to 250 around the attractor
 		force = 14 * force.getNormalized();
 
 		vel += force;
-		vel = mass * 10 * vel.getNormalized();
+		vel = mass /1.2 * vel.getNormalized();
 	}
 	else if (250 < force.length() < 500) {			//Movement of the particle which is located at a radius of 250 to 500 around the attractor
 		force = 14 * force.getNormalized();
 
 		vel += force;
-		vel = mass * 4* vel.getNormalized();
+		vel = mass /1.2* vel.getNormalized();
 	}
 	else {											//Movement of the particle which is located at a radius more than 500 around the attractor
 		force = 20 * force.getNormalized();

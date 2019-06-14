@@ -1,4 +1,4 @@
-ofxCv
 ofxOpenCv
-ofxWarp
 ofxXmlSettings
+ofxCv
+ofxWarp

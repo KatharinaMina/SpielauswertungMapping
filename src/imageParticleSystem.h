@@ -7,6 +7,7 @@
 #include "ofxOpenCv.h"
 #include "particle.h"
 #include "drawableImage.h"
+#include <stdio.h>
 
 class ImageParticleSystem
 {

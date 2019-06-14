@@ -5,6 +5,7 @@
 #include "ofMain.h"
 #include "ofxCv.h"
 #include "ofxOpenCv.h"
+#include <stdio.h>
 
 
 
@@ -26,6 +27,7 @@ public:
 	float mass;
 	int yToMoveIntoCloud;
 	int xToMoveInCloud;
+	int yToMoveInCloud;
 	int maxYpositionForPicture;
 	int redImageColor;
 	int greenImageColor;
@@ -34,6 +36,10 @@ public:
 	int counterToMovePictureToRight;
 	int imageHeight;
 	int newMaxHeight;
+	int newXToMoveInCloud;
+	int newYToMoveInCloud;
+	float newCloudVelX;
+	float newCloudVelY;
 	int getHeight();
 	int getWidth();
 	int getMaxHeight();
@@ -46,10 +52,15 @@ public:
 	void drawImage(float sceneSizeX, float sceneSizeY);
 	void doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
 	int setMaxHeightPosition(float sceneSizeY);
+	
+	int setSpeedAtCloud(float sceneSizeX);
+	int setYAtCloud(float sceneSizeY);
 	bool imageIsOnTop(float sceneSizeY);
 	float getImagePosX(float sceneSizeX);
 	float getImagePosY(float sceneSizeY);
 	vector<float>maxHeightPositions;
+	vector<float>cloudVelX;
+	vector<float>cloudVelY;
 	ofImage changeImageColor(ofImage imageToDraw, int r, int g, int b);
 
 private:

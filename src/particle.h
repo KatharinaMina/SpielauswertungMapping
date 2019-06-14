@@ -40,6 +40,7 @@ public:
 	int valueToMoveToRight;
 	int ticksToMoveParticlesToRight;
 	int counterToMoveParticlesToRight;
+
   
     void setup(ofVec2f pos, float maxAge);
     void updateParticle(double deltaT, ofVec2f attractor, bool cloudAttractorIsSet, bool imageIsOnTop, bool tornadoIsFinished, int imageHeight, int imageWidth, float sceneSizeX, float sceneSizeY);
