@@ -27,6 +27,7 @@ public:
 	ofImage fileImageUW;
 	ofImage fileImageAWU;
 	ofImage fileImageATU;
+	ofImage fileImageAUT;
 	ofImage fileImageCloud;
 	ofImage imageToDraw;
 	ofImage attractorToDraw;

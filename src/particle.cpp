@@ -170,14 +170,20 @@ void Particle::doMovementOfHexagonOnTheTop(ofVec2f &attractor, float sceneSizeX,
 	vel *= 0.1;
 	ofVec2f force = attractor - pos;			//Attraction						
 
-	if (50 < force.length() < 150) {			//Movement of the particle which is located at a radius of 50 to 150 around the attractor
+	if (1 < force.length() < 50) {			//Movement of the particle which is located at a radius of 50 to 150 around the attractor
+		force = 60 * force.getNormalized();		//Anziehungskraft des Attraktors auf die Partikel
+
+		vel += force;							//Bewegung zum Attraktor
+		vel = mass * vel.getNormalized();
+	}
+	else if(50 < force.length() < 150) {			//Movement of the particle which is located at a radius of 50 to 150 around the attractor
 		force = 60 * force.getNormalized();		//Anziehungskraft des Attraktors auf die Partikel
 
 		vel += force;							//Bewegung zum Attraktor
 		vel = mass * vel.getNormalized();
 	}
 	else {										//Movement of the particle which is located at a radius of more than 150 around the attractor
-		force = 100 * force.getNormalized();
+		force = 1000 * force.getNormalized();
 
 		vel += force;
 		vel = mass/2 * vel.getNormalized();

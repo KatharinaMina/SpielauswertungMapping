@@ -21,6 +21,8 @@ public:
 	ofImage fileImageHex;
 	ofImage imageToDraw;
 
+
+
 	float maxLife;
 	float age;
 	float size;
@@ -40,6 +42,7 @@ public:
 	int newYToMoveInCloud;
 	float newCloudVelX;
 	float newCloudVelY;
+	float frameTime;
 	int getHeight();
 	int getWidth();
 	int getMaxHeight();
@@ -47,6 +50,7 @@ public:
 	bool symbolAttractorIsSet;
 	bool cloudAttractorIsSet;
 	bool pastMiddle;
+	bool pastYMax;
 
 	void updateImage(float sceneSizeX, float sceneSizeY);
 	void drawImage(float sceneSizeX, float sceneSizeY);

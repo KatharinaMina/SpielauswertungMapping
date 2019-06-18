@@ -2,10 +2,11 @@
 #include "ofxOpenCv.h"
 #include "ofTrueTypeFont.h"
 
+
 //--------------------------------------------------------------
 void ofApp::setup() {
 
-	currentImage = -1;
+	currentImage = 0;
 	ofDisableArbTex();
 	ofBackground(0);
 
@@ -112,6 +113,11 @@ void ofApp::draw() {
 	fbo.draw(0, 0);
 
 	warpController.getWarp(0)->end();
+	ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate()),glm::vec2(10,10));
+	ofDrawBitmapString("frameTime: " + ofToString(ofGetLastFrameTime()), glm::vec2(10, 20));
+
+
+	
 }
 
 
@@ -135,18 +141,30 @@ void ofApp::keyReleased(int key) {
 		rainIsActive = false;
 		currentImage++;
 		break;
-
 	case '2':
-		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagTechnikUmwelt.png"));
+		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagUmweltTechnik.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;
+
 
 	case '3':
 		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagWissenschaftUmwelt.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;
+
+	
+	case '4':
+		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagTechnikUmwelt.png"));
+		rainIsActive = false;
+		currentImage++;
+		break;
+	case '5':
+	
+		rainIsActive = true;
+		break;
+	
 	}
 
 }

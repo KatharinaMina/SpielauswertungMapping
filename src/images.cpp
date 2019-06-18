@@ -24,7 +24,7 @@ void Images::setup() {
 	fileImageUT.loadImage("PktUmweltTechnik.png");
 	fileImageUW.loadImage("PktUmweltWissenschaft.png");
 	fileImageAWU.loadImage("PktAlltagWissenschaftUmwelt.png");
-	fileImageATU.loadImage("PktAlltagTechnikUmwelt.png");
+	fileImageAUT.loadImage("PktAlltagUmweltTechnik.png");
 	fileImageTU.loadImage("PktTechnikUmwelt.png");
 	fileImageCloud.loadImage("Wolke.png");
 	x = 0;
@@ -82,18 +82,20 @@ void Images::doPlacementOfSymbolInGameEvaluation(float sceneSizeX, float sceneSi
 void Images::doMovementOfSymbolsOfCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
 	if (y <= maxYpositionForPicture) {
-		y += 3;
+		y += 0.005*sceneSizeY;
 	}
 	else if (counterToMovePicctureToRight < ticksToMovePictureToRight) {
 		counterToMovePicctureToRight++;
 	}
 	else {
 		if (pastMiddle) {		// midpoint + x and x: increase x til its scenesize
-			x += 3;
+			x += 0.005*sceneSizeX;
+			y += 0.005*sceneSizeY;
 			
 		}
 		else {					// midpoint - x: decrease x til its 0 again
-			x -= 3;
+			x -= 0.005*sceneSizeX;
+			y += 0.005*sceneSizeY;
 			
 		}
 	}
@@ -159,16 +161,17 @@ void Images::keyReleased(int key) {
 		tornadoIsFinished = true;
 
 		break;
-	case '2':												//image 2: UmweltWissenschaft
+	case '2':												//image 4: AlltagUmweltTechnik
 
-		imageToDraw = changeImageColor(fileImageUW, r, g, b);
+		imageToDraw = changeImageColor(fileImageAUT, r, g, b);
 
 		symbolAttractorIsSet = true;
 		cloudAttractorIsSet = false;
 		tornadoIsFinished = true;
 
 		break;
-	case '3':												//image 3: AlltagTechnikUmwelt
+	
+	case '3':												//image 3: AlltagWissenschaftUmwelt
 
 		imageToDraw = changeImageColor(fileImageAWU, r, g, b);
 
@@ -177,6 +180,17 @@ void Images::keyReleased(int key) {
 		tornadoIsFinished = true;
 
 		break;
+	
+	case '4':												//image 2: UmweltWissenschaft
+
+		imageToDraw = changeImageColor(fileImageUW, r, g, b);
+
+		symbolAttractorIsSet = true;
+		cloudAttractorIsSet = false;
+		tornadoIsFinished = true;
+
+		break;
+	
 	}
 
 }
