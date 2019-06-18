@@ -81,8 +81,12 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	else {													//x-Movement in cloud
 		if (pastMiddle) {									//from the middle to right: midpoint + x and x  gets increased til its Scenesize   
 			xToMoveInCloud += newCloudVelX;
-			yToMoveIntoCloud += newCloudVelY;
-
+	
+			if (yToMoveInCloud >  0) {
+					yToMoveIntoCloud += newCloudVelY;       //y up
+				} else if (yToMoveInCloud < sceneSizeY / 4) {
+					yToMoveIntoCloud -= newCloudVelY;		//y down
+				}
 		}else {												//From left to the middle: midpoint - x  decreased til x is 0 again
 			xToMoveInCloud -= newCloudVelX;
 			yToMoveIntoCloud += newCloudVelY;
@@ -132,7 +136,7 @@ for (int i = 0; i <= 10; i++) {										//number of different velocities in x d
 
 int DrawableImage::setYAtCloud(float sceneSizeY) {
 	for (int i = 0; i <= 10; i++) {									//number of different velocities in y dircetion
-		newYToMoveInCloud = ofRandom(0.002*sceneSizeY, 0.007 * sceneSizeY);
+		newYToMoveInCloud = ofRandom(0.001*sceneSizeY, 0.003 * sceneSizeY);
 		cloudVelY.push_back(newYToMoveInCloud);
 	}
 	int rgen = ofRandom(0, 9);

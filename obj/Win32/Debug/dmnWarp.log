@@ -4,12 +4,12 @@ c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\a
   c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
 c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(14): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
   c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
-c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(169): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(165): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
   c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
-c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(170): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(166): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
   c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
-c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(171): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(167): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
   c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
-c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(172): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(168): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
   c:\users\agathe gnus\desktop\studienfächer\projekt\of_v0.10.0_vs2017_release2\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
   dmnWarp.vcxproj -> C:\Users\Agathe Gnus\Desktop\Studienfächer\Projekt\of_v0.10.0_vs2017_release2\apps\myApps\SpielauswertungMapping\bin\dmnWarp_debug.exe
