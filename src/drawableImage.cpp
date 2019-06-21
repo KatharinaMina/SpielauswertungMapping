@@ -25,7 +25,7 @@ DrawableImage::DrawableImage(string imageName, float sceneSizeX, float sceneSize
 	newCloudVelX = setSpeedAtCloud(sceneSizeX);
 	newCloudVelY = setYAtCloud(sceneSizeY);
 	frameTime = 0.03;
-	test = false;
+	pastMaxYInWave = false;
 	std::cout << "setMaxHeight: " + maxYpositionForPicture << endl;
 
 }
@@ -88,7 +88,7 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	else {
 		//x-Movement in cloud
 
-		if (test) {
+		if (pastMaxYInWave) {
 			yToMoveIntoCloud += newCloudVelY;				//y up
 		}
 		else {
@@ -105,12 +105,12 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	}
 
 
-	if (test && yToMoveIntoCloud >= maxYInWave) {
-		test = false;
+	if (pastMaxYInWave && yToMoveIntoCloud >= maxYInWave) {
+		pastMaxYInWave = false;
 	}
 
-	if (!test && yToMoveIntoCloud <= maxYInWave / 2) {
-		test = true;
+	if (!pastMaxYInWave && yToMoveIntoCloud <= maxYInWave ) {
+		pastMaxYInWave = true;
 	}
 
 	if (pastMiddle && xToMoveInCloud >= sceneSizeX / 2 + imageToDraw.getWidth()) {		//Left position from middle

@@ -51,7 +51,7 @@ public:
 	bool cloudAttractorIsSet;
 	bool pastMiddle;
 	bool pastYMax;
-	bool test;
+	bool pastMaxYInWave;
 	int maxYInWave;
 	int min;
 	int max;
