@@ -52,8 +52,8 @@ void ofApp::setup() {
 	//ofSetFrameRate(60);
 
 	fileImageHex.loadImage("Hexagon.png");
-																							
-	rainIsActive = true;																	
+
+	rainIsActive = true;
 	int particleSystems = 7;													//number of rainparticlesystems (one for single stele)
 	float sceneSizeForSingleParticleSystem = sceneSize.x / particleSystems;		//calculate the widht for every single rainparticlesystem
 	for (int i = 0; i <= particleSystems - 1; i++) {							//create all rainparticlesystem
@@ -113,12 +113,12 @@ void ofApp::draw() {
 	fbo.draw(0, 0);
 
 	warpController.getWarp(0)->end();
-	ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate()),glm::vec2(10,10));
+	ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate()), glm::vec2(10, 10));
 	ofDrawBitmapString("frameTime: " + ofToString(ofGetLastFrameTime()), glm::vec2(10, 20));
 
 
 
-	
+
 }
 
 
@@ -155,17 +155,17 @@ void ofApp::keyReleased(int key) {
 		currentImage++;
 		break;
 
-	
+
 	case '4':
 		imageParticleSystems.push_back(new ImageParticleSystem(sceneSize.x, sceneSize.y, fileImageHex, "PktAlltagTechnikUmwelt.png"));
 		rainIsActive = false;
 		currentImage++;
 		break;
 	case '5':
-	
+
 		rainIsActive = true;
 		break;
-	
+
 	}
 
 }

@@ -31,7 +31,7 @@ void RainParticleSystem::updateParticleSystem() {
 
 	for (int p = 0; p < particles.size(); p++) {				//Movement of particles from bottom to top
 		particles.at(p)->updateParticle(deltaT, ofVec2f(ofRandom(startSceneX, startSceneX + sceneSizeX), 0),
-			false, false, false, 0, 0, startSceneX + sceneSizeX, sceneSizeY);						
+			false, false, false, 0, 0, startSceneX + sceneSizeX, sceneSizeY);
 	}
 
 }

@@ -40,6 +40,8 @@ public:
 	int newMaxHeight;
 	int newXToMoveInCloud;
 	int newYToMoveInCloud;
+	int maxYInWave;
+	int minYInWave;
 	float newCloudVelX;
 	float newCloudVelY;
 	float frameTime;
@@ -52,15 +54,15 @@ public:
 	bool pastMiddle;
 	bool pastYMax;
 	bool pastMaxYInWave;
-	int maxYInWave;
-	int min;
-	int max;
+	bool test;
+
 
 	void updateImage(float sceneSizeX, float sceneSizeY);
 	void drawImage(float sceneSizeX, float sceneSizeY);
 	void doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
+	void doMovementOfImageIntoCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY);
 	int setMaxHeightPosition(float sceneSizeY);
-	
+
 	int setSpeedAtCloud(float sceneSizeX);
 	int setYAtCloud(float sceneSizeY);
 	bool imageIsOnTop(float sceneSizeY);

@@ -54,8 +54,8 @@ void ImageParticleSystem::updateParticleSystem() {
 			else if (symbolAttractorIsSet == true)																										//Movement at Symbol at the bottom
 			{
 				particles.at(p)->updateParticle(deltaT, attractors[p * 7],
-					cloudAttractorIsSet, this->imageToDraw->imageIsOnTop(sceneSizeY), true, imageHeight, imageWidth, sceneSizeX, sceneSizeY);					
-				
+					cloudAttractorIsSet, this->imageToDraw->imageIsOnTop(sceneSizeY), true, imageHeight, imageWidth, sceneSizeX, sceneSizeY);
+
 				if (this->imageToDraw->imageIsOnTop(sceneSizeY))																						//Deleting the particle after they left scene at right
 				{
 					deleteParticleAfterLeavingOntheRightAndCreateThemOnTheLeft(p);
@@ -66,7 +66,7 @@ void ImageParticleSystem::updateParticleSystem() {
 
 	if (counterToMoveImageToTop < ticksToMoveImageToTop) {			//Delay (every Frame) before the symbol and particle pass to the rocket effect
 		counterToMoveImageToTop++;
-		
+
 	}
 	else if (counterToMoveImageToTop == ticksToMoveImageToTop) {	//Symbol and particles do over in rocketeffect
 		changeAttractorImage(fileImageCloud);
@@ -200,7 +200,7 @@ vector<ofVec2f> ImageParticleSystem::pixelInVector(ofImage a) {			//Read in all 
 
 			ofVec2f vec;
 
-			vec.set(x + ((sceneSizeX / 2) - picWidth / 2), y - ((sceneSizeY)-picHeight - 7));		
+			vec.set(x + ((sceneSizeX / 2) - picWidth / 2), y - ((sceneSizeY)-picHeight - 7));
 			pxPos.push_back(vec);
 
 			picPix++;
@@ -220,7 +220,7 @@ void ImageParticleSystem::drawImageParticleSystem() {			//Drawing of symbols and
 }
 
 //----------------------------------------------------------
-void ImageParticleSystem::setSymbolAttractorIsSet(bool value) {	
+void ImageParticleSystem::setSymbolAttractorIsSet(bool value) {
 
 	imageToDraw->symbolAttractorIsSet = value;
 	symbolAttractorIsSet = value;

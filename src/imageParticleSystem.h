@@ -40,7 +40,7 @@ public:
 	float parAmount;
 	float height;
 	double time;
-	double tornadoStartTime;	
+	double tornadoStartTime;
 
 	void updateParticleSystem();
 	void deleteParticlesForRocketEffect();

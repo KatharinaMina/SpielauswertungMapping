@@ -4,13 +4,13 @@ c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_relea
   c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(13): warning C4996: 'ofImage_<unsigned char>::loadImage': Use load instead
   c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(227): note: see declaration of 'ofImage_<unsigned char>::loadImage'
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(185): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
-  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(186): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
-  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
-c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(187): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
-  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
 c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(188): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(189): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(190): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
+  c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
+c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myapps\spielauswertungmapping\src\drawableimage.cpp(191): warning C4996: 'ofImage_<unsigned char>::getPixelsRef': Use getPixels() instead
   c:\users\katon\desktop\projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\libs\openframeworks\graphics\ofimage.h(410): note: see declaration of 'ofImage_<unsigned char>::getPixelsRef'
   SpielauswertungMapping.vcxproj -> C:\Users\Katon\Desktop\Projekt\of_v0.10.0_vs2017_release\of_v0.10.0_vs2017_release\apps\myApps\SpielauswertungMapping\bin\SpielauswertungMapping_debug.exe
   

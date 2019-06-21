@@ -15,7 +15,7 @@ class RainParticleSystem
 public:
 
 	RainParticleSystem(float startSceneX, float sceneSizeX, float sceneSizeY);
-	~RainParticleSystem(); 
+	~RainParticleSystem();
 
 	vector<ofVec2f>attractors;
 	vector<Particle*> particles;
@@ -35,7 +35,7 @@ public:
 	float height;
 	double time;
 	double tornadoStartTime;
-	
+
 	void updateParticleSystem();
 	void createParticlesForRain();
 	void drawRainParticleSystem();

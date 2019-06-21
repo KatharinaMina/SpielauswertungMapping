@@ -26,6 +26,7 @@ DrawableImage::DrawableImage(string imageName, float sceneSizeX, float sceneSize
 	newCloudVelY = setYAtCloud(sceneSizeY);
 	frameTime = 0.03;
 	pastMaxYInWave = false;
+	test = false;
 	std::cout << "setMaxHeight: " + maxYpositionForPicture << endl;
 
 }
@@ -66,12 +67,8 @@ void DrawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 //--------------------------------------------------------------
 void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
-
-	min = maxYpositionForPicture - 1;
-	max = maxYpositionForPicture + 130;
-
-
-	if (yToMoveIntoCloud <= maxYpositionForPicture) {		//y-Movement into cloud
+	test = false;
+	if (yToMoveIntoCloud <= maxYpositionForPicture ){//&& !test) {		//y-Movement into cloud
 		if (ofGetLastFrameTime() > frameTime) {
 
 			yToMoveIntoCloud += (0.005*sceneSizeY) * 2;		//y-Movement *2, if the frameTime is over 0.03
@@ -87,12 +84,13 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	}
 	else {
 		//x-Movement in cloud
+		test = true;
 
 		if (pastMaxYInWave) {
 			yToMoveIntoCloud += newCloudVelY;				//y up
 		}
 		else {
-			yToMoveIntoCloud -= newCloudVelY;
+			yToMoveIntoCloud -= newCloudVelY;				//y down
 		}
 
 
@@ -105,11 +103,15 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	}
 
 
-	if (pastMaxYInWave && yToMoveIntoCloud >= maxYInWave) {
+	if (pastMaxYInWave && yToMoveIntoCloud >= maxYInWave ) {
 		pastMaxYInWave = false;
 	}
 
-	if (!pastMaxYInWave && yToMoveIntoCloud <= maxYInWave ) {
+	if (!pastMaxYInWave && yToMoveIntoCloud <= maxYInWave / 4) {
+		pastMaxYInWave = true;
+	}
+
+	if (!pastMaxYInWave && yToMoveIntoCloud <= maxYpositionForPicture + 1){//&& test) {
 		pastMaxYInWave = true;
 	}
 
@@ -121,13 +123,13 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 		pastMiddle = true;
 	}
 
-if (yToMoveIntoCloud >= maxYpositionForPicture) {									//new Y Position 
-	pastYMax = true;
-}
+	if (yToMoveIntoCloud >= maxYpositionForPicture) {									//new Y Position 
+		pastYMax = true;
+	}
 
 
-imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
-fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
+	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
+	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 
 }
 
@@ -135,6 +137,7 @@ fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 
 int DrawableImage::setMaxHeightPosition(float sceneSizeY)			// Array for max y-values (so that height of the hexagons fits together and can hook into one another in honeycomb structure)
 {
+	newMaxHeight -= imageHeight / 2;
 	for (float i = 0; i <= 4; i++) {								//alculate the max y-values
 		newMaxHeight -= imageHeight / 2;
 		maxHeightPositions.push_back(newMaxHeight);
