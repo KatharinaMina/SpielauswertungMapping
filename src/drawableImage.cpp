@@ -121,13 +121,13 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 		pastMiddle = true;
 	}
 
-	if (yToMoveIntoCloud >= maxYpositionForPicture) {									//new Y Position 
-		pastYMax = true;
-	}
+if (yToMoveIntoCloud >= maxYpositionForPicture) {									//new Y Position 
+	pastYMax = true;
+}
 
 
-	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
-	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
+imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
+fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 
 }
 
@@ -156,10 +156,10 @@ int DrawableImage::setSpeedAtCloud(float sceneSizeX) {
 
 int DrawableImage::setYAtCloud(float sceneSizeY) {
 	for (int i = 0; i <= 10; i++) {									//number of different velocities in y dircetion
-		newYToMoveInCloud = ofRandom(0.001*sceneSizeY, 0.0015 * sceneSizeY);
+		newYToMoveInCloud = ofRandom(0.0012*sceneSizeY, 0.0015 * sceneSizeY);
 		cloudVelY.push_back(newYToMoveInCloud);
 	}
-	int rgen = ofRandom(0, 9);
+	int rgen = ofRandom(1, 9);
 	return (float)cloudVelY.at(rgen);
 }
 
@@ -222,8 +222,6 @@ float DrawableImage::getImagePosX(float sceneSizeX) {
 
 //--------------------------------------------------------------
 float DrawableImage::getImagePosY(float sceneSizeY) {
-
-
 
 	return (sceneSizeY - imageToDraw.getHeight() - 5) - yToMoveIntoCloud;
 }
