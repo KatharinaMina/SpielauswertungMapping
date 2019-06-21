@@ -1,13 +1,12 @@
 #include "drawableImage.h"
-#include "images.h"
 #include <iostream>
 
 //--------------------------------------------------------------
 DrawableImage::DrawableImage(string imageName, float sceneSizeX, float sceneSizeY) {
 	//Color for symbol
-	redImageColor = 121;	
+	redImageColor = 121;
 	greenImageColor = 205;
-	blueImageColor = 205;	
+	blueImageColor = 205;
 	pastMiddle = true;
 	pastYMax = false;
 	fileImageHex.loadImage("Hexagon.png");
@@ -20,12 +19,13 @@ DrawableImage::DrawableImage(string imageName, float sceneSizeX, float sceneSize
 	ticksToMovePictureToRight = 150;
 	counterToMovePictureToRight = 0;
 	newMaxHeight = sceneSizeY - imageToDraw.getHeight() - 3;
+	maxYInWave = sceneSizeY - imageToDraw.getHeight() - 3;
 	imageHeight = imageToDraw.getHeight();
 	maxYpositionForPicture = setMaxHeightPosition(sceneSizeY);
 	newCloudVelX = setSpeedAtCloud(sceneSizeX);
 	newCloudVelY = setYAtCloud(sceneSizeY);
 	frameTime = 0.03;
-
+	test = false;
 	std::cout << "setMaxHeight: " + maxYpositionForPicture << endl;
 
 }
@@ -47,7 +47,7 @@ void DrawableImage::updateImage(float sceneSizeX, float sceneSizeY) {
 		drawImage(sceneSizeX, sceneSizeY);
 
 	}
-	
+
 }
 
 //--------------------------------------------------------------
@@ -66,14 +66,18 @@ void DrawableImage::drawImage(float sceneSizeX, float sceneSizeY)
 //--------------------------------------------------------------
 void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float sceneSizeX, float sceneSizeY)
 {
+
 	min = maxYpositionForPicture - 1;
-	max = maxYpositionForPicture + imageToDraw.getHeight();
+	max = maxYpositionForPicture + 130;
+
+
 	if (yToMoveIntoCloud <= maxYpositionForPicture) {		//y-Movement into cloud
 		if (ofGetLastFrameTime() > frameTime) {
 
 			yToMoveIntoCloud += (0.005*sceneSizeY) * 2;		//y-Movement *2, if the frameTime is over 0.03
-		
-		}else {
+
+		}
+		else {
 			yToMoveIntoCloud += 0.005*sceneSizeY;
 		}
 	}
@@ -81,32 +85,32 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 	else if (counterToMovePictureToRight < ticksToMovePictureToRight) {
 		counterToMovePictureToRight++;
 	}
-	else {													//x-Movement in cloud
+	else {
+		//x-Movement in cloud
 
-		
+		if (test) {
+			yToMoveIntoCloud += newCloudVelY;				//y up
+		}
+		else {
+			yToMoveIntoCloud -= newCloudVelY;
+		}
+
+
 		if (pastMiddle) {									//from the middle to right: midpoint + x and x  gets increased til its Scenesize   
 			xToMoveInCloud += newCloudVelX;
-			//yToMoveIntoCloud += newCloudVelY;       //y up
-
-			if (  min < yToMoveIntoCloud <= max ) {
-				std::cout << yToMoveIntoCloud << endl;
-					yToMoveIntoCloud += newCloudVelY;       //y up
-			}
-			else if (yToMoveIntoCloud > max){
-				
-			}
-			//if (yToMoveIntoCloud <= sceneSizeY / 4) {
-			//		yToMoveIntoCloud -= newCloudVelY;		//y down
-			//	}
-		}else  {												//From left to the middle: midpoint - x  decreased til x is 0 again
-			xToMoveInCloud -= newCloudVelX;
-
-			if (yToMoveIntoCloud <= sceneSizeY/4) {
-					yToMoveIntoCloud += newCloudVelY;       //y up
-				} else {
-					yToMoveIntoCloud -= newCloudVelY;		//y down
-				}
 		}
+		else {												//From left to the middle: midpoint - x  decreased til x is 0 again
+			xToMoveInCloud -= newCloudVelX;
+		}
+	}
+
+
+	if (test && yToMoveIntoCloud >= maxYInWave) {
+		test = false;
+	}
+
+	if (!test && yToMoveIntoCloud <= maxYInWave / 2) {
+		test = true;
 	}
 
 	if (pastMiddle && xToMoveInCloud >= sceneSizeX / 2 + imageToDraw.getWidth()) {		//Left position from middle
@@ -117,13 +121,13 @@ void DrawableImage::doMovementOfImageAtCloud(int maxYpositionForPicture, float s
 		pastMiddle = true;
 	}
 
-	if ( yToMoveIntoCloud >= maxYpositionForPicture) {									//new Y Position 
+	if (yToMoveIntoCloud >= maxYpositionForPicture) {									//new Y Position 
 		pastYMax = true;
 	}
-	
 
-	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		
-	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));		
+
+	imageToDraw.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
+	fileImageHex.draw(getImagePosX(sceneSizeX), getImagePosY(sceneSizeY));
 
 }
 
@@ -135,17 +139,17 @@ int DrawableImage::setMaxHeightPosition(float sceneSizeY)			// Array for max y-v
 		newMaxHeight -= imageHeight / 2;
 		maxHeightPositions.push_back(newMaxHeight);
 	}
-	int rgen = ofRandom(0, 3);										
+	int rgen = ofRandom(0, 3);
 	return (int)maxHeightPositions.at(rgen);						//random array position to choose random y-position
 }
 
 
 int DrawableImage::setSpeedAtCloud(float sceneSizeX) {
-for (int i = 0; i <= 10; i++) {										//number of different velocities in x dircetion
-	newXToMoveInCloud = ofRandom(0.0015*sceneSizeX, 0.004 * sceneSizeX);
-    cloudVelX.push_back(newXToMoveInCloud);
+	for (int i = 0; i <= 10; i++) {										//number of different velocities in x dircetion
+		newXToMoveInCloud = ofRandom(0.0015*sceneSizeX, 0.004 * sceneSizeX);
+		cloudVelX.push_back(newXToMoveInCloud);
 	}
-    int rgen = ofRandom(0, 9);
+	int rgen = ofRandom(0, 9);
 	return (float)cloudVelX.at(rgen);
 }
 
@@ -176,7 +180,7 @@ ofImage DrawableImage::changeImageColor(ofImage imageToDraw, int r, int g, int b
 	for (int x = 0; x < picWidth; x++) {													//go through all pixel and set new rgb-values
 		for (int y = 0; y < picHeight; y++)
 		{
-			int index = (x + y * picWidth) * 4;												
+			int index = (x + y * picWidth) * 4;
 
 			if (imageToDraw.getPixelsRef()[index + 3] >= threshold) {
 				imageToDraw.getPixelsRef()[index] = r;
@@ -219,7 +223,7 @@ float DrawableImage::getImagePosX(float sceneSizeX) {
 //--------------------------------------------------------------
 float DrawableImage::getImagePosY(float sceneSizeY) {
 
-	
-	
-		return (sceneSizeY - imageToDraw.getHeight() - 5) - yToMoveIntoCloud;
+
+
+	return (sceneSizeY - imageToDraw.getHeight() - 5) - yToMoveIntoCloud;
 }

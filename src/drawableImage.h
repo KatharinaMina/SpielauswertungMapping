@@ -51,6 +51,8 @@ public:
 	bool cloudAttractorIsSet;
 	bool pastMiddle;
 	bool pastYMax;
+	bool test;
+	int maxYInWave;
 	int min;
 	int max;
 
@@ -73,4 +75,3 @@ private:
 
 };
 #endif 
-#pragma once
