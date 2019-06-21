@@ -51,6 +51,8 @@ public:
 	bool cloudAttractorIsSet;
 	bool pastMiddle;
 	bool pastYMax;
+	int min;
+	int max;
 
 	void updateImage(float sceneSizeX, float sceneSizeY);
 	void drawImage(float sceneSizeX, float sceneSizeY);
